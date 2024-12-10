@@ -12,12 +12,12 @@ The FrontendApp that will host the Community Website
 
 When creating Pull Requests, use the following format for your PR
 
-## WHY
+WHY
 Why do we have this PR
 
-## WHAT
+WHAT
 What are the list of changes you have made
 
-## TESTING
+TESTING
 How was it tested? Add commands or screenshots to help the reviewer
 
