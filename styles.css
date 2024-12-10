@@ -1,0 +1,177 @@
+/* Reset and base styles */
+
+
+:root {
+  --primary-color: hsl(245, 50%, 9%);
+  --primary-color-darker: hsl(245, 50%, 6%);
+  --secondary-color: hsl(48, 26%, 96%);
+  --secondary-color-darker: hsl(48, 26%, 90%);
+  --accent-color: #febebc;
+  --transition: all 150ms ease-in-out;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  background-color: var(--secondary-color);
+}
+
+/* Header styles */
+.header {
+  padding: 1rem 2rem;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.font-serif {
+  font-family: "Domine";
+}
+
+.w-fit {
+  width: fit-content;
+}
+.mx-auto {
+  margin: 0 auto;
+}
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header__ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.header__right {
+  display: flex;
+  gap: 1rem;
+}
+.header__li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Search bar styles */
+.searchbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  width: 200px;
+  background-color: #ffffff;
+  border-radius: 75px;
+}
+
+.searchbar input {
+  background: transparent;
+  appearance: none;
+  border: none;
+}
+
+.searchbar button {
+  padding: 0.5rem 1rem;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Button styles */
+.buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.btn__primary {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.btn__primary:hover {
+  background-color: var(--primary-color-darker);
+}
+
+.btn__secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.btn__secondary:hover {
+  background-color: var(--secondary-color-darker);
+}
+
+/* Hero section styles */
+.hero {
+  max-width: 1200px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.hero__flag {
+  display: inline-block;
+  background-color: var(--accent-color);
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.hero__headline {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.hero__subheadline {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 2rem;
+}
+
+.hero__buttons {
+  margin-bottom: 3rem;
+}
+
+.hero__images {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-inline: auto;
+  padding-block: 2rem;
+}
+
+.hero__image {
+  width: 300px;
+  aspect-ratio: 1/1.5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.hero__image img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
