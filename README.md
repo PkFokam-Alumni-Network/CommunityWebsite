@@ -1,2 +1,2 @@
 # AlumniWebsite
-The FrontendApp that will host the Alumni Website
+The FrontendApp that will host the Community Website
