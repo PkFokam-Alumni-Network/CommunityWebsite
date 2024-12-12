@@ -5,10 +5,10 @@ The FrontendApp that will host the Community Website
 - Download and install node js & VS code from their respectful official website.
 - Clone the repo with: `git clone https://github.com/PkFokam-Alumni-Network/CommunityWebsite.git`
 - Install the latest dependencies
-  - npm install
+  - navigate to the root of the `CommunityWebsite` folder from command line and run `npm install`
 
 # HOW TO RUN YOUR SERVER LOCALLY
-- Navigate to the root of the folder `CommunityWebsite` and run `npm start`
+- Navigate to the root of the `CommunityWebsite` folder from command line and run `npm start`
 
 # HOW TO MAKE CODE CHANGES
 - Create a new branch from main with the format yourName/what-you-are-trying-to-do
