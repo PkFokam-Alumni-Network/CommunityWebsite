@@ -19,3 +19,7 @@ The FrontendApp that will host the Community Website
 # HELPFUL RESOURCES
 - [WEBCRUMBS](https://tools.webcrumbs.org/frontend-ai) - Rapid prototyping
 - [V0](https://v0.dev/chat/) - Prototyping
+
+# INSPIRATION
+- https://alumni.princeton.edu/our-community/alumni-association/alumni-council
+- https://alumni.stanford.edu/volunteer/beyond-the-farm/
