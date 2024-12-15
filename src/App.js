@@ -1,10 +1,12 @@
 import "./App.css";
 import AlumniDetails from "./components/AlumniDetails";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
     <div className="App">
-      <AlumniDetails />
+      {/* <AlumniDetails /> */}
+      <LoginForm/>
     </div>
   );
 }
