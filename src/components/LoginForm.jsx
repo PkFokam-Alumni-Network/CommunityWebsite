@@ -31,14 +31,12 @@ const LoginForm = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="w-[150px] h-[150px] rounded-full mx-auto"
+            className="w-40 h-40 p-4 rounded-full mx-auto bg-gray-100"
           >
             <img
               src={pkfLogo}
               alt="Pkfokam Connect Logo"
-              width={100}
-              height={100}
-              className="mx-auto rounded-full bg-blue-100 p-2"
+              className="mx-auto p-2 w-full h-full object-cover"
             />
           </motion.div>
           <motion.h2
@@ -68,7 +66,7 @@ const LoginForm = () => {
             <FormControl>
               <TextField id="email" label="Email" variant="outlined" />
             </FormControl>
-            <FormControl>
+            <FormControl color="secondary">
               <TextField
                 id="password"
                 label="Password"
@@ -80,7 +78,6 @@ const LoginForm = () => {
               type="submit"
               fullWidth
               variant="contained"
-              className="text-red-500"
               disableElevation
               size="large"
             >
