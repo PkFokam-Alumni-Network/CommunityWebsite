@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import pkfLogo from "../assets/pkflogo.png";
+import { validateSignupForm } from "../utils/validation";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -32,52 +33,18 @@ const SignupForm = () => {
     }));
   };
 
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-      isValid = false;
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-      isValid = false;
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long";
-      isValid = false;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    // Validate form data
+    const { isValid, errors } = validateSignupForm(formData);
+
+    if (isValid) {
       // Here you would typically send the form data to your backend
       console.log("Form submitted:", formData);
       // Reset form after successful submission
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+    } else {
+      setErrors(errors);
     }
   };
 

@@ -9,12 +9,41 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import pkfLogo from "../assets/pkflogo.png";
+import { useDispatch } from "react-redux";
+import { useToast } from "../uiContexts/toastContext";
+import { loginUser } from "../features/authSlice";
 
 const LoginForm = () => {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  // Get the loading state from the store
   const [isLoading, setIsLoading] = useState(false);
 
+  // Use the dispatch function from the useDispatch hook
+  const dispatch = useDispatch();
+
+  const showToast = useToast();
+
+  // Function to handle the submission of the credentials
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Unwrap the promise returned by the loginUser thunk
+    dispatch(loginUser(credentials))
+      .unwrap()
+      .then(() => {
+        showToast("Login successful", "success");
+      })
+      .catch((error) => {
+        showToast(error.message, "error");
+      });
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [id]: value,
+    }));
   };
 
   return (
@@ -64,7 +93,14 @@ const LoginForm = () => {
             }}
           >
             <FormControl>
-              <TextField id="email" label="Email" variant="outlined" />
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+                value={credentials.email}
+                onChange={handleChange}
+                fullWidth
+              />
             </FormControl>
             <FormControl color="secondary">
               <TextField
@@ -72,6 +108,9 @@ const LoginForm = () => {
                 label="Password"
                 type="password"
                 variant="outlined"
+                value={credentials.password}
+                onChange={handleChange}
+                fullWidth
               />
             </FormControl>
             <Button
