@@ -7,7 +7,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/login", credentials);
       return response.data;
     } catch (error) {
-      return handleError(error);
+      throw handleError(error);
     }
   },
 
@@ -16,7 +16,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/signup", userData);
       return response.data;
     } catch (error) {
-      return handleError(error);
+      throw handleError(error);
     }
   },
 
@@ -25,7 +25,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/logout");
       return response.data;
     } catch (error) {
-      return handleError(error);
+      throw handleError(error);
     }
   },
 };

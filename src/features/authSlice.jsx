@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../api/axiosInstance";
+import authService from "../api/authService";
 
 // export const signupUser = createAsyncThunk(
 //   "auth/signupUser",
@@ -21,16 +21,13 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.post("/auth/login", formData);
-      console.log("THIS IS THE REPSONSE", response);
-      // Check if the response is successful
-      if (response.status.toString().startsWith("4")) {
-        const error = new Error(response.detail);
-        return rejectWithValue(error);
-      }
+      const response = await authService.login(formData);
 
       // Return the data to the user
-      return response.data.payload;
+      return {
+        accessToken: response.access_token,
+        tokenType: response.token_type,
+      };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -43,14 +40,14 @@ const authSlice = createSlice({
     isAuthenticated: false,
     user: null,
     accessToken: null,
-    accessTokenType: null,
+    tokenType: null,
   },
   reducers: {
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.accessToken = null;
-      state.accessTokenType = null;
+      state.tokenType = null;
       // Remove the token from local storage
       localStorage.removeItem("token");
     },
@@ -59,11 +56,13 @@ const authSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         // Set the access token and type
-        const { access_token: accessToken, token_type: accessTokenType } =
-          action.payload;
+        const { accessToken, tokenType } = action.payload;
         state.accessToken = accessToken;
-        state.accessTokenType = accessTokenType;
+        state.tokenType = tokenType;
         state.isAuthenticated = true;
+
+        // Store the token in local storage
+        localStorage.setItem("token", `${tokenType} ${accessToken}`);
       })
       .addCase(loginUser.rejected, (state) => {
         state.isAuthenticated = false;

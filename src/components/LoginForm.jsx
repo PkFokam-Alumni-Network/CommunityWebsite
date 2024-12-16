@@ -26,7 +26,9 @@ const LoginForm = () => {
 
   // Function to handle the submission of the credentials
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
+
     // Unwrap the promise returned by the loginUser thunk
     dispatch(loginUser(credentials))
       .unwrap()
@@ -35,6 +37,9 @@ const LoginForm = () => {
       })
       .catch((error) => {
         showToast(error.message, "error");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
