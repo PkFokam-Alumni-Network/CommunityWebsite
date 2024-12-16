@@ -24,6 +24,9 @@ const theme = createTheme({
       secondary: colors.text.secondary,
       disabled: colors.text.disabled,
       hint: colors.text.hint,
+      light: colors.text.light,
+      dark: colors.text.dark,
+      muted: colors.text.muted,
     },
     neutral: {
       light: colors.neutral.light,
@@ -42,19 +45,20 @@ const theme = createTheme({
           marginBottom: "16px",
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: colors.primary.main, // bittersweet
+              borderColor: colors.neutral.light, // bittersweet
             },
             "&:hover fieldset": {
-              borderColor: colors.secondary.main, // licorice
+              borderColor: colors.primary.main, // licorice
             },
             "&.Mui-focused fieldset": {
               borderColor: colors.primary.main, // bittersweet
             },
           },
           "& .MuiFormLabel-root": {
-            color: colors.primary.main, // bittersweet
+            color: colors.text.muted,
             "&.Mui-focused": {
               color: colors.primary.main, // bittersweet
+              fontWeight: "500",
             },
           },
         },
@@ -65,7 +69,7 @@ const theme = createTheme({
         root: {
           backgroundColor: colors.primary.main, // bittersweet
           "&:hover": {
-            backgroundColor: colors.secondary.main, // licorice
+            backgroundColor: colors.primary.light, // licorice
           },
         },
       },

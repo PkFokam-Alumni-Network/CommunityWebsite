@@ -20,6 +20,9 @@ const colors = {
     secondary: "#ffffffff", // white
     disabled: "#bdbdbdff",
     hint: "#9e9e9eff",
+    light: "#e0e0e0ff", // light text
+    dark: "#212121ff", // dark text
+    muted: "#757575ff",
   },
   neutral: {
     light: "#d1d5dbff", // light neutral
