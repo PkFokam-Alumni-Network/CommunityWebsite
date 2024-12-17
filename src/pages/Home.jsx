@@ -1,6 +1,7 @@
 import React from "react";
 import Banner from "../components/Banner";
 import Events from "../components/Events";
+import Footer from "../components/Footer";
 
 import { Container, Typography } from "@mui/material";
 import colors from "../utils/colors";
@@ -30,7 +31,7 @@ export default function Home() {
           experiences, mentor, and grow together.
         </Typography>
       </div>
-      <footer></footer>
+      <Footer />
     </>
   );
 }

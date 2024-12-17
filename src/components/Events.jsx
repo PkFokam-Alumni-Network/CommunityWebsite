@@ -27,8 +27,10 @@ export default function Events() {
 
   const Card = React.memo(({ title, date, location }) => (
     <div
-      className="bg-white rounded-md cursor-pointer p-8 transition-all"
+      className="rounded-md cursor-pointer p-8 transition-all"
       style={{
+        borderWidth: "1px",
+        borderColor: colors.primary.light,
         boxShadow: "none",
         "&:hover": {
           boxShadow: `0 4px 6px ${colors.accent.main}`,
@@ -49,14 +51,14 @@ export default function Events() {
         <LocationOnIcon color="primary" sx={{ marginRight: "8px" }} />
         {location}
       </p>
-      <Button sx={{ width: "100%", marginTop: "35px" }}>Learn More</Button>
+      <Button sx={{ width: "100%", marginTop: "3rem" }}>Learn More</Button>
     </div>
   ));
   return (
     <div className="justify-between">
       <div className="container mx-auto">
-        <div className="py-10">
-          <h2 className="text-2xl font-bold text-center">Upcoming Events</h2>
+        <div className="py-[4rem]">
+          <h2 className="text-3xl font-bold text-center">Upcoming Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             {events.map((event) => (
               <Card {...event} />
