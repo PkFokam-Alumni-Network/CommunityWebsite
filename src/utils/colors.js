@@ -9,7 +9,7 @@ const colors = {
     main: "#170312", // new secondary color
     light: "#3a0a3a", // light derivative of secondary
     dark: "#0d0009", // dark derivative of secondary
-    contrastText: "#ffffff", // white
+    contrastText: "#f5f1e3", // white
   },
   accent: {
     main: "#ff6f59", // new accent color
@@ -29,6 +29,8 @@ const colors = {
     light: "#e0e0e0ff", // light text
     dark: "#212121ff", // dark text
     muted: "#757575ff",
+    white: "#ffffffff", // white
+    black: "#000000ff", // black
   },
   neutral: {
     light: "#d1d5dbff", // light neutral

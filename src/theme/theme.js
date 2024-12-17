@@ -33,6 +33,8 @@ const theme = createTheme({
       light: colors.text.light,
       dark: colors.text.dark,
       muted: colors.text.muted,
+      white: colors.text.white,
+      black: colors.text.black,
     },
     neutral: {
       light: colors.neutral.light,
@@ -75,6 +77,7 @@ const theme = createTheme({
         root: {
           backgroundColor: colors.primary.main, // bittersweet
           boxShadow: "none",
+          color: colors.primary.contrastText,
           "&:hover": {
             backgroundColor: colors.primary.light, // licorice
           },
