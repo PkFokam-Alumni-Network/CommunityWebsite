@@ -1,15 +1,21 @@
 const colors = {
   primary: {
-    main: "#ff6f59ff", // bittersweet
-    light: "#ff8a75ff",
-    dark: "#cc5747ff",
-    contrastText: "#ffffffff",
+    main: "#ffba08", // new primary color
+    light: "#ffd95b", // light derivative of primary
+    dark: "#c78a00", // dark derivative of primary
+    contrastText: "#ffffff", // white
   },
   secondary: {
-    main: "#170312ff", // licorice
-    light: "#2e0a2aff",
-    dark: "#0e010aff",
-    contrastText: "#ffffffff",
+    main: "#170312", // new secondary color
+    light: "#3a0a3a", // light derivative of secondary
+    dark: "#0d0009", // dark derivative of secondary
+    contrastText: "#ffffff", // white
+  },
+  accent: {
+    main: "#ff6f59", // new accent color
+    light: "#ff9a85", // light derivative of accent
+    dark: "#c43f33", // dark derivative of accent
+    contrastText: "#ffffff", // white
   },
   background: {
     default: "#f5f1e3ff", // old-lace
