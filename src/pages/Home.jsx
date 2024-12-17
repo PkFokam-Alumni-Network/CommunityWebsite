@@ -1,8 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
 import Banner from "../components/Banner";
 import colors from "../utils/colors";
 import { Button } from "@mui/material";
+import {
+  Event as EventIcon,
+  LocationOn as LocationOnIcon,
+} from "@mui/icons-material";
 
 export default function Home() {
   const events = [
@@ -25,7 +28,7 @@ export default function Home() {
 
   const Card = ({ title, date, location }) => (
     <div
-      className="bg-white rounded-sm cursor-pointer p-4 transition-all"
+      className="bg-white rounded-md cursor-pointer p-8 transition-all"
       style={{
         boxShadow: "none",
         "&:hover": {
@@ -34,8 +37,19 @@ export default function Home() {
       }}
     >
       <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="text-base">{date.toDateString()}</p>
-      <p className="text-base">{location}</p>
+      <p className="text-base mt-2">
+        {" "}
+        <EventIcon sx={{ marginRight: "8px" }} color="primary" />
+        {date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </p>
+      <p className="text-base mt-2">
+        <LocationOnIcon color="primary" sx={{ marginRight: "8px" }} />
+        {location}
+      </p>
       <Button sx={{ width: "100%", marginTop: "35px" }}>Learn More</Button>
     </div>
   );

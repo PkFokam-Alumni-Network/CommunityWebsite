@@ -77,7 +77,7 @@ const theme = createTheme({
         root: {
           backgroundColor: colors.primary.main, // bittersweet
           boxShadow: "none",
-          color: colors.primary.contrastText,
+          color: colors.secondary.main,
           "&:hover": {
             backgroundColor: colors.primary.light, // licorice
           },
