@@ -1,23 +1,15 @@
 // filepath: /home/yanndjoumessi/Desktop/BetterEngineers/CommunityWebsite/src/components/Layout.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Button,
-  Menu,
-  List,
-  ListItem,
-} from "@mui/material";
-import colors from "../utils/colors";
 import Header from "./Header";
+import colors from "../utils/colors";
+import { Container, Typography } from "@mui/material";
+import Banner from "./Banner";
 
 const Layout = ({ children }) => {
   return (
     <div>
       <Header />
+      <Banner />
       <Container style={{ marginTop: "20px" }}>{children}</Container>
     </div>
   );

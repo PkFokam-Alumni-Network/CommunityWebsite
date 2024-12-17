@@ -4,15 +4,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Container,
   Button,
-  Menu,
   List,
   ListItem,
 } from "@mui/material";
-import colors from "../utils/colors";
 
-export default function Header() {
+const Header = () => {
   const menu = ["Membership", "Graduation", "Events", "Donate", "Onboarding"];
 
   return (
@@ -54,4 +51,6 @@ export default function Header() {
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+export default Header;
