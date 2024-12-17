@@ -4,9 +4,9 @@ import { Container, Typography } from "@mui/material";
 
 export default function Banner() {
   return (
-    <div style={{ height: "60vh", backgroundColor: colors.secondary.main }}>
+    <div style={{ height: "50vh", backgroundColor: colors.secondary.main }}>
       <Container sx={{ height: "100%" }}>
-        <div className="py-20">
+        <div className="h-full flex flex-col text-center justify-center items-center">
           <Typography
             variant="h3"
             sx={{
