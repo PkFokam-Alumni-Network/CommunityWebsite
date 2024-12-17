@@ -5,6 +5,7 @@ import {
   Event as EventIcon,
   LocationOn as LocationOnIcon,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 export default function Events() {
   const events = [
@@ -26,16 +27,14 @@ export default function Events() {
   ];
 
   const Card = React.memo(({ title, date, location }) => (
-    <div
-      className="rounded-md cursor-pointer p-8 transition-all"
+    <motion.div
+      className="bg-white rounded-md cursor-pointer p-8 transition-all"
       style={{
         borderWidth: "1px",
         borderColor: colors.primary.light,
         boxShadow: "none",
-        "&:hover": {
-          boxShadow: `0 4px 6px ${colors.accent.main}`,
-        },
       }}
+      whileHover={{ scale: 1.005 }}
     >
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="text-base mt-2">
@@ -52,7 +51,7 @@ export default function Events() {
         {location}
       </p>
       <Button sx={{ width: "100%", marginTop: "3rem" }}>Learn More</Button>
-    </div>
+    </motion.div>
   ));
   return (
     <div className="justify-between">
