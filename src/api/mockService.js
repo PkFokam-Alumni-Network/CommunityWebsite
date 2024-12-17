@@ -3,16 +3,20 @@ import MockAdapter from "axios-mock-adapter";
 
 const mock = new MockAdapter(axiosInstance, { delayResponse: 500 });
 
+const loginPayload = {
+  payload: {
+    access_token: "test_access_token",
+    token_type: "bearer",
+  },
+};
+
 // Mock login endpoint
 mock.onPost("/auth/login").reply((config) => {
-  const { username, password } = JSON.parse(config.data);
-  if (username === "testuser" && password === "password") {
-    return [
-      200,
-      { token: "fake-jwt-token", user: { username: "testuser", role: "user" } },
-    ];
+  const { email, password } = JSON.parse(config.data);
+  if (email === "testuser" && password === "password") {
+    return [200, loginPayload];
   }
-  return [401, { message: "Invalid credentials" }];
+  return [401, { detail: "Invalid credentials" }];
 });
 
 // Mock signup endpoint

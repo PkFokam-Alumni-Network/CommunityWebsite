@@ -1,5 +1,5 @@
-// filepath: /home/yanndjoumessi/Desktop/BetterEngineers/CommunityWebsite/src/api/authService.js
 import axiosInstance from "./axiosInstance";
+import { handleError } from "../utils/error";
 
 const authService = {
   login: async (credentials) => {
@@ -7,7 +7,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/login", credentials);
       return response.data;
     } catch (error) {
-      throw error;
+      throw handleError(error);
     }
   },
 
@@ -16,7 +16,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/signup", userData);
       return response.data;
     } catch (error) {
-      throw error;
+      throw handleError(error);
     }
   },
 
@@ -25,7 +25,7 @@ const authService = {
       const response = await axiosInstance.post("/auth/logout");
       return response.data;
     } catch (error) {
-      throw error;
+      throw handleError(error);
     }
   },
 };

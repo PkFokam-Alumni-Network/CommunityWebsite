@@ -1,48 +1,72 @@
-/**
- * Auth slice for managing authentication state.
- *
- * @module authSlice
- */
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import authService from "../api/authService";
 
-import { createSlice } from "@reduxjs/toolkit";
+// export const signupUser = createAsyncThunk(
+//   "auth/signupUser",
+//   async (formData, { rejectWithValue }) => {
+//     try {
+//       const response = await axiosInstance.post("/auth/signup", formData);
+//       // Check if the response is successful
+//       if (response.status_code.toString().startsWith("4")) {
+//         return rejectWithValue(response.detail);
+//       }
+//       return response.data.payload;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 
-/**
- * Slice for authentication state management.
- *
- * @typedef {Object} AuthState
- * @property {boolean} isAuthenticated - Indicates if the user is authenticated.
- * @property {Object|null} user - The authenticated user's information.
- */
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await authService.login(formData);
+
+      // Return the data to the user
+      return {
+        accessToken: response.access_token,
+        tokenType: response.token_type,
+      };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     isAuthenticated: false,
     user: null,
+    accessToken: null,
+    tokenType: null,
   },
   reducers: {
-    /**
-     * Action to log in a user.
-     *
-     * @function
-     * @param {AuthState} state - The current state.
-     * @param {Object} action - The action object.
-     * @param {Object} action.payload - The user information.
-     */
-    login: (state, action) => {
-      state.isAuthenticated = true;
-      state.user = action.payload;
-    },
-    /**
-     * Action to log out a user.
-     *
-     * @function
-     * @param {AuthState} state - The current state.
-     */
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
+      state.accessToken = null;
+      state.tokenType = null;
+      // Remove the token from local storage
+      localStorage.removeItem("token");
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.fulfilled, (state, action) => {
+        // Set the access token and type
+        const { accessToken, tokenType } = action.payload;
+        state.accessToken = accessToken;
+        state.tokenType = tokenType;
+        state.isAuthenticated = true;
+
+        // Store the token in local storage
+        localStorage.setItem("token", `${tokenType} ${accessToken}`);
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isAuthenticated = false;
+      });
   },
 });
 

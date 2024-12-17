@@ -5,50 +5,47 @@ import {
   Button,
   CssBaseline,
   FormControl,
-  Link,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import pkfLogo from "../assets/pkflogo.png";
-import { useDispatch } from "react-redux";
-import { useToast } from "../uiContexts/toastContext";
-import { loginUser } from "../features/authSlice";
+import { validateSignupForm } from "../utils/validation";
 
-const LoginForm = () => {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
+const SignupForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  // Get the loading state from the store
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Use the dispatch function from the useDispatch hook
-  const dispatch = useDispatch();
-
-  const showToast = useToast();
-
-  // Function to handle the submission of the credentials
-  const handleSubmit = (e) => {
-    setIsLoading(true);
-    e.preventDefault();
-
-    // Unwrap the promise returned by the loginUser thunk
-    dispatch(loginUser(credentials))
-      .unwrap()
-      .then(() => {
-        showToast("Login successful", "success");
-      })
-      .catch((error) => {
-        showToast(error.message, "error");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials,
-      [id]: value,
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Validate form data
+    const { isValid, errors } = validateSignupForm(formData);
+
+    if (isValid) {
+      // Here you would typically send the form data to your backend
+      console.log("Form submitted:", formData);
+      // Reset form after successful submission
+      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+    } else {
+      setErrors(errors);
+    }
   };
 
   return (
@@ -99,22 +96,56 @@ const LoginForm = () => {
           >
             <FormControl>
               <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                value={credentials.email}
+                id="name"
+                label="Name"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
+                variant="outlined"
                 fullWidth
               />
             </FormControl>
-            <FormControl color="secondary">
+            <FormControl>
+              <TextField
+                id="email"
+                label="Email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                error={!!errors.email}
+                helperText={errors.email}
+                variant="outlined"
+                fullWidth
+              />
+            </FormControl>
+            <FormControl>
               <TextField
                 id="password"
                 label="Password"
+                name="password"
                 type="password"
-                variant="outlined"
-                value={credentials.password}
+                value={formData.password}
                 onChange={handleChange}
+                error={!!errors.password}
+                helperText={errors.password}
+                variant="outlined"
+                fullWidth
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                id="confirmPassword"
+                label="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword}
+                variant="outlined"
                 fullWidth
               />
             </FormControl>
@@ -125,16 +156,8 @@ const LoginForm = () => {
               disableElevation
               size="large"
             >
-              Sign in
+              Sign Up
             </Button>
-            <Link
-              component="button"
-              type="button"
-              variant="body2"
-              sx={{ alignSelf: "center" }}
-            >
-              Forgot your password?
-            </Link>
           </Box>
         </div>
       </motion.div>
@@ -142,4 +165,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
