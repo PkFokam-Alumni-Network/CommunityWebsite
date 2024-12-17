@@ -15,6 +15,12 @@ const theme = createTheme({
       dark: colors.secondary.dark,
       contrastText: colors.secondary.contrastText,
     },
+    accent: {
+      main: colors.accent.main,
+      light: colors.accent.light,
+      dark: colors.accent.dark,
+      contrastText: colors.accent.contrastText,
+    },
     background: {
       default: colors.background.default,
       paper: colors.background.paper,
@@ -68,8 +74,16 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.primary.main, // bittersweet
+          boxShadow: "none",
           "&:hover": {
             backgroundColor: colors.primary.light, // licorice
+          },
+          "&.MuiButton-contained": {
+            backgroundColor: colors.secondary.main,
+            color: colors.secondary.contrastText,
+            "&:hover": {
+              backgroundColor: colors.secondary.dark,
+            },
           },
         },
       },
