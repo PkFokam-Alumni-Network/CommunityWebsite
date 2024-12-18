@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
+import AlumniDetails from './components/AlumniDetails';
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
           <AuthLayout>
             <Signup />
           </AuthLayout>
+        }
+      />
+      <Route
+        path="/alumni-details"
+        element={
+          <MainLayout>
+            <AlumniDetails />
+          </MainLayout>
         }
       />
     </Routes>
