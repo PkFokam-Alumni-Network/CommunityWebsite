@@ -15,7 +15,7 @@ export default function Banner() {
               maxWidth: "500px",
             }}
           >
-            Welcome to PkFokam Alumni Network
+            # PKFOkam Alumni Society
           </Typography>
           <Typography
             variant="h5"

@@ -22,7 +22,7 @@ const Header = () => {
             color="secondary"
             mr={2}
           >
-            PKFOKAM ALUMNI
+            PKFOkam Alumni Society
           </Typography>
           <nav>
             <List orientation="horizontal" sx={{ display: "flex" }}>
@@ -44,19 +44,19 @@ const Header = () => {
               ))}
               {
                 <ListItem key={"yo"}>
-                <Typography
-                  variant="body1"
-                  color="secondary"
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      color: "white",
-                    },
-                  }}
-                >
-                  <Link to="/alumni-details">Alumni Detail</Link>
-                </Typography>
-              </ListItem>
+                  <Typography
+                    variant="body1"
+                    color="secondary"
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": {
+                        color: "white",
+                      },
+                    }}
+                  >
+                    <Link to="/alumni-details">Alumni Detail</Link>
+                  </Typography>
+                </ListItem>
               }
             </List>
           </nav>
