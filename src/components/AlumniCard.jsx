@@ -1,51 +1,34 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Button from "@mui/material/Button";
 
 const AlumniCard = ({ name, role, imageUrl }) => {
   return (
     <motion.div
-      className="w-80 space-y-8 rounded-2xl bg-white p-8 shadow-xl"
-      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
+      className=" rounded-md cursor-pointer p-8"
+      initial={{ opacity: 0, y: 20 }}
+      style={{
+        width: 320,
+      }}
       transition={{ duration: 0.25 }}
+      whileHover={{ scale: 1.005 }}
     >
-      <div className="text-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="w-40 h-40 p-4 rounded-full mx-auto bg-gray-100"
-        >
+      <div className="text-center glassmorphism-card">
+        <div className="glassmorphism-card-img">
           <img
-            src={imageUrl || "/api/placeholder/120/120"}
-            alt={`${name}'s profile`}
-            className="w-full h-full object-cover rounded-full"
-          />
-        </motion.div>
-
-        <motion.div
-          className="mt-6 space-y-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <h2 className="text-2xl font-bold text-gray-900">
-            {name || "John Doe"}
-          </h2>
-          <p className="text-sm text-gray-600">
-            {role || "Software Developer"}
-          </p>
-        </motion.div>
+            alt="Alumni profile"
+            src="https://dl.dropbox.com/s/u3j25jx9tkaruap/Webp.net-resizeimage.jpg?raw=1"
+          ></img>
+        </div>
+        <div className="alumni-card-demographics-container">
+          <h6 className="alumni-name-text">Olivia Smith</h6>
+          <h6 className="alumni-job-position-text">Full Stack Developer</h6>
+        </div>
+        <Button className="primary-text glassmorphism-card-button">
+          View Profile
+        </Button>
       </div>
-
-      <motion.button
-        className="w-full py-3 px-4 bg-black text-white rounded-lg font-medium
-                   hover:bg-gray-800 transition-colors duration-200"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        View Profile
-      </motion.button>
     </motion.div>
   );
 };
