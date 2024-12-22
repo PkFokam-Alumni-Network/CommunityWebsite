@@ -42,22 +42,6 @@ const Header = () => {
                   </Typography>
                 </ListItem>
               ))}
-              {
-                <ListItem key={"yo"}>
-                <Typography
-                  variant="body1"
-                  color="secondary"
-                  sx={{
-                    cursor: "pointer",
-                    "&:hover": {
-                      color: "white",
-                    },
-                  }}
-                >
-                  <Link to="/alumni-details">Alumni Detail</Link>
-                </Typography>
-              </ListItem>
-              }
             </List>
           </nav>
         </div>
