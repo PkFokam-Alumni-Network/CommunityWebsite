@@ -45,7 +45,6 @@ const Header = () => {
             </List>
           </nav>
         </div>
-        
         <Button component={Link} to="/login" variant="contained">
           Login
         </Button>
