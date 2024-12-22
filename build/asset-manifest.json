@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.609dc8da.css",
+    "main.js": "/static/js/main.d731d128.js",
+    "static/media/axios.cjs": "/static/media/axios.f50781e842ef05922fb7.cjs",
+    "static/media/pkflogo.png": "/static/media/pkflogo.1ac2e3728cc0cc458263.png",
+    "index.html": "/index.html",
+    "main.609dc8da.css.map": "/static/css/main.609dc8da.css.map",
+    "main.d731d128.js.map": "/static/js/main.d731d128.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.609dc8da.css",
+    "static/js/main.d731d128.js"
+  ]
+}

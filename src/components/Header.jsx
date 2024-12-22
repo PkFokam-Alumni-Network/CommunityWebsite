@@ -22,7 +22,7 @@ const Header = () => {
             color="secondary"
             mr={2}
           >
-            PKFOkam Alumni Society
+            PKFokam Alumni Society
           </Typography>
           <nav>
             <List orientation="horizontal" sx={{ display: "flex" }}>
