@@ -1,28 +1,10 @@
-version: '3.8'
+version: '3.3'
 
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./CommunityWebsite
     ports:
       - "3000:80" # Map port 3000 on the host to port 80 in the container
     container_name: community_frontend
 
-  backend:
-    build:
-      context: ./backend
-    ports:
-      - "8000:8000" # Map port 8000 on the host to port 8000 in the container
-    container_name: community_backend
-    depends_on:
-      - database
-
-  database:
-    image: postgres:15
-    container_name: postgres_db
-    environment:
-      POSTGRES_USER: yourusername
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: yourdatabase
-    ports:
-      - "5432:5432"
