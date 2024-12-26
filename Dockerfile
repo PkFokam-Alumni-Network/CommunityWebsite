@@ -3,7 +3,7 @@ FROM node:16 as build
 WORKDIR /app
 
 # Copy package.json and package-lock.json to install dependencies
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install
 
 # Copy the entire project and build the React app
