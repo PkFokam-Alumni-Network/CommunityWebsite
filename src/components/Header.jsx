@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 const Header = () => {
+  const location = useLocation();
   const menu = ["Membership", "Graduation", "Events", "Donate", "Onboarding"];
 
   return (
@@ -54,6 +55,23 @@ const Header = () => {
                     </Typography>
                   </ListItem>
                 ))}
+                {location.pathname !== "/faq" && (
+                  <ListItem>
+                    <Typography
+                      variant="body1"
+                      color="secondary"
+                      sx={{
+                        cursor: "pointer",
+                        "&:hover": {
+                          color: "white",
+                        },
+                        fontWeight: 600,
+                      }}
+                    >
+                      <Link to="/faq">FAQ</Link>
+                    </Typography>
+                  </ListItem>
+                )}
               </List>
             </nav>
           </div>

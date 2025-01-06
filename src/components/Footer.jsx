@@ -25,22 +25,38 @@ const Footer = () => {
           <Grid item xs={12} sm={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link
+                  href="/faq"
+                  color="secondary.contrastText"
+                  underline="none"
+                >
                   FAQ
                 </Link>
               </Grid>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link
+                  href="/membership"
+                  color="secondary.contrastText"
+                  underline="none"
+                >
                   Membership
                 </Link>
               </Grid>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link
+                  href="/events"
+                  color="secondary.contrastText"
+                  underline="none"
+                >
                   Events
                 </Link>
               </Grid>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link
+                  href="/contact"
+                  color="secondary.contrastText"
+                  underline="none"
+                >
                   Contact Us
                 </Link>
               </Grid>
