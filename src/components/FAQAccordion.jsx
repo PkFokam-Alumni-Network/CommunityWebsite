@@ -1,5 +1,9 @@
 import React from "react";
-import { Disclosure } from "@headlessui/react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const faqData = [
   {
@@ -33,18 +37,18 @@ export function FAQAccordion() {
   return (
     <div className="w-full">
       {faqData.map((faq, index) => (
-        <Disclosure key={index}>
-          {({ open }) => (
-            <>
-              <Disclosure.Button className="text-left w-full px-4 py-2 text-sm font-medium text-[#170312] hover:text-[#FF6F59]">
-                {faq.question}
-              </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-[#170312]">
-                {faq.answer}
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
+        <Accordion key={index}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`panel${index}-content`}
+            id={`panel${index}-header`}
+          >
+            <Typography>{faq.question}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>{faq.answer}</Typography>
+          </AccordionDetails>
+        </Accordion>
       ))}
     </div>
   );
