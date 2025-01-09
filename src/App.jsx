@@ -6,8 +6,10 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/UserDashboard"; // Make sure you import your Dashboard component
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
+
 import { useDispatch, useSelector } from "react-redux";
 import { initializeAuth } from "./features/authSlice";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
