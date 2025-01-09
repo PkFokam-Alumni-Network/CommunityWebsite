@@ -4,7 +4,8 @@ import { handleError } from "../utils/error";
 const authService = {
   login: async (credentials) => {
     try {
-      const response = await axiosInstance.post("/auth/login", credentials);
+      const response = await axiosInstance.post("/login", credentials);
+      console.log(response);
       return response.data;
     } catch (error) {
       throw handleError(error);
