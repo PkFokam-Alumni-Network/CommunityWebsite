@@ -40,7 +40,7 @@ const LoginForm = () => {
         showToast("Login successful", "success");
       })
       .catch((error) => {
-        showToast(error.message, "error");
+        showToast(error, "error");
       })
       .finally(() => {
         setIsLoading(false);
