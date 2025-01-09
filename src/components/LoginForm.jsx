@@ -6,8 +6,8 @@ import {
   CssBaseline,
   FormControl,
   Link,
+  CircularProgress,
 } from "@mui/material";
-import colors from "../utils/colors";
 import { ArrowBack } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import pkfLogo from "../assets/pkflogo.png";
@@ -129,14 +129,34 @@ const LoginForm = () => {
                 fullWidth
               />
             </FormControl>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               disableElevation
               size="large"
+              disabled={isLoading} // Add disabled state
+              sx={{
+                position: "relative",
+                padding: "1rem", // Add this for spinner positioning
+              }}
             >
-              Sign in
+              {isLoading ? (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: "white",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              ) : (
+                "Sign in"
+              )}
             </Button>
             <Link
               component="button"
