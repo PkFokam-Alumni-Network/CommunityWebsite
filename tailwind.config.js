@@ -5,13 +5,45 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        licorice: "#170312",
-        bittersweet: "#FF6F59",
-        "old-lace": "#F5F1E3",
-        white: "#FFFFFF",
-        jet: "#373737",
-        lightPeach: "#FFE6E1",
-        softBlue: "#E8F0FF",
+        primary: {
+          main: "#ffba08",
+          light: "#ffd95b",
+          dark: "#c78a00",
+          contrastText: "#ffffff",
+        },
+        secondary: {
+          main: "#170312",
+          light: "#3a0a3a",
+          dark: "#0d0009",
+          contrastText: "#f5f1e3",
+        },
+        accent: {
+          main: "#ff6f59",
+          light: "#ff9a85",
+          dark: "#c43f33",
+          contrastText: "#ffffff",
+        },
+        background: {
+          default: "#f5f1e3",
+          paper: "#ffffff",
+        },
+        text: {
+          primary: "#373737",
+          secondary: "#ffffff",
+          disabled: "#bdbdbd",
+          hint: "#9e9e9e",
+          light: "#e0e0e0",
+          dark: "#212121",
+          muted: "#757575",
+          white: "#ffffff",
+          black: "#000000",
+        },
+        neutral: {
+          light: "#d1d5db",
+          main: "#64748b",
+          dark: "#1e293b",
+          contrastText: "#ffffff",
+        },
       },
       fontFamily: {
         sans: ["Montserrat", "Arial", "sans-serif"],

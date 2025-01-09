@@ -7,11 +7,14 @@ import {
   FormControl,
   Link,
 } from "@mui/material";
+import colors from "../utils/colors";
+import { ArrowBack } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import pkfLogo from "../assets/pkflogo.png";
 import { useDispatch } from "react-redux";
 import { useToast } from "../uiContexts/toastContext";
 import { loginUser } from "../features/authSlice";
+import { NavLink, useNavigation } from "react-router";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -24,6 +27,7 @@ const LoginForm = () => {
 
   const showToast = useToast();
 
+  //
   // Function to handle the submission of the credentials
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -52,8 +56,15 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-left px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-left px-4 py-12 sm:px-6 lg:px-8">
       <CssBaseline enableColorScheme />
+      <NavLink
+        to="/"
+        className={`fixed top-4 left-4 font-semibold flex items-center gap-2 bg-slate-200 p-4 rounded-full cursor-pointer hover:bg-primary-main transition`}
+      >
+        <ArrowBack color="secondary" />
+        <span>Back</span>
+      </NavLink>
       <motion.div
         className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl"
         initial={{ opacity: 0, y: 20 }}
