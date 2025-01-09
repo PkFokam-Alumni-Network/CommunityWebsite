@@ -1,34 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "../api/authService";
 
-// export const signupUser = createAsyncThunk(
-//   "auth/signupUser",
-//   async (formData, { rejectWithValue }) => {
-//     try {
-//       const response = await axiosInstance.post("/auth/signup", formData);
-//       // Check if the response is successful
-//       if (response.status_code.toString().startsWith("4")) {
-//         return rejectWithValue(response.detail);
-//       }
-//       return response.data.payload;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const AUTH_ACTION_TYPES = {
+  LOGIN: "auth/loginUser",
+  LOGOUT: "auth/logout",
+};
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
+  AUTH_ACTION_TYPES.LOGIN,
   async (formData, { rejectWithValue }) => {
     try {
       const response = await authService.login(formData);
-      // Return the data to the user
       return {
         accessToken: response.access_token,
         tokenType: response.token_type,
       };
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message || "Login failed");
     }
   }
 );
@@ -40,6 +28,8 @@ const authSlice = createSlice({
     user: null,
     accessToken: null,
     tokenType: null,
+    error: null,
+    loading: false,
   },
   reducers: {
     logout: (state) => {
@@ -47,40 +37,46 @@ const authSlice = createSlice({
       state.user = null;
       state.accessToken = null;
       state.tokenType = null;
-      // Remove the token from local storage
+      state.error = null;
       localStorage.removeItem("token");
+      sessionStorage.clear();
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
+    initializeAuth: (state) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const [tokenType, accessToken] = token.split(" ");
+        state.isAuthenticated = true;
+        state.accessToken = accessToken;
+        state.tokenType = tokenType;
+      }
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
-        // Set the access token and type
         const { accessToken, tokenType } = action.payload;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.error = null;
         state.accessToken = accessToken;
         state.tokenType = tokenType;
-        state.isAuthenticated = true;
-
-        // Store the token in local storage
         localStorage.setItem("token", `${tokenType} ${accessToken}`);
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
         state.isAuthenticated = false;
       });
   },
 });
 
-/**
- * Action creators generated from the slice.
- *
- * @type {Object}
- * @property {Function} login - Action creator for logging in a user.
- * @property {Function} logout - Action creator for logging out a user.
- */
-export const { login, logout } = authSlice.actions;
+export const { login, logout, clearError, initializeAuth } = authSlice.actions;
 
-/**
- * The reducer function for the auth slice.
- *
- * @type {Function}
- */
 export default authSlice.reducer;

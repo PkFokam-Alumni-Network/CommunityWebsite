@@ -83,7 +83,7 @@ export default function OnboardingPage() {
             component="h1"
             gutterBottom
             fontWeight="bold"
-            color="primary"
+            color="text.primary"
           >
             Student Onboarding Guide
           </Typography>
@@ -121,7 +121,7 @@ export default function OnboardingPage() {
 
           <Grid item xs={12} sm={6} md={4}>
             <CustomCard title="Insurance" icon={LocalHospital}>
-              <Typography variant="body2" color="text.main">
+              <Typography variant="body2" color="text.main" mt={2}>
                 Follow these steps to activate your insurance:
               </Typography>
               <List>
@@ -147,7 +147,7 @@ export default function OnboardingPage() {
 
           <Grid item xs={12} sm={6} md={4}>
             <CustomCard title="Transportation" icon={DirectionsBus}>
-              <Typography variant="body2" color="text.primary">
+              <Typography variant="body2" color="text.primary" mt={2}>
                 Getting around campus:
               </Typography>
               <List>
@@ -161,7 +161,7 @@ export default function OnboardingPage() {
 
           <Grid item xs={12} sm={6} md={4}>
             <CustomCard title="Grocery Shopping" icon={ShoppingCart}>
-              <Typography variant="body2" color="text.primary">
+              <Typography variant="body2" color="text.primary" mt={2}>
                 Nearby shopping options:
               </Typography>
               <List>

@@ -90,7 +90,7 @@ export default function FAQAccordion() {
                 sx={{
                   fontWeight: 500,
                   color: "#170312",
-                  "&:hover": { color: "#FF6F59" },
+                  "&:hover": { color: "text.dark" },
                   transition: "color 0.2s",
                 }}
               >
