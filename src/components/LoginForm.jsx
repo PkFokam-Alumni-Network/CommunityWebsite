@@ -139,30 +139,22 @@ const LoginForm = () => {
               disabled={isLoading} // Add disabled state
               sx={{
                 position: "relative",
-                padding: "1rem", // Add this for spinner positioning
               }}
             >
-              {isLoading ? (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: "white",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-12px",
-                    marginLeft: "-12px",
-                  }}
-                />
-              ) : (
-                "Sign in"
-              )}
+              <div className="p-1">
+                {isLoading ? (
+                  <CircularProgress size={24} color="black" />
+                ) : (
+                  <span>Sign in</span>
+                )}
+              </div>
             </Button>
             <Link
               component="button"
               type="button"
               variant="body2"
               sx={{ alignSelf: "center" }}
+              color="secondary"
             >
               Forgot your password?
             </Link>

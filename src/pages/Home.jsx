@@ -5,12 +5,18 @@ import Footer from "../components/Footer";
 
 import { Container, Typography } from "@mui/material";
 import colors from "../utils/colors";
+import OnboardingPage from "../components/Onboarding";
+import FAQAccordion from "../components/FAQAccordion";
 
 export default function Home() {
   return (
     <>
       <Banner />
       <Events />
+      <div className="bg-neutral-200 py-16">
+        <OnboardingPage />
+      </div>
+      <FAQAccordion />
       <div
         style={{ backgroundColor: colors.secondary.main }}
         className="p-14 text-center"
