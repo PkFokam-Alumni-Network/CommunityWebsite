@@ -12,7 +12,7 @@ import theme from "./theme/theme";
 import store from "./store/store";
 
 // Import the mock service worker
-import "./api/mockService";
+// import "./api/mockService";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
