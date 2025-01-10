@@ -1,42 +1,42 @@
 const colors = {
   primary: {
-    main: "#ffba08", // new primary color
-    light: "#ffd95b", // light derivative of primary
-    dark: "#c78a00", // dark derivative of primary
-    contrastText: "#ffffff", // white
+    main: "#4A90E2", // Calm blue - represents knowledge and trust
+    light: "#7EB2FF", // Lighter blue for hover states
+    dark: "#2B65B4", // Deeper blue for emphasis
+    contrastText: "#FFFFFF",
   },
   secondary: {
-    main: "#170312", // new secondary color
-    light: "#3a0a3a", // light derivative of secondary
-    dark: "#0d0009", // dark derivative of secondary
-    contrastText: "#f5f1e3", // white
+    main: "#2A4365", // Deep navy - represents wisdom and depth
+    light: "#3B5C8F", // Lighter navy
+    dark: "#1A2F4C", // Darker navy
+    contrastText: "#FFFFFF",
   },
   accent: {
-    main: "#ff6f59", // new accent color
-    light: "#ff9a85", // light derivative of accent
-    dark: "#c43f33", // dark derivative of accent
-    contrastText: "#ffffff", // white
+    main: "#48BB78", // Sage green - represents growth and progress
+    light: "#68D391", // Lighter green
+    dark: "#2F855A", // Deeper green
+    contrastText: "#FFFFFF",
   },
   background: {
-    default: "#f5f1e3ff", // old-lace
-    paper: "#ffffffff",
+    default: "#F7FAFC", // Very light blue-grey - soft, easy on eyes
+    paper: "#FFFFFF",
   },
   text: {
-    primary: "#373737ff", // jet
-    secondary: "#ffffffff", // white
-    disabled: "#bdbdbdff",
-    hint: "#9e9e9eff",
-    light: "#e0e0e0ff", // light text
-    dark: "#212121ff", // dark text
-    muted: "#757575ff",
-    white: "#ffffffff", // white
-    black: "#000000ff", // black
+    primary: "#2D3748", // Deep grey - clear but not harsh
+    secondary: "#4A5568", // Medium grey - for secondary information
+    disabled: "#A0AEC0", // Light grey
+    hint: "#718096", // Medium-light grey
+    light: "#EDF2F7", // Very light grey
+    dark: "#1A202C", // Almost black
+    muted: "#718096", // Muted grey
+    white: "#FFFFFF",
+    black: "#000000",
   },
   neutral: {
-    light: "#d1d5dbff", // light neutral
-    main: "#64748bff", // main neutral
-    dark: "#1e293bff", // dark neutral
-    contrastText: "#ffffffff", // white
+    light: "#E2E8F0", // Light neutral
+    main: "#718096", // Main neutral
+    dark: "#2D3748", // Dark neutral
+    contrastText: "#FFFFFF",
   },
 };
 

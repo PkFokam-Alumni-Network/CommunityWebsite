@@ -75,17 +75,20 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.primary.main, // bittersweet
           boxShadow: "none",
           color: colors.secondary.main,
           "&:hover": {
             backgroundColor: colors.primary.light, // licorice
           },
           "&.MuiButton-contained": {
-            backgroundColor: colors.secondary.main,
-            color: colors.secondary.contrastText,
+            backgroundColor: colors.primary.main,
+            color: colors.primary.contrastText,
             "&:hover": {
-              backgroundColor: colors.secondary.dark,
+              backgroundColor: colors.primary.light,
+            },
+            "&.Mui-disabled": {
+              backgroundColor: colors.neutral.light,
+              color: colors.text.disabled,
             },
           },
         },

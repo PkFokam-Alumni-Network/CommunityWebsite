@@ -1,70 +1,136 @@
 import React from "react";
-import colors from "../utils/colors";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Box,
+  Container,
+  Card as MuiCard,
+  CardContent,
+  Stack,
+} from "@mui/material";
 import {
   Event as EventIcon,
   LocationOn as LocationOnIcon,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
-export default function Events() {
-  const events = [
-    {
-      title: "Graduation Ceremony",
-      date: new Date("2024-12-10"),
-      location: "Amphitheater",
-    },
-    {
-      title: "Graduation Ceremony",
-      date: new Date("2024-12-10"),
-      location: "Amphitheater",
-    },
-    {
-      title: "Graduation Ceremony",
-      date: new Date("2024-12-10"),
-      location: "Amphitheater",
-    },
-  ];
+const events = [
+  {
+    title: "Graduation Ceremony",
+    date: new Date("2024-12-10"),
+    location: "Amphitheater",
+  },
+  {
+    title: "Graduation Ceremony",
+    date: new Date("2024-12-10"),
+    location: "Amphitheater",
+  },
+  {
+    title: "Graduation Ceremony",
+    date: new Date("2024-12-10"),
+    location: "Amphitheater",
+  },
+];
 
-  const Card = React.memo(({ title, date, location }) => (
-    <motion.div
-      className="bg-white rounded-md cursor-pointer p-8 transition-all"
-      style={{
-        borderWidth: "1px",
-        borderColor: colors.primary.light,
-        boxShadow: "none",
-      }}
-      whileHover={{ scale: 1.005 }}
-    >
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="text-base mt-2">
-        {" "}
-        <EventIcon sx={{ marginRight: "8px" }} color="primary" />
-        {date.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </p>
-      <p className="text-base mt-2">
-        <LocationOnIcon color="primary" sx={{ marginRight: "8px" }} />
-        {location}
-      </p>
-      <Button sx={{ width: "100%", marginTop: "3rem" }}>Learn More</Button>
-    </motion.div>
-  ));
+const EventCard = React.memo(({ title, date, location }) => {
+  const MotionCard = motion(MuiCard);
+
   return (
-    <div className="justify-between">
-      <div className="container mx-auto">
-        <div className="py-[4rem]">
-          <h2 className="text-3xl font-bold text-center">Upcoming Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            {events.map((event) => (
-              <Card {...event} />
+    <MotionCard
+      elevation={0}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
+      sx={{
+        height: "100%",
+        borderRadius: 2,
+        border: 1,
+        borderColor: "grey.200",
+        bgcolor: "background.paper",
+        overflow: "hidden",
+        "&:hover": {
+          borderColor: "primary.main",
+        },
+      }}
+    >
+      <CardContent sx={{ p: 4, height: "100%" }}>
+        <Stack spacing={3} height="100%">
+          <Box>
+            <Typography variant="h6" gutterBottom fontWeight={600}>
+              {title}
+            </Typography>
+
+            <Stack spacing={1.5} sx={{ mt: 2 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <EventIcon fontSize="small" sx={{ color: "primary.main" }} />
+                <Typography variant="body2" color="text.primary">
+                  {date.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <LocationOnIcon
+                  fontSize="small"
+                  sx={{ color: "primary.main" }}
+                />
+                <Typography variant="body2" color="text.primary">
+                  {location}
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
+
+          <Button
+            variant="outlined"
+            sx={{
+              mt: "auto",
+              textTransform: "none",
+              borderRadius: 1.5,
+            }}
+          >
+            Learn More
+          </Button>
+        </Stack>
+      </CardContent>
+    </MotionCard>
+  );
+});
+
+export default function Events() {
+  return (
+    <Box>
+      <Container maxWidth="lg">
+        <Box sx={{ py: { xs: 6, md: 10 } }}>
+          <Typography
+            variant="h3"
+            align="center"
+            sx={{
+              mb: { xs: 4, md: 6 },
+              fontWeight: 700,
+            }}
+          >
+            Upcoming Events
+          </Typography>
+
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "repeat(3, 1fr)",
+              },
+              gap: 3,
+            }}
+          >
+            {events.map((event, index) => (
+              <EventCard key={index} {...event} />
             ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 }
