@@ -8,7 +8,7 @@ RUN npm install
 
 # Copy the entire project and build the React app
 COPY . .
-RUN npm run build
+RUN npm run build -- --verbose
 
 # Stage 2: Serve the app with nginx
 FROM nginx:alpine
