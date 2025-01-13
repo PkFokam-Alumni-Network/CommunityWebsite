@@ -8,14 +8,7 @@ RUN npm install
 
 # Copy the entire project and build the React app
 COPY . .
-RUN npm run build -- --verbose
-
-# Stage 2: Serve the app with nginx
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose port 80 for HTTP traffic
-EXPOSE 80
+RUN npm run build --loglevel verbose
 
 # Default command to run nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
