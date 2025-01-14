@@ -29,7 +29,7 @@ import {
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
 import alumniData from "../store/alumnidata"
-import AlumniCard from "../components/AlumniCard"; // Import the new AlumniCard component
+import AlumniCard from "../components/AlumniCard";
 
 const drawerWidth = 240;
 
