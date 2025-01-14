@@ -1,35 +1,15 @@
-import React from "react";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import {
-  Container,
-  Typography,
-  Grid,
   Avatar,
-  Box,
-  Link,
   Card,
   CardContent,
   Divider,
-} from "@mui/material";
+} from '@mui/material';
 
 const AlumniDetails = () => {
-  const person = {
-    name: "Jane Doe",
-    image: "/placeholder.svg?height=400&width=400",
-    role: "Software Engineer",
-    bio: "Jane Doe is a passionate software engineer with a proven track record in developing cutting-edge web applications. She excels in React and Node.js, and has a keen interest in AI and machine learning. Throughout her career, Jane has led multiple successful projects, consistently delivering high-quality solutions that meet and exceed client expectations. Her innovative approach to problem-solving and her ability to adapt to new technologies quickly have made her a valuable asset in the ever-evolving field of software development.",
-    details: {
-      currentState: "California",
-      currentCompany: "TechInnovate Inc.",
-      education: "M.S. in Computer Science",
-      graduationYear: "2018",
-      email: "jane.doe@example.com",
-    },
-    socialMedia: {
-      linkedin: "https://www.linkedin.com/in/janedoe",
-      instagram: "https://www.instagram.com/janedoe",
-      github: "https://github.com/janedoe",
-    },
-  };
+  const location = useLocation();
+  const { name, role, imageUrl, details } = location.state || {};
 
   return (
     <div className="min-h-screen bg-[#F3EFF5] py-12">
@@ -41,19 +21,16 @@ const AlumniDetails = () => {
               <div className="lg:w-1/2 space-y-6">
                 <div className="flex flex-col items-center lg:items-start gap-4">
                   <div className="relative rounded-full overflow-hidden">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/1.jpg"
-                    />
+                    <Avatar alt={name} src={imageUrl} />
                   </div>
                   <div className="text-center lg:text-left">
-                    <h1 className="text-3xl font-bold">{person.name}</h1>
-                    <p className="text-xl text-slate-400">{person.role}</p>
+                    <h1 className="text-3xl font-bold">{name}</h1>
+                    <p className="text-xl text-slate-400">{role}</p>
                   </div>
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold mb-2">Biography</h2>
-                  <p className="">{person.bio}</p>
+                  <p>PlaceHolderBio</p>
                 </div>
               </div>
 
@@ -66,44 +43,50 @@ const AlumniDetails = () => {
                 <div>
                   <h2 className="text-xl font-semibold mb-4">Details</h2>
                   <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
-                    {Object.entries(person.details).map(([key, value]) => (
+                    {details && Object.entries(details).map(([key, value]) => (
                       <div key={key} className="flex flex-col">
                         <dt className="text-sm font-medium text-slate-400 capitalize">
-                          {key.replace(/([A-Z])/g, " $1").trim()}
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
                         </dt>
-                        <dd className="text-sm">{value}</dd>
+                        <dd className="text-sm">
+                          {key === 'socialMedia' ? 
+                            // Render each social media link separately
+                            Object.entries(value).map(([platform, url]) => (
+                              <div key={platform}>
+                                <a href={url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                                </a>
+                              </div>
+                            )) 
+                            : value
+                          }
+                        </dd>
                       </div>
                     ))}
                   </dl>
                 </div>
 
                 {/* Horizontal Divider */}
-                {/* <Separator className="my-4" /> */}
                 <Divider orientation="horizontal" flexItem />
 
                 {/* Social Media */}
-                <div>
-                  <h2 className="text-xl font-semibold mb-4">Social Media</h2>
-                  <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
-                    {Object.entries(person.socialMedia).map(([key, value]) => (
-                      <div key={key} className="flex flex-col">
-                        <dt className="text-sm font-medium text-slate-400 capitalize">
-                          {key}
-                        </dt>
-                        <dd className="text-sm">
-                          <a
-                            href={value}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline"
-                          >
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                          </a>
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
+                {details.socialMedia && (
+                  <div>
+                    <h2 className="text-xl font-semibold mb-4">Social Media</h2>
+                    <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                      {Object.entries(details.socialMedia).map(([platform, url]) => (
+                        <div key={platform} className="flex flex-col">
+                          <dt className="text-sm font-medium text-slate-400 capitalize">{platform}</dt>
+                          <dd className="text-sm">
+                            <a href={url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                              {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                            </a>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                )}
               </div>
             </div>
           </CardContent>

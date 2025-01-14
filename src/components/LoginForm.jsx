@@ -14,7 +14,7 @@ import pkfLogo from "../assets/pkflogo.png";
 import { useDispatch } from "react-redux";
 import { useToast } from "../uiContexts/toastContext";
 import { loginUser } from "../features/authSlice";
-import { NavLink, useNavigation } from "react-router";
+import { NavLink } from "react-router";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
