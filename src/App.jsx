@@ -6,8 +6,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/UserDashboard";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
-import AlumniCard from "./components/AlumniCard"; // Adjust the path as needed
-import AlumniDetails from "./components/AlumniDetails"; // Adjust the path as needed
+import AlumniCard from "./components/AlumniCard";
+import AlumniDetails from "./components/AlumniDetails";
 import { initializeAuth } from "./features/authSlice";
 import "./App.css";
 
