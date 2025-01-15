@@ -12,7 +12,6 @@ import {
   ListItemIcon,
   ListItemText,
   Box,
-  Paper,
   useTheme,
 } from "@mui/material";
 import {
