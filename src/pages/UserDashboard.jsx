@@ -1,43 +1,35 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   CssBaseline,
   Container,
   Grid,
   AppBar,
-  Typography,
   Toolbar,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Drawer,
   Box,
-  Avatar,
-  IconButton,
+  Typography,
   Divider,
   InputBase,
-  InputAdornment,
   Button,
+  InputAdornment,   
+  ListItem,         
+  ListItemIcon,     
+  ListItemText, 
 } from "@mui/material";
-
 import {
   Dashboard,
   People,
   Event,
   Message,
   Settings,
-  Phone,
-  Email,
-  LocationOn,
-  Work,
   Search,
   Logout,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
+import alumniData from "../store/alumnidata"
+import AlumniCard from "../components/AlumniCard";
 
 const drawerWidth = 240;
 
@@ -48,183 +40,6 @@ const menuItems = [
   { text: "Messages", icon: <Message /> },
   { text: "Settings", icon: <Settings /> },
 ];
-
-const alumniData = [
-  {
-    name: "John Smith",
-    image: "/api/placeholder/150/150",
-    role: "Software Engineer",
-    email: "john.smith@email.com",
-    phone: "+1 234 567 8900",
-    location: "New York, USA",
-    graduation: "2020",
-  },
-  {
-    name: "Sarah Johnson",
-    image: "/api/placeholder/150/150",
-    role: "Marketing Manager",
-    email: "sarah.j@email.com",
-    phone: "+1 234 567 8901",
-    location: "Los Angeles, USA",
-    graduation: "2019",
-  },
-  {
-    name: "Michael Brown",
-    image: "/api/placeholder/150/150",
-    role: "Data Scientist",
-    email: "michael.b@email.com",
-    phone: "+1 234 567 8902",
-    location: "Chicago, USA",
-    graduation: "2021",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-  {
-    name: "Emily Davis",
-    image: "/api/placeholder/150/150",
-    role: "Product Manager",
-    email: "emily.d@email.com",
-    phone: "+1 234 567 8903",
-    location: "San Francisco, USA",
-    graduation: "2018",
-  },
-];
-
-const AlumniCard = ({ alumni }) => (
-  <Card
-    elevation={0}
-    sx={{
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-      bgcolor: "#fff",
-      transition: "all 0.2s",
-      "&:hover": {
-        bgcolor: "grey.50",
-        transform: "translateY(-2px)",
-      },
-    }}
-  >
-    <CardContent sx={{ p: 3 }}>
-      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-        <Avatar
-          src={alumni.image}
-          sx={{
-            width: 56,
-            height: 56,
-            mr: 2,
-            border: "2px solid",
-            borderColor: "primary.main",
-          }}
-        />
-        <Box>
-          <Typography variant="h6" sx={{ fontWeight: 500 }}>
-            {alumni.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {alumni.role}
-          </Typography>
-        </Box>
-      </Box>
-
-      <Divider sx={{ my: 2 }} />
-
-      <List dense disablePadding>
-        <ListItem disableGutters>
-          <ListItemIcon sx={{ minWidth: 36 }}>
-            <Email fontSize="small" color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary={alumni.email}
-            primaryTypographyProps={{ variant: "body2" }}
-          />
-        </ListItem>
-
-        <ListItem disableGutters>
-          <ListItemIcon sx={{ minWidth: 36 }}>
-            <Phone fontSize="small" color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary={alumni.phone}
-            primaryTypographyProps={{ variant: "body2" }}
-          />
-        </ListItem>
-
-        <ListItem disableGutters>
-          <ListItemIcon sx={{ minWidth: 36 }}>
-            <LocationOn fontSize="small" color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary={alumni.location}
-            primaryTypographyProps={{ variant: "body2" }}
-          />
-        </ListItem>
-
-        <ListItem disableGutters>
-          <ListItemIcon sx={{ minWidth: 36 }}>
-            <Work fontSize="small" color="primary" />
-          </ListItemIcon>
-          <ListItemText
-            primary={`Class of ${alumni.graduation}`}
-            primaryTypographyProps={{ variant: "body2" }}
-          />
-        </ListItem>
-      </List>
-    </CardContent>
-  </Card>
-);
 
 const SearchBar = ({ onSearch }) => (
   <Box
@@ -260,7 +75,7 @@ export default function AlumniDashboard() {
     setSearchQuery(query);
     const filtered = alumniData.filter((alumni) => {
       const searchStr =
-        `${alumni.name} ${alumni.role} ${alumni.location} ${alumni.email}`.toLowerCase();
+        `${alumni.name} ${alumni.role}`.toLowerCase();
       return searchStr.includes(query.toLowerCase());
     });
     setFilteredAlumni(filtered);
@@ -275,13 +90,13 @@ export default function AlumniDashboard() {
     <Box
       sx={{
         display: "flex",
-        bgcolor: "grey.50",
         minHeight: "100vh",
+        background: "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );",
         zIndex: 1000,
       }}
     >
       <CssBaseline />
-      <AppBar position="fixed" elevation={0} color="inherit">
+      <AppBar position="fixed" elevation={0} color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <SearchBar onSearch={handleSearch} />
@@ -308,7 +123,7 @@ export default function AlumniDashboard() {
             flexDirection: "column",
           }}
         >
-          <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200" }}>
+          <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200"}}>
             <Typography
               variant="h6"
               sx={{
@@ -321,7 +136,7 @@ export default function AlumniDashboard() {
             </Typography>
           </Box>
 
-          <Box sx={{ flex: 1, mt: 2 }}>
+          <Box sx={{ flex: 1, mt: 2,         background: "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );", }}>
             {menuItems.map((item) => (
               <ListItem
                 button
@@ -349,7 +164,7 @@ export default function AlumniDashboard() {
           </Box>
 
           <Divider />
-          <Box sx={{ p: 2 }}>
+          <Box sx={{ p: 2,}}>
             <Button
               fullWidth
               variant="contained"
@@ -379,7 +194,12 @@ export default function AlumniDashboard() {
           <Grid container spacing={3}>
             {filteredAlumni.map((alumni, index) => (
               <Grid item key={index} xs={12} sm={6} md={4}>
-                <AlumniCard alumni={alumni} />
+                <AlumniCard
+                  name={alumni.name}
+                  role={alumni.role}
+                  imageUrl={alumni.imageUrl}
+                  details={alumni.details}
+                />
               </Grid>
             ))}
             {filteredAlumni.length === 0 && (
