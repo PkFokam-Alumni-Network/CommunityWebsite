@@ -10,5 +10,11 @@ RUN npm install
 COPY . .
 RUN npm run build --loglevel verbose
 
-# Default command to run nginx
-CMD ["npm", "start"]
+# Install a simple HTTP server to serve the built app
+RUN npm install -g serve
+
+# Set the command to serve the React app
+CMD ["serve", "-s", "build"]
+
+# Expose the port the app runs on
+EXPOSE 3000
