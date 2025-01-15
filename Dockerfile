@@ -10,11 +10,12 @@ RUN npm install
 COPY . .
 RUN npm run build --loglevel verbose
 
+# Expose the port the app runs on
+EXPOSE 3000
+
 # Install a simple HTTP server to serve the built app
 RUN npm install -g serve
 
 # Set the command to serve the React app
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "build", "-l", "3000"]
 
-# Expose the port the app runs on
-EXPOSE 3000
