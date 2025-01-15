@@ -12,6 +12,8 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await authService.login(formData);
       console.log("The response to your API call is: ", response);
+      console.log("accessToken from response:" , response.access_token);
+      console.log("tokenType from response:", response.token_type);
       return {
         accessToken: response.access_token,
         tokenType: response.token_type,
