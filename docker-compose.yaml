@@ -3,5 +3,5 @@ services:
     build:
       context: ./
     ports:
-      - "3000:80" # Map port 3000 on the host to port 80 in the container
+      - "4000:4000" # Map port 4000 on the host to port 4000 in the container
     container_name: community_frontend
