@@ -50,7 +50,11 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="fixed" elevation={0} color="primary">
+    <AppBar position="fixed" elevation={0} color="primary" 
+    sx={{
+      backgroundColor: "rgba(74, 144, 226, 0.7)", 
+      backdropFilter: "blur(10px)", 
+    }}>
       <Toolbar
         component={motion.div}
         variants={containerVariants}

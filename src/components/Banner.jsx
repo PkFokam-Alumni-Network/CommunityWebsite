@@ -1,10 +1,18 @@
 import React from "react";
 import colors from "../utils/colors";
 import { Container, Typography } from "@mui/material";
+import backgroundImage2 from "../assets/bg2.jpg";
 
 export default function Banner() {
   return (
-    <div style={{ height: "50vh", backgroundColor: colors.secondary.main }}>
+    <div style={{
+      height: "50vh",
+      backgroundColor: colors.secondary.main,
+      backgroundImage: `url(${backgroundImage2})`,
+      backgroundSize: "cover",
+      backgroundPosition: "1%  10%",
+      backgroundRepeat: "no-repeat",
+    }}>
       <Container sx={{ height: "100%" }}>
         <div className="h-full flex flex-col text-center justify-center items-center">
           <Typography

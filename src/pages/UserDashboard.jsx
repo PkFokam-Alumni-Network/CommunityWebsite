@@ -28,7 +28,7 @@ import {
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
-import alumniData from "../store/alumnidata"
+import alumniData from "../utils/alumnidata";
 import AlumniCard from "../components/AlumniCard";
 
 const drawerWidth = 240;
