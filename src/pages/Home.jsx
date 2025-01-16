@@ -4,7 +4,8 @@ import Events from "../components/Events";
 import Footer from "../components/Footer";
 import { Typography, Container, Box } from "@mui/material";
 import OnboardingPage from "../components/Onboarding";
-import FAQAccordion from "../components/FAQAccordion";
+// import FAQAccordion from "../components/FAQAccordion";
+import FAQAccordion from "../components/Accordion";
 
 export default function Home() {
   return (
