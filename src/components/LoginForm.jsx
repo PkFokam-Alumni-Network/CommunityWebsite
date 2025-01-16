@@ -56,7 +56,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-left px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 px-4 py-12 px-4 py-12 sm:px-6 lg:px-8">
       <CssBaseline enableColorScheme />
       <NavLink
         to="/"
