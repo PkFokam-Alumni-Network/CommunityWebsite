@@ -13,13 +13,16 @@ const inAnimation = keyframes`
   }
 `;
 
-const SplashScreen = ({ onComplete }) => {
+const SplashScreen = ({ onComplete, username }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onComplete();
     }, 3000); // Adjust time for splash screen duration
     return () => clearTimeout(timer);
   }, [onComplete]);
+
+  const message = "Hello  " + username;
+  var usernameArray = message.split("").concat(["🌸", "🌸", "🌸"]);
 
   return (
     <Box
@@ -29,7 +32,8 @@ const SplashScreen = ({ onComplete }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#ea2e49",
+        background:
+          "radial-gradient(circle farthest-corner at 0.8% 3.1%, rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2%)",
         position: "absolute",
         top: 0,
         left: 0,
@@ -43,41 +47,20 @@ const SplashScreen = ({ onComplete }) => {
         sx={{
           color: "#fff",
           fontFamily: "'Georgia', sans-serif",
-          fontSize: "52px",
           fontWeight: 600,
           textTransform: "uppercase",
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
+          fontSize: {
+            xs: "36px",
+            sm: "48px",
+            md: "52px",
+            lg: "60px",
+          },
         }}
       >
-        {[
-          "w",
-          "e",
-          "l",
-          "c",
-          "o",
-          "m",
-          "e",
-          " ",
-          " ",
-          "b",
-          "a",
-          "c",
-          "k",
-          " ",
-          " ",
-          "l",
-          "e",
-          "s",
-          "l",
-          "i",
-          "e",
-          "!",
-          "🌸",
-          "🌸",
-          "🌸",
-        ].map((char, index) => (
+        {usernameArray.map((char, index) => (
           <Box
             key={index}
             component="span"
@@ -88,7 +71,7 @@ const SplashScreen = ({ onComplete }) => {
               transformOrigin: "left",
               animation: `${inAnimation} 0.5s forwards`,
               animationDelay: `${0.1 * index}s`,
-              marginRight: index !== 0 && "10px",
+              marginRight: index !== 0 && "10px", // Add margin between letters
             }}
           >
             {char}

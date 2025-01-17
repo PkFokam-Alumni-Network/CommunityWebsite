@@ -6,7 +6,6 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/UserDashboard";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
-import AlumniCard from "./components/AlumniCard";
 import AlumniDetails from "./components/AlumniDetailsCard";
 import SplashScreen from "./components/SplashScreen";
 import { initializeAuth } from "./features/authSlice";
@@ -57,7 +56,9 @@ function App() {
       {isAuthenticated && showSplash ? (
         <Route
           path="/dashboard"
-          element={<SplashScreen onComplete={handleSplashComplete} />}
+          element={
+            <SplashScreen onComplete={handleSplashComplete} username="Leslie" />
+          }
         />
       ) : (
         // Dashboard page after splash screen
