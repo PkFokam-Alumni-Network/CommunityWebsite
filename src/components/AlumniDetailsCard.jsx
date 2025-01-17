@@ -44,8 +44,6 @@ const fallbackData = {
 export default function AlumniProfile() {
   const location = useLocation();
   const locationData = location.state?.alumni;
-
-  // Use location data if available, otherwise use initialData or fallback
   const alumniData = locationData || fallbackData;
 
   return (
@@ -62,10 +60,10 @@ export default function AlumniProfile() {
     >
       <Card
         sx={{
-          maxWidth: { xs: "100%", sm: 600, md: 800 }, // Responsive maxWidth
-          width: "100%", // Ensure it doesn't exceed the parent's width
-          margin: { xs: 2, sm: 3 }, // Responsive margin
-          padding: { xs: 2, sm: 3 }, // Responsive padding if needed
+          maxWidth: { xs: "100%", sm: 600, md: 800 },
+          width: "100%",
+          margin: { xs: 2, sm: 3 },
+          padding: { xs: 2, sm: 3 },
         }}
       >
         <CardHeader
@@ -89,47 +87,74 @@ export default function AlumniProfile() {
         />
         <CardContent>
           <Grid2 container spacing={3}>
+            {/* About Me Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+              >
                 About Me
               </Typography>
               <Typography variant="body1">{alumniData.bio}</Typography>
             </Grid2>
 
+            {/* Contact Information Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+              >
                 Contact Information
               </Typography>
               <Grid2 container spacing={2}>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <EmailIcon color="action" sx={{ mr: 1 }} />
+                    <EmailIcon
+                      color="action"
+                      sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
+                    />
                     <Typography>{alumniData.details?.email}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <PhoneIcon color="action" sx={{ mr: 1 }} />
+                    <PhoneIcon
+                      color="action"
+                      sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
+                    />
                     <Typography>{alumniData.details?.phone}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <LocationIcon color="action" sx={{ mr: 1 }} />
+                    <LocationIcon
+                      color="action"
+                      sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
+                    />
                     <Typography>{alumniData.details?.location}</Typography>
                   </Box>
                 </Grid2>
               </Grid2>
             </Grid2>
 
+            {/* Social Media Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+              >
                 Social Media
               </Typography>
               <Grid2 container spacing={2}>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <LinkedInIcon color="action" sx={{ mr: 1 }} />
+                    <LinkedInIcon
+                      color="action"
+                      sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
+                    />
                     <Link
                       href={alumniData.details?.socialMedia.linkedin}
                       target="_blank"
@@ -141,7 +166,10 @@ export default function AlumniProfile() {
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <TwitterIcon color="action" sx={{ mr: 1 }} />
+                    <TwitterIcon
+                      color="action"
+                      sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
+                    />
                     <Link
                       href={alumniData.details?.socialMedia.twitter}
                       target="_blank"
@@ -154,8 +182,13 @@ export default function AlumniProfile() {
               </Grid2>
             </Grid2>
 
+            {/* Skills Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+              >
                 Skills
               </Typography>
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
@@ -165,39 +198,58 @@ export default function AlumniProfile() {
               </Box>
             </Grid2>
 
+            {/* Education Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem", mr: 1 }}
+              >
                 Education
               </Typography>
               {(alumniData.education || []).map((edu, index) => (
                 <Box key={index} sx={{ mb: 2 }}>
                   <Typography variant="subtitle1">
+                    <SchoolIcon
+                      fontSize="small"
+                      sx={{
+                        mr: 1,
+                        verticalAlign: "middle",
+                        "&:hover": { color: "primary.main" },
+                      }}
+                    />
                     {edu.degree} in {edu.field}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    <SchoolIcon
-                      fontSize="small"
-                      sx={{ mr: 1, verticalAlign: "middle" }}
-                    />
                     Graduated: {edu.year}
                   </Typography>
                 </Box>
               ))}
             </Grid2>
 
+            {/* Experience Section */}
             <Grid2 item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem", mr: 100 }}
+              >
                 Experience
               </Typography>
               {(alumniData.experience || []).map((exp, index) => (
                 <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="subtitle1">{exp.position}</Typography>
-                  <Typography variant="body2">{exp.company}</Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="subtitle1">
                     <WorkIcon
                       fontSize="small"
-                      sx={{ mr: 1, verticalAlign: "middle" }}
+                      sx={{
+                        mr: 1,
+                        verticalAlign: "middle",
+                        "&:hover": { color: "primary.main" },
+                      }}
                     />
+                    {exp.position} at {exp.company}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
                     {exp.duration}
                   </Typography>
                 </Box>
