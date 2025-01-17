@@ -17,7 +17,7 @@ const SplashScreen = ({ onComplete, username }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onComplete();
-    }, 3000); // Adjust time for splash screen duration
+    }, 3000);
     return () => clearTimeout(timer);
   }, [onComplete]);
 
