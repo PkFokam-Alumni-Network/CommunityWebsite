@@ -3,19 +3,21 @@ import { useNavigate } from "react-router-dom";
 import {
   CssBaseline,
   Container,
-  Grid,
-  AppBar,
-  Toolbar,
-  Drawer,
   Box,
   Typography,
   Divider,
   InputBase,
   Button,
-  InputAdornment,   
-  ListItem,         
-  ListItemIcon,     
-  ListItemText, 
+  InputAdornment,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  AppBar,
+  Drawer,
+  Grid2,
+  useMediaQuery,
+  IconButton,
 } from "@mui/material";
 import {
   Dashboard,
@@ -25,13 +27,16 @@ import {
   Settings,
   Search,
   Logout,
+  Menu as MenuIcon,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
-import alumniData from "../utils/alumnidata";
+import alumniFakeData from "../utils/alumnidata";
 import AlumniCard from "../components/AlumniCard";
 
 const drawerWidth = 240;
+
+const alumniData = new Array(10).fill(alumniFakeData);
 
 const menuItems = [
   { text: "Dashboard", icon: <Dashboard /> },
@@ -70,12 +75,14 @@ export default function AlumniDashboard() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAlumni, setFilteredAlumni] = useState(alumniData);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const handleSearch = (query) => {
     setSearchQuery(query);
     const filtered = alumniData.filter((alumni) => {
-      const searchStr =
-        `${alumni.name} ${alumni.role}`.toLowerCase();
+      const searchStr = `${alumni.name} ${alumni.role}`.toLowerCase();
       return searchStr.includes(query.toLowerCase());
     });
     setFilteredAlumni(filtered);
@@ -86,25 +93,41 @@ export default function AlumniDashboard() {
     navigate("/login");
   };
 
+  const toggleDrawer = () => {
+    setOpenDrawer(!openDrawer);
+  };
+
   return (
     <Box
       sx={{
         display: "flex",
         minHeight: "100vh",
-        background: "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );",
+        background:
+          "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );",
         zIndex: 1000,
       }}
     >
       <CssBaseline />
-      <AppBar position="fixed" elevation={0} color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );">
+      <AppBar
+        position="fixed"
+        elevation={0}
+        color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );"
+      >
         <Toolbar>
+          {isMobile && (
+            <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
+              <MenuIcon />
+            </IconButton>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <SearchBar onSearch={handleSearch} />
         </Toolbar>
       </AppBar>
 
       <Drawer
-        variant="permanent"
+        variant={isMobile ? "temporary" : "permanent"}
+        open={openDrawer}
+        onClose={toggleDrawer}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -116,27 +139,14 @@ export default function AlumniDashboard() {
           },
         }}
       >
-        <Box
-          sx={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200"}}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 600,
-                color: "primary.main",
-                textAlign: "left",
-              }}
-            >
-              Alumni Directory
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200" }}>
+            <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              PKF-Alumni
             </Typography>
           </Box>
 
-          <Box sx={{ flex: 1, mt: 2,         background: "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );", }}>
+          <Box sx={{ flex: 1, mt: 2 }}>
             {menuItems.map((item) => (
               <ListItem
                 button
@@ -164,7 +174,7 @@ export default function AlumniDashboard() {
           </Box>
 
           <Divider />
-          <Box sx={{ p: 2,}}>
+          <Box sx={{ p: 2 }}>
             <Button
               fullWidth
               variant="contained"
@@ -175,7 +185,6 @@ export default function AlumniDashboard() {
                 justifyContent: "flex-start",
                 px: 2,
                 py: 1,
-
                 "&:hover": {
                   backgroundColor: "primary.light",
                   boxShadow: "none",
@@ -191,13 +200,11 @@ export default function AlumniDashboard() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
+          <Grid2 container spacing={3}>
             {filteredAlumni.map((alumni, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <AlumniCard
-                  alumni={alumni}
-                />
-              </Grid>
+              <Grid2 item key={index} xs={12} sm={6} md={4}>
+                <AlumniCard alumni={alumni} />
+              </Grid2>
             ))}
             {filteredAlumni.length === 0 && (
               <Box sx={{ width: "100%", textAlign: "center", mt: 4 }}>
@@ -206,7 +213,7 @@ export default function AlumniDashboard() {
                 </Typography>
               </Box>
             )}
-          </Grid>
+          </Grid2>
         </Container>
       </Box>
     </Box>
