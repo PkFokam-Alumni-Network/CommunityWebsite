@@ -1,13 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { motion } from "framer-motion";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
-const AlumniCard = ({ name, role, imageUrl, details }) => {
+const AlumniCard = ({ alumni }) => {
   const navigate = useNavigate();
 
   const handleViewProfile = () => {
-    navigate('/alumni/details', { state: { name, role, imageUrl, details } });
+    navigate("/alumni/details", { state: { alumni } });
   };
 
   return (
@@ -22,11 +22,11 @@ const AlumniCard = ({ name, role, imageUrl, details }) => {
     >
       <div className="text-center glassmorphism-card">
         <div className="glassmorphism-card-img">
-          <img src={imageUrl} alt="Alumni profile"/>
+          <img src={alumni.imageUrl} alt="Alumni profile" />
         </div>
         <div className="alumni-card-demographics-container">
-          <h6 className="alumni-name-text">{name}</h6>
-          <h6 className="alumni-job-position-text">{role}</h6>
+          <h6 className="alumni-name-text">{alumni.name}</h6>
+          <h6 className="alumni-job-position-text">{alumni.role}</h6>
         </div>
         <Button className="primary-text glassmorphism-card-button">
           View Profile

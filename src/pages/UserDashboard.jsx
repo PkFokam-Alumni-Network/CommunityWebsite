@@ -195,10 +195,7 @@ export default function AlumniDashboard() {
             {filteredAlumni.map((alumni, index) => (
               <Grid item key={index} xs={12} sm={6} md={4}>
                 <AlumniCard
-                  name={alumni.name}
-                  role={alumni.role}
-                  imageUrl={alumni.imageUrl}
-                  details={alumni.details}
+                  alumni={alumni}
                 />
               </Grid>
             ))}

@@ -44,6 +44,7 @@ const theme = createTheme({
     },
   },
   typography: {
+    fontSize: 18,
     fontFamily: "'Source Serif 4', serif",
   },
   components: {

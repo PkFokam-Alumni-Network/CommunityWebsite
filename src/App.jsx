@@ -7,7 +7,7 @@ import Dashboard from "./pages/UserDashboard";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
 import AlumniCard from "./components/AlumniCard";
-import AlumniDetails from "./components/AlumniDetails";
+import AlumniDetails from "./components/AlumniDetailsCard";
 import { initializeAuth } from "./features/authSlice";
 import "./App.css";
 
