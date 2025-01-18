@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { motion } from "framer-motion";
-import pkfLogo from "../assets/pkflogo.png";
+import pkfLogo from "../assets/logo-black.png";
 import { useDispatch } from "react-redux";
 import { useToast } from "../uiContexts/toastContext";
 import { loginUser } from "../features/authSlice";
@@ -60,10 +60,22 @@ const LoginForm = () => {
       <CssBaseline enableColorScheme />
       <NavLink
         to="/"
-        className={`fixed top-4 left-4 font-semibold flex items-center gap-2 bg-slate-200 p-4 rounded-full cursor-pointer hover:bg-primary-main transition`}
+        className={`fixed top-4 left-4 font-semibold flex items-center gap-2 bg-slate-200 p-4 rounded-full cursor-pointer hover:bg-primary-main transition transform hover:scale-105 sm:top-6 sm:left-6 sm:p-5 lg:top-8 lg:left-8 lg:p-6`}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          padding: { xs: "8px", sm: "12px", lg: "16px" },
+          top: { xs: "16px", sm: "24px", lg: "32px" },
+          left: { xs: "16px", sm: "24px", lg: "32px" },
+          transition: "transform 0.2s",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
+        }}
       >
         <ArrowBack color="secondary" />
-        <span>Back</span>
+        <span className="hidden sm:inline">Back</span>
       </NavLink>
       <motion.div
         className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl"
@@ -80,6 +92,9 @@ const LoginForm = () => {
           >
             <img
               src={pkfLogo}
+              style={{
+                scale: 1.5,
+              }}
               alt="Pkfokam Connect Logo"
               className="mx-auto p-2 w-full h-full object-cover"
             />
