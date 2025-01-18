@@ -9,6 +9,7 @@ import AuthLayout from "./components/AuthLayout";
 import AlumniDetails from "./components/AlumniDetailsCard";
 import SplashScreen from "./components/SplashScreen";
 import { initializeAuth } from "./features/authSlice";
+
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const firstName = useSelector((state) => state.auth.user?.firstName);
 
   useEffect(() => {
     dispatch(initializeAuth());
@@ -57,7 +59,10 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <SplashScreen onComplete={handleSplashComplete} username="Leslie" />
+            <SplashScreen
+              onComplete={handleSplashComplete}
+              username={firstName || "Guest"}
+            />
           }
         />
       ) : (
