@@ -1,7 +1,7 @@
 import React from "react";
 import colors from "../utils/colors";
 import { Container, Typography } from "@mui/material";
-import backgroundImage2 from "../assets/bg2.jpg";
+import backgroundImage2 from "../assets/bg.jpg";
 
 export default function Banner() {
   return (

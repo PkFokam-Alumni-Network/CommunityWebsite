@@ -10,6 +10,7 @@ import {
   Box,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { NorthEast } from "@mui/icons-material";
 
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
@@ -70,25 +71,25 @@ const Header = () => {
           py: 1,
         }}
       >
-        <Box className="flex items-center">
-          <MotionTypography
-            variant="h6"
-            variants={logoVariants}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
-            sx={{
-              fontWeight: 700,
-              mr: 4,
-              color: "primary.contrastText",
-              cursor: "pointer",
-            }}
-          >
-            PKFOKAM ALUMNI
-          </MotionTypography>
+        <MotionTypography
+          variant="h6"
+          variants={logoVariants}
+          whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.2 },
+          }}
+          sx={{
+            fontWeight: 700,
+            mr: 4,
+            color: "primary.contrastText",
+            cursor: "pointer",
+          }}
+        >
+          PKFOKAM ALUMNI
+        </MotionTypography>
 
-          <List sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
+          <List sx={{ display: "flex", marginLeft: "auto" }}>
             {menu.map((item, index) => (
               <MotionListItem
                 key={index}
@@ -122,32 +123,36 @@ const Header = () => {
                 >
                   {item}
                 </Typography>
+                <NorthEast
+                  sx={{ color: "primary.contrastText", fontSize: 20 }}
+                />
               </MotionListItem>
             ))}
           </List>
-        </Box>
 
-        <MotionButton
-          component={Link}
-          to="/login"
-          variant="outlined"
-          variants={itemVariants}
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.2 },
-          }}
-          whileTap={{ scale: 0.95 }}
-          sx={{
-            color: "primary.contrastText",
-            borderColor: "primary.contrastText",
-            "&:hover": {
+          <MotionButton
+            component={Link}
+            to="/login"
+            variant="outlined"
+            variants={itemVariants}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.95 }}
+            sx={{
+              color: "primary.contrastText",
               borderColor: "primary.contrastText",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-            },
-          }}
-        >
-          Login
-        </MotionButton>
+              marginLeft: 5,
+              "&:hover": {
+                borderColor: "primary.contrastText",
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+              },
+            }}
+          >
+            Login
+          </MotionButton>
+        </Box>
       </Toolbar>
     </AppBar>
   );
