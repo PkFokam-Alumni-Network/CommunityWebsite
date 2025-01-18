@@ -103,7 +103,7 @@ export default function AlumniDashboard() {
         display: "flex",
         minHeight: "100vh",
         background:
-          "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );",
+          "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1)  100.2% );",
         zIndex: 1000,
       }}
     >
@@ -111,7 +111,7 @@ export default function AlumniDashboard() {
       <AppBar
         position="fixed"
         elevation={0}
-        color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2% );"
+        color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1) 100.2% );"
       >
         <Toolbar>
           {isMobile && (

@@ -56,7 +56,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 px-4 py-12 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gradient-to-br from-pink-300 via-purple-300 to-pink-300 px-4 py-12 px-4 py-12 sm:px-6 lg:px-8">
       <CssBaseline enableColorScheme />
       <NavLink
         to="/"
@@ -75,7 +75,6 @@ const LoginForm = () => {
         }}
       >
         <ArrowBack color="secondary" />
-        <span className="hidden sm:inline">Back</span>
       </NavLink>
       <motion.div
         className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl"
