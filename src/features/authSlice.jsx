@@ -11,6 +11,7 @@ export const loginUser = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await authService.login(formData);
+
       return {
         accessToken: response.access_token,
         tokenType: response.token_type,
