@@ -71,7 +71,7 @@ const SplashScreen = ({ onComplete, username }) => {
               transformOrigin: "left",
               animation: `${inAnimation} 0.5s forwards`,
               animationDelay: `${0.1 * index}s`,
-              marginRight: index !== 0 && "10px", // Add margin between letters
+              marginRight: "10px", // Add margin between letters
             }}
           >
             {char}
