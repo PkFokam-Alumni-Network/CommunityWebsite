@@ -32,6 +32,15 @@ const LoginForm = () => {
     setIsLoading(true);
     e.preventDefault();
 
+    const { email, password } = credentials;
+
+    // Check if the email and password fields are not empty
+    if (!email || !password) {
+      showToast("Please fill in all fields", "error");
+      setIsLoading(false);
+      return;
+    }
+
     // Unwrap the promise returned by the loginUser thunk
     dispatch(loginUser(credentials))
       .unwrap()
