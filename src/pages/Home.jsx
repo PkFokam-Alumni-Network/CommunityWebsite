@@ -3,7 +3,6 @@ import Banner from "../components/Banner";
 import Events from "../components/Events";
 import Footer from "../components/Footer";
 import { Typography, Container, Box } from "@mui/material";
-import OnboardingPage from "../components/Onboarding";
 import FAQAccordion from "../components/FAQAccordion";
 
 export default function Home() {
@@ -15,18 +14,6 @@ export default function Home() {
       {/* Events Section with subtle spacing */}
       <Box sx={{ py: 10 }}>
         <Events />
-      </Box>
-
-      {/* Onboarding Section with light background */}
-      <Box
-        sx={{
-          bgcolor: "grey.50",
-          py: 10,
-        }}
-      >
-        <Container maxWidth="lg">
-          <OnboardingPage />
-        </Container>
       </Box>
 
       {/* FAQ Section with proper spacing */}

@@ -13,6 +13,8 @@ import {
   ListItemText,
   Box,
   useTheme,
+  Modal,
+  Link,
 } from "@mui/material";
 import {
   AccountBalance,
@@ -72,108 +74,371 @@ const CustomListItem = ({ children }) => (
 );
 
 export default function OnboardingPage() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
-    <Box sx={{ minHeight: "100vh", py: 8 }}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Box textAlign="center" mb={6}>
-          <Typography
-            variant="h3"
-            component="h1"
-            gutterBottom
-            fontWeight="bold"
-            color="text.primary"
-          >
-            Student Onboarding Guide
+    <>
+      <Box sx={{ minHeight: "100vh", py: 12 }}>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Box textAlign="center" mb={6}>
+            <Typography
+              variant="h3"
+              component="h1"
+              gutterBottom
+              fontWeight="bold"
+              color="text.primary"
+            >
+              Student Onboarding Guide
+            </Typography>
+            <Typography variant="h6" color="text.primary" mb={4}>
+              Everything you need to know to get started on campus
+            </Typography>
+          </Box>
+
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Banking" icon={AccountBalance}>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Bank of America - Student Advantage
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Chase College Checking Account
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Wells Fargo College Combo
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Local Credit Unions - Better Rates
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Campus Employment" icon={Work}>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Browse Handshake Opportunities
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Research Assistant Positions
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Department Work-Study Jobs
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Career Center Resources
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Insurance" icon={LocalHospital}>
+                <Typography variant="body2" color="text.main" mt={2}>
+                  Follow these steps to activate your insurance:
+                </Typography>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Visit Student Health Center
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Present Required Documents
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Complete Registration
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Attend Orientation
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Opportunities" icon={School}>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Colorstack - Tech Opportunities
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      LinkedIn - Professional Network
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      University Job Board
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Career Fairs
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Professional Associations
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Transportation" icon={DirectionsBus}>
+                <Typography variant="body2" color="text.primary" mt={2}>
+                  Getting around campus:
+                </Typography>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Translock App for Bus Tracking
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Student Bus Pass
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Campus Bike-Share Program
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Parking Permit Information
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <CustomCard title="Grocery Shopping" icon={ShoppingCart}>
+                <Typography variant="body2" color="text.primary" mt={2}>
+                  Nearby shopping options:
+                </Typography>
+                <List>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Walmart Supercenter
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Target
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Local Farmer's Market
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Whole Foods
+                    </Link>
+                  </CustomListItem>
+                  <CustomListItem>
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={handleOpen}
+                      sx={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Trader Joe's
+                    </Link>
+                  </CustomListItem>
+                </List>
+              </CustomCard>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
           </Typography>
-          <Typography variant="h6" color="text.primary" mb={4}>
-            Everything you need to know to get started on campus
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
         </Box>
-
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Banking" icon={AccountBalance}>
-              <List>
-                <CustomListItem>
-                  Bank of America - Student Advantage
-                </CustomListItem>
-                <CustomListItem>Chase College Checking Account</CustomListItem>
-                <CustomListItem>Wells Fargo College Combo</CustomListItem>
-                <CustomListItem>
-                  Local Credit Unions - Better Rates
-                </CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Campus Employment" icon={Work}>
-              <List>
-                <CustomListItem>Browse Handshake Opportunities</CustomListItem>
-                <CustomListItem>Research Assistant Positions</CustomListItem>
-                <CustomListItem>Department Work-Study Jobs</CustomListItem>
-                <CustomListItem>Career Center Resources</CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Insurance" icon={LocalHospital}>
-              <Typography variant="body2" color="text.main" mt={2}>
-                Follow these steps to activate your insurance:
-              </Typography>
-              <List>
-                <CustomListItem>Visit Student Health Center</CustomListItem>
-                <CustomListItem>Present Required Documents</CustomListItem>
-                <CustomListItem>Complete Registration</CustomListItem>
-                <CustomListItem>Attend Orientation</CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Opportunities" icon={School}>
-              <List>
-                <CustomListItem>Colorstack - Tech Opportunities</CustomListItem>
-                <CustomListItem>LinkedIn - Professional Network</CustomListItem>
-                <CustomListItem>University Job Board</CustomListItem>
-                <CustomListItem>Career Fairs</CustomListItem>
-                <CustomListItem>Professional Associations</CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Transportation" icon={DirectionsBus}>
-              <Typography variant="body2" color="text.primary" mt={2}>
-                Getting around campus:
-              </Typography>
-              <List>
-                <CustomListItem>Translock App for Bus Tracking</CustomListItem>
-                <CustomListItem>Student Bus Pass</CustomListItem>
-                <CustomListItem>Campus Bike-Share Program</CustomListItem>
-                <CustomListItem>Parking Permit Information</CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <CustomCard title="Grocery Shopping" icon={ShoppingCart}>
-              <Typography variant="body2" color="text.primary" mt={2}>
-                Nearby shopping options:
-              </Typography>
-              <List>
-                <CustomListItem>Walmart Supercenter</CustomListItem>
-                <CustomListItem>Target</CustomListItem>
-                <CustomListItem>Local Farmer's Market</CustomListItem>
-                <CustomListItem>Whole Foods</CustomListItem>
-                <CustomListItem>Trader Joe's</CustomListItem>
-              </List>
-            </CustomCard>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+      </Modal>
+    </>
   );
 }
