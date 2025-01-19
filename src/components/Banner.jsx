@@ -8,7 +8,7 @@ export default function Banner() {
     <Box
       sx={{
         position: "relative",
-        height: "70vh",
+        height: "50vh",
         backgroundColor: colors.secondary.main,
         backgroundImage: `url(${backgroundImage2})`,
         backgroundSize: "cover",
@@ -51,7 +51,6 @@ export default function Banner() {
               maxWidth: "500px",
               width: "100%",
               fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              zIndex: 100
             }}
           >
             Welcome to PkFokam Alumni Network
@@ -62,7 +61,6 @@ export default function Banner() {
             sx={{
               color: "#FFFAFA",
               fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" }, // Responsive font size
-              zIndex: 100
             }}
           >
             Connecting generations of excellence
