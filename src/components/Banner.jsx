@@ -1,18 +1,57 @@
 import React from "react";
 import colors from "../utils/colors";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import backgroundImage2 from "../assets/bg.jpg";
 
 export default function Banner() {
   return (
-    <div style={{ height: "50vh", backgroundColor: colors.secondary.main }}>
+    <Box
+      sx={{
+        position: "relative",
+        height: "70vh",
+        backgroundColor: colors.secondary.main,
+        backgroundImage: `url(${backgroundImage2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "45% 20%",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        px: 2,
+      }}
+    >
+      {/* Dark Overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          zIndex: 2,
+        }}
+      />
       <Container sx={{ height: "100%" }}>
-        <div className="h-full flex flex-col text-center justify-center items-center">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
           <Typography
             variant="h3"
             sx={{
               color: colors.secondary.contrastText,
               fontWeight: 700,
               maxWidth: "500px",
+              width: "100%",
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+              zIndex: 100
             }}
           >
             Welcome to PkFokam Alumni Network
@@ -21,13 +60,15 @@ export default function Banner() {
             variant="h5"
             mt={2}
             sx={{
-              color: colors.secondary.contrastText,
+              color: "#FFFAFA",
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" }, // Responsive font size
+              zIndex: 100
             }}
           >
             Connecting generations of excellence
           </Typography>
-        </div>
+        </Box>
       </Container>
-    </div>
+    </Box>
   );
 }

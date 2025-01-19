@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          main: "#ffba08",
+          main: "#7EB2FF",
           light: "#ffd95b",
           dark: "#c78a00",
           contrastText: "#ffffff",
@@ -46,7 +46,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Montserrat", "Arial", "sans-serif"],
+        sans: ["Times New Roman", "Arial", "sans-serif"],
+        serif: ["'Source Serif 4'", "serif"],
       },
       backgroundImage: {
         "gradient-top": "linear-gradient(0deg, #F8F9FA, #E9ECEF, #DEE2E6)",

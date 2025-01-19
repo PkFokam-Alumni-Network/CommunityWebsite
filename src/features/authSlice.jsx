@@ -11,12 +11,15 @@ export const loginUser = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await authService.login(formData);
-
+      console.log("The response to your API call is: ", response);
+      console.log("accessToken from response:" , response.access_token);
+      console.log("tokenType from response:", response.token_type);
       return {
         accessToken: response.access_token,
         tokenType: response.token_type,
       };
     } catch (error) {
+      console.log("Error is", error);
       return rejectWithValue(error.message || "Login failed");
     }
   }

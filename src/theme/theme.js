@@ -44,7 +44,8 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
+    fontSize: 18,
+    fontFamily: "'Source Serif 4', serif",
   },
   components: {
     MuiTextField: {
