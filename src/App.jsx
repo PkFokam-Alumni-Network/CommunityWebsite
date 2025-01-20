@@ -9,7 +9,7 @@ import AuthLayout from "./components/AuthLayout";
 import AlumniDetails from "./components/AlumniDetailsCard";
 import SplashScreen from "./components/SplashScreen";
 import { initializeAuth } from "./features/authSlice";
-import OnboardingPage from "./components/Onboarding";
+import OnboardingPage from "./pages/Onboarding";
 import "./App.css";
 
 function App() {
