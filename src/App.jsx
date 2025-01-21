@@ -9,6 +9,7 @@ import AuthLayout from "./components/AuthLayout";
 import AlumniDetails from "./components/AlumniDetailsCard";
 import SplashScreen from "./components/SplashScreen";
 import { initializeAuth } from "./features/authSlice";
+import OnboardingPage from "./pages/Onboarding";
 import "./App.css";
 
 function App() {
@@ -74,6 +75,15 @@ function App() {
         path="/alumni/details"
         element={
           isAuthenticated ? <AlumniDetails /> : <Navigate to="/login" replace />
+        }
+      />
+
+      <Route
+        path="/onboarding"
+        element={
+          <MainLayout>
+            <OnboardingPage />
+          </MainLayout>
         }
       />
     </Routes>

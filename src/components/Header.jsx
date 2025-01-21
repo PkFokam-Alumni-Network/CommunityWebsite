@@ -22,7 +22,7 @@ const MotionListItem = motion(ListItem);
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const menu = ["Membership", "Graduation", "Events"];
+  const menu = ["Membership", "Graduation", "Events", "Onboarding"];
 
   // Animation variants
   const containerVariants = {
@@ -151,7 +151,11 @@ const Header = () => {
                       },
                     }}
                   >
-                    {item}
+                    {item.toLowerCase() === "onboarding" ? (
+                      <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+                    ) : (
+                      item
+                    )}
                   </Typography>
                   <NorthEast
                     sx={{ color: "primary.contrastText", fontSize: 20 }}
