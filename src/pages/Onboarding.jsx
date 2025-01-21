@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CssBaseline,
   Container,
@@ -16,15 +16,8 @@ import {
   Modal,
   Link,
 } from "@mui/material";
-import {
-  AccountBalance,
-  Work,
-  LocalHospital,
-  School,
-  DirectionsBus,
-  ShoppingCart,
-  ArrowForward,
-} from "@mui/icons-material";
+import { ArrowForward } from "@mui/icons-material";
+import { onboardingData } from "./../constants/OnboardingData";
 
 const CustomCard = ({ title, icon: Icon, children }) => {
   const theme = useTheme();
@@ -74,9 +67,20 @@ const CustomListItem = ({ children }) => (
 );
 
 export default function OnboardingPage() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(false);
+  const [selectedCardContentItem, setSelectedCardContentItem] = useState(null);
+
+  const handleLinkOnClick = (cardContentItem) => {
+    setSelectedCardContentItem(cardContentItem);
+    setOpen(true);
+  };
+
+  const handleModalOnClick = (value = "ok") => {
+    if (value === "cancel") {
+      setSelectedCardContentItem(null);
+      setOpen(false);
+    }
+  };
 
   const style = {
     position: "absolute",
@@ -111,332 +115,49 @@ export default function OnboardingPage() {
           </Box>
 
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Banking" icon={AccountBalance}>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Bank of America - Student Advantage
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Chase College Checking Account
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Wells Fargo College Combo
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Local Credit Unions - Better Rates
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Campus Employment" icon={Work}>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Browse Handshake Opportunities
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Research Assistant Positions
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Department Work-Study Jobs
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Career Center Resources
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Insurance" icon={LocalHospital}>
-                <Typography variant="body2" color="text.main" mt={2}>
-                  Follow these steps to activate your insurance:
-                </Typography>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Visit Student Health Center
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Present Required Documents
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Complete Registration
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Attend Orientation
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Opportunities" icon={School}>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Colorstack - Tech Opportunities
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      LinkedIn - Professional Network
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      University Job Board
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Career Fairs
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Professional Associations
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Transportation" icon={DirectionsBus}>
-                <Typography variant="body2" color="text.primary" mt={2}>
-                  Getting around campus:
-                </Typography>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Translock App for Bus Tracking
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Student Bus Pass
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Campus Bike-Share Program
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Parking Permit Information
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <CustomCard title="Grocery Shopping" icon={ShoppingCart}>
-                <Typography variant="body2" color="text.primary" mt={2}>
-                  Nearby shopping options:
-                </Typography>
-                <List>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Walmart Supercenter
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Target
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Local Farmer's Market
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Whole Foods
-                    </Link>
-                  </CustomListItem>
-                  <CustomListItem>
-                    <Link
-                      component="button"
-                      variant="body2"
-                      onClick={handleOpen}
-                      sx={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Trader Joe's
-                    </Link>
-                  </CustomListItem>
-                </List>
-              </CustomCard>
-            </Grid>
+            {onboardingData.map((item) => (
+              <Grid key={item.key} item xs={12} sm={6} md={4}>
+                <CustomCard title={item.title} icon={item.icon}>
+                  <List>
+                    {item.cardcontent.map((content) => (
+                      <CustomListItem key={content.id}>
+                        <Link
+                          component="button"
+                          variant="body2"
+                          onClick={() => handleLinkOnClick(content)}
+                          sx={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                        >
+                          {content.onboardingTitle}
+                        </Link>
+                      </CustomListItem>
+                    ))}
+                  </List>
+                </CustomCard>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => handleModalOnClick("cancel")}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          {selectedCardContentItem && (
+            <>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                {selectedCardContentItem.onboardingTitle}
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {selectedCardContentItem.onboardingInfo}
+              </Typography>
+            </>
+          )}
         </Box>
       </Modal>
     </>
