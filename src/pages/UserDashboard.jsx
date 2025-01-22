@@ -163,7 +163,14 @@ export default function AlumniDashboard() {
         </Box>
       </Drawer>
 
-      <Box sx={{ flex: 2, p: 3 }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          maxWidth: "100%",
+          overflow: "auto",
+        }}
+      >
         <Outlet />
       </Box>
     </Box>
