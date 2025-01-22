@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   CssBaseline,
-  Container,
   Box,
   Typography,
   Divider,
-  InputBase,
   Button,
-  InputAdornment,
   ListItem,
   ListItemIcon,
   ListItemText,
   Toolbar,
   AppBar,
   Drawer,
-  Grid2,
   useMediaQuery,
   IconButton,
 } from "@mui/material";
@@ -25,68 +20,38 @@ import {
   Event,
   Message,
   Settings,
-  Search,
   Logout,
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
-import alumniFakeData from "../utils/alumnidata";
-import AlumniCard from "../components/AlumniCard";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const alumniData = new Array(10).fill(alumniFakeData);
-
 const menuItems = [
-  { text: "Dashboard", icon: <Dashboard /> },
-  { text: "Alumni Directory", icon: <People /> },
-  { text: "Events", icon: <Event /> },
-  { text: "Messages", icon: <Message /> },
-  { text: "Settings", icon: <Settings /> },
+  { text: "Home", icon: <Dashboard />, path: "/dashboard" },
+  {
+    text: "Alumni Directory",
+    icon: <People />,
+    path: "/dashboard/alumni-directory",
+  },
+  { text: "Events", icon: <Event />, path: "/dashboard/events" },
+  {
+    text: "Announcements",
+    icon: <Message />,
+    path: "/dashboard/announcements",
+  },
+  { text: "Settings", icon: <Settings />, path: "/dashboard/settings" },
 ];
-
-const SearchBar = ({ onSearch }) => (
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      bgcolor: "grey.100",
-      borderRadius: 2,
-      p: 1,
-      width: 300,
-    }}
-  >
-    <InputBase
-      placeholder="Search alumni..."
-      sx={{ ml: 1, flex: 1 }}
-      onChange={(e) => onSearch(e.target.value)}
-      startAdornment={
-        <InputAdornment position="start">
-          <Search color="primary" />
-        </InputAdornment>
-      }
-    />
-  </Box>
-);
 
 export default function AlumniDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredAlumni, setFilteredAlumni] = useState(alumniData);
+
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    const filtered = alumniData.filter((alumni) => {
-      const searchStr = `${alumni.name} ${alumni.role}`.toLowerCase();
-      return searchStr.includes(query.toLowerCase());
-    });
-    setFilteredAlumni(filtered);
-  };
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("650"));
 
   const handleLogout = () => {
     dispatch(logout());
@@ -111,7 +76,9 @@ export default function AlumniDashboard() {
       <AppBar
         position="fixed"
         elevation={0}
-        color="radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1) 100.2% );"
+        sx={{
+          background: "transparent",
+        }}
       >
         <Toolbar>
           {isMobile && (
@@ -120,10 +87,8 @@ export default function AlumniDashboard() {
             </IconButton>
           )}
           <Box sx={{ flexGrow: 1 }} />
-          <SearchBar onSearch={handleSearch} />
         </Toolbar>
       </AppBar>
-
       <Drawer
         variant={isMobile ? "temporary" : "permanent"}
         open={openDrawer}
@@ -151,6 +116,7 @@ export default function AlumniDashboard() {
               <ListItem
                 button
                 key={item.text}
+                onClick={() => navigate(item.path)}
                 sx={{
                   py: 1.5,
                   px: 2,
@@ -197,24 +163,8 @@ export default function AlumniDashboard() {
         </Box>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid2 container spacing={3}>
-            {filteredAlumni.map((alumni, index) => (
-              <Grid2 item key={index} xs={12} sm={6} md={4}>
-                <AlumniCard alumni={alumni} />
-              </Grid2>
-            ))}
-            {filteredAlumni.length === 0 && (
-              <Box sx={{ width: "100%", textAlign: "center", mt: 4 }}>
-                <Typography variant="h6" color="text.secondary">
-                  No alumni found matching your search.
-                </Typography>
-              </Box>
-            )}
-          </Grid2>
-        </Container>
+      <Box sx={{ flex: 2, p: 3 }}>
+        <Outlet />
       </Box>
     </Box>
   );
