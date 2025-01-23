@@ -56,7 +56,7 @@ export default function EventsPage() {
         actionLabel={isGoing ? "Registered" : "Register"}
       />
 
-      <Typography variant="h5" sx={{ mb: 3 }}>
+      <Typography variant="h5" sx={{ mb: 3, mt: 3 }}>
         Past (1)
       </Typography>
       <Grid2 container spacing={3}>

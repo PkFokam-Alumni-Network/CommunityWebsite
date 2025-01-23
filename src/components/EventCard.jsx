@@ -22,6 +22,8 @@ export function EventCard({
     <Card
       sx={{
         height: "100%",
+        maxWidth: 500,
+        width: "100%", // Ensures it scales down for smaller screens
         display: "flex",
         flexDirection: "column",
       }}
