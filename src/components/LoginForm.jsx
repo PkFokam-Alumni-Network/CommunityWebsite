@@ -5,7 +5,7 @@ import {
   Button,
   CssBaseline,
   FormControl,
-  Link,
+  Link as MuiLink,
   CircularProgress,
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useToast } from "../uiContexts/toastContext";
 import { loginUser } from "../features/authSlice";
 import { NavLink } from "react-router";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -78,11 +79,13 @@ const LoginForm = () => {
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             className="w-40 h-40 p-4 rounded-full mx-auto bg-gray-100"
           >
-            <img
-              src={pkfLogo}
-              alt="Pkfokam Connect Logo"
-              className="mx-auto p-2 w-full h-full object-cover"
-            />
+            <Link to="/">
+              <img
+                src={pkfLogo}
+                alt="Pkfokam Connect Logo"
+                className="mx-auto p-2 w-full h-full object-cover"
+              />
+            </Link>
           </motion.div>
           <motion.h2
             className="mt-6 text-3xl font-extrabold text-gray-900"
@@ -149,7 +152,7 @@ const LoginForm = () => {
                 )}
               </div>
             </Button>
-            <Link
+            <MuiLink
               component="button"
               type="button"
               variant="body2"
@@ -157,7 +160,7 @@ const LoginForm = () => {
               color="secondary"
             >
               Forgot your password?
-            </Link>
+            </MuiLink>
           </Box>
         </div>
       </motion.div>
