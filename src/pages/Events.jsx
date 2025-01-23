@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Grid2, Container } from "@mui/material";
+import { Box, Typography, Grid2 } from "@mui/material";
 import { EventCard } from "../components/EventCard";
 import EventDetailsDialog from "../components/EventDetails";
 
