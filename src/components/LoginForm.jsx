@@ -52,14 +52,7 @@ const LoginForm = () => {
         showToast("Login successful", "success");
       })
       .catch((error) => {
-        let errorMessage = typeof error !== "object" ? error : "";
-        if (!errorMessage) {
-          errorMessage =
-            Array.isArray(error) && error.length > 0 && error[0].msg
-              ? error[0].msg
-              : "Something went wrong.";
-        }
-        showToast(errorMessage, "error");
+        showToast(error, "error");
       })
       .finally(() => {
         setIsLoading(false);
