@@ -16,7 +16,7 @@ const MotionButton = motion(Button);
 const MotionListItem = motion(ListItem);
 
 const Header = () => {
-  const menu = ["Membership", "Graduation", "Events"];
+  const menu = ["Membership", "About Us"];
 
   // Animation variants
   const containerVariants = {
