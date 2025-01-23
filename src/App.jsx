@@ -11,6 +11,7 @@ import SplashScreen from "./components/SplashScreen";
 import AlumniDirectory from "./pages/AlumniDirectory";
 import Announcements from "./pages/Announcements";
 import OnboardingPage from "./pages/Onboarding";
+import Events from "./pages/Events";
 import { initializeAuth } from "./features/authSlice";
 import "./App.css";
 
@@ -72,7 +73,7 @@ function App() {
         >
           {/* Nested routes */}
           <Route path="alumni-directory" element={<AlumniDirectory />} />
-          <Route path="events" element={<AlumniDirectory />} />
+          <Route path="events" element={<Events />} />
           <Route path="announcements" element={<Announcements />} />
           <Route path="settings" element={<AlumniDirectory />} />
         </Route>
