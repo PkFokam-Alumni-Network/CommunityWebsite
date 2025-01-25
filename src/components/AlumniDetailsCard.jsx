@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -9,6 +9,7 @@ import {
   Chip,
   Grid2,
   Typography,
+  IconButton,
   Link,
 } from "@mui/material";
 import {
@@ -19,6 +20,7 @@ import {
   LinkedIn as LinkedInIcon,
   Twitter as TwitterIcon,
   LocationOn as LocationIcon,
+  ArrowBack as ArrowBackIcon,
 } from "@mui/icons-material";
 
 const fallbackData = {
@@ -43,8 +45,13 @@ const fallbackData = {
 
 export default function AlumniProfile() {
   const location = useLocation();
+  const navigate = useNavigate();
   const locationData = location.state?.alumni;
   const alumniData = locationData || fallbackData;
+
+  const handleBackClick = () => {
+    navigate(-1); // Go back to the previous page
+  };
 
   return (
     <Box
@@ -54,7 +61,7 @@ export default function AlumniProfile() {
         alignItems: "center",
         justifyContent: "center",
         background:
-          "radial-gradient(circle farthest-corner at 0.8% 3.1%, rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(165,255,205,1) 100.2%)",
+          "radial-gradient(circle farthest-corner at 0.8% 3.1%, rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1) 100.2%)",
         padding: 2,
       }}
     >
@@ -66,6 +73,25 @@ export default function AlumniProfile() {
           padding: { xs: 2, sm: 3 },
         }}
       >
+        {/* Back Button with Arrow */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 1,
+            left: 10,
+            zIndex: 1, // Ensures the button is above the card
+          }}
+        >
+          <IconButton
+            color="primary"
+            onClick={handleBackClick}
+            sx={{
+              display: { xs: "block", sm: "block" }, // Adjust display on small screens
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </Box>
         <CardHeader
           avatar={
             <Avatar

@@ -8,6 +8,10 @@ import MainLayout from "./components/MainLayout";
 import AuthLayout from "./components/AuthLayout";
 import AlumniDetails from "./components/AlumniDetailsCard";
 import SplashScreen from "./components/SplashScreen";
+import AlumniDirectory from "./pages/AlumniDirectory";
+import Announcements from "./pages/Announcements";
+import OnboardingPage from "./pages/Onboarding";
+import Events from "./pages/Events";
 import { initializeAuth } from "./features/authSlice";
 import "./App.css";
 
@@ -61,19 +65,33 @@ function App() {
           }
         />
       ) : (
-        // Dashboard page after splash screen
         <Route
           path="/dashboard"
           element={
             isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
           }
-        />
+        >
+          {/* Nested routes */}
+          <Route path="alumni-directory" element={<AlumniDirectory />} />
+          <Route path="events" element={<Events />} />
+          <Route path="announcements" element={<Announcements />} />
+          <Route path="settings" element={<AlumniDirectory />} />
+        </Route>
       )}
 
       <Route
         path="/alumni/details"
         element={
           isAuthenticated ? <AlumniDetails /> : <Navigate to="/login" replace />
+        }
+      />
+
+      <Route
+        path="/onboarding"
+        element={
+          <MainLayout>
+            <OnboardingPage />
+          </MainLayout>
         }
       />
     </Routes>

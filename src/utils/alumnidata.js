@@ -2,7 +2,7 @@ const alumniData = {
   name: "Leslie Alexanne",
   graduationYear: "2025",
   bio: "Hello, I am Alexanne. A project Manager at Microsoft. I am in charge of making user experience nice for users across the Surface Pro. Connect with me if you are also a foodie 😍❤️",
-  imageUrl: "https://i.ibb.co/WBGf4HF/leslie-cropped.png",
+  imageUrl: "https://i.ibb.co/b73MfH2/leslie-cropped.png",
   role: "Project Manager",
   education: [
     {
