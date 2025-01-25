@@ -71,22 +71,24 @@ const Header = () => {
         }}
       >
         <Box className="flex items-center">
-          <MotionTypography
-            variant="h6"
-            variants={logoVariants}
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
-            sx={{
-              fontWeight: 700,
-              mr: 4,
-              color: "primary.contrastText",
-              cursor: "pointer",
-            }}
-          >
-            PKFOKAM ALUMNI
-          </MotionTypography>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <MotionTypography
+              variant="h6"
+              variants={logoVariants}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              sx={{
+                fontWeight: 700,
+                mr: 4,
+                color: "primary.contrastText",
+                cursor: "pointer",
+              }}
+            >
+              PKFOKAM ALUMNI
+            </MotionTypography>
+          </Link>
 
           <List sx={{ display: "flex" }}>
             {menu.map((item, index) => (
