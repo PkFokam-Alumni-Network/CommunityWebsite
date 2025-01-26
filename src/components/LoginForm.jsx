@@ -18,6 +18,10 @@ import { NavLink } from "react-router";
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [emailError, setEmailError] = React.useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
 
   // Get the loading state from the store
   const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +39,8 @@ const LoginForm = () => {
     const { email, password } = credentials;
 
     // Check if the email and password fields are not empty
-    if (!email || !password) {
-      showToast("Please fill in all fields", "error");
+    if (!email || !password || emailError || passwordError) {
+      if (!email || !password) showToast("Please fill in all fields", "error");
       setIsLoading(false);
       return;
     }
@@ -53,6 +57,33 @@ const LoginForm = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const validateInputs = () => {
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    let isValid = true;
+
+    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+      setEmailError(true);
+      setEmailErrorMessage("Please enter a valid email address.");
+      isValid = false;
+    } else {
+      setEmailError(false);
+      setEmailErrorMessage("");
+    }
+
+    if (!password.value || password.value.length < 6) {
+      setPasswordError(true);
+      setPasswordErrorMessage("Password must be at least 6 characters long.");
+      isValid = false;
+    } else {
+      setPasswordError(false);
+      setPasswordErrorMessage("");
+    }
+
+    return isValid;
   };
 
   const handleChange = (e) => {
@@ -132,16 +163,21 @@ const LoginForm = () => {
           >
             <FormControl>
               <TextField
+                error={emailError}
+                helperText={emailErrorMessage}
                 id="email"
                 label="Email"
                 variant="outlined"
                 value={credentials.email}
                 onChange={handleChange}
                 fullWidth
+                color={emailError ? "error" : "primary"}
               />
             </FormControl>
             <FormControl color="secondary">
               <TextField
+                error={passwordError}
+                helperText={passwordErrorMessage}
                 id="password"
                 label="Password"
                 type="password"
@@ -149,6 +185,7 @@ const LoginForm = () => {
                 value={credentials.password}
                 onChange={handleChange}
                 fullWidth
+                color={passwordError ? "error" : "primary"}
               />
             </FormControl>
 
@@ -162,6 +199,7 @@ const LoginForm = () => {
               sx={{
                 position: "relative",
               }}
+              onClick={validateInputs}
             >
               <div className="p-1">
                 {isLoading ? (
