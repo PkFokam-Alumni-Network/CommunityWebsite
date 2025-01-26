@@ -24,7 +24,7 @@ const ContactUsPage = () => {
                 <Typography variant="body1" color="textSecondary">
                   Contact Us
                 </Typography>
-                <Typography variant="h6" component="h1" gutterBottom>
+                <Typography variant="h5" component="h1" gutterBottom>
                   Feel free to reach out with any questions, suggestions, or
                   feedback. We're here to help and look forward to hearing from
                   you.

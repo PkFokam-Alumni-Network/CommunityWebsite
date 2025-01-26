@@ -4,6 +4,7 @@ import Events from "../components/Events";
 import Footer from "../components/Footer";
 import { Typography, Container, Box } from "@mui/material";
 import FAQAccordion from "../components/FAQAccordion";
+import ContactUsPage from "./ContactUsPage";
 
 export default function Home() {
   return (
@@ -60,6 +61,10 @@ export default function Home() {
             </Typography>
           </Box>
         </Container>
+      </Box>
+
+      <Box sx={{ py: 10 }}>
+        <ContactUsPage />
       </Box>
 
       <Footer />
