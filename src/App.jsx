@@ -14,6 +14,8 @@ import OnboardingPage from "./pages/Onboarding";
 import Events from "./pages/Events";
 import { initializeAuth } from "./features/authSlice";
 import "./App.css";
+import AlumniSettings from "./components/AlumniProfile";
+import EditProfile from "./components/AlumiEditProfile";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -75,7 +77,7 @@ function App() {
           <Route path="alumni-directory" element={<AlumniDirectory />} />
           <Route path="events" element={<Events />} />
           <Route path="announcements" element={<Announcements />} />
-          <Route path="settings" element={<AlumniDirectory />} />
+          <Route path="settings" element={<AlumniSettings />} />
         </Route>
       )}
 
@@ -83,6 +85,13 @@ function App() {
         path="/alumni/details"
         element={
           isAuthenticated ? <AlumniDetails /> : <Navigate to="/login" replace />
+        }
+      />
+
+      <Route
+        path="/edit-profile"
+        element={
+          isAuthenticated ? <EditProfile /> : <Navigate to="/login" replace />
         }
       />
 
