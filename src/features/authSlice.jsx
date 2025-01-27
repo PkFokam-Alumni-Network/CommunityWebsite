@@ -4,6 +4,7 @@ import authService from "../api/authService";
 export const AUTH_ACTION_TYPES = {
   LOGIN: "auth/loginUser",
   LOGOUT: "auth/logout",
+  GET_USERNAME: "auth/username",
 };
 
 export const loginUser = createAsyncThunk(
@@ -18,6 +19,19 @@ export const loginUser = createAsyncThunk(
       };
     } catch (error) {
       return rejectWithValue(error.message || "Login failed");
+    }
+  }
+);
+
+export const getUsername = createAsyncThunk(
+  AUTH_ACTION_TYPES.GET_USERNAME,
+  async (user_email, { rejectWithValue }) => {
+    try {
+      const response = await authService.getUsername(user_email);
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to get username!");
     }
   }
 );
@@ -74,6 +88,17 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;
+      })
+      .addCase(getUsername.fulfilled, (state, action) => {
+        let userData = action.payload ?? {};
+        state.isUserDataExists = Object.keys(userData).length > 0;
+        state.loading = false;
+        state.error = null;
+        localStorage.setItem("userData", JSON.stringify(userData));
+      })
+      .addCase(getUsername.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

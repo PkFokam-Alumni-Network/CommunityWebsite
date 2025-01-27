@@ -22,7 +22,7 @@ const SplashScreen = ({ onComplete, username }) => {
   }, [onComplete]);
 
   const message = "Hello  " + username;
-  var usernameArray = message.split("").concat(["🌸", "🌸", "🌸"]);
+  let usernameArray = message.split("").concat(["🌸", "🌸", "🌸"]);
 
   return (
     <Box
