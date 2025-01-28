@@ -23,26 +23,9 @@ import {
   ArrowBack as ArrowBackIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
+import alumniData from "../utils/alumnidata";
 
-const fallbackData = {
-  name: "Alumni Name",
-  graduationYear: "N/A",
-  bio: "No bio available",
-  imageUrl: "/placeholder.svg?height=128&width=128",
-  role: "Alumni",
-  education: [],
-  experience: [],
-  skills: [],
-  details: {
-    email: "N/A",
-    phone: "N/A",
-    location: "N/A",
-    socialMedia: {
-      linkedin: "",
-      twitter: "",
-    },
-  },
-};
+const fallbackData = alumniData;
 
 export default function AlumniSettings() {
   const location = useLocation();

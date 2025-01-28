@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -11,11 +11,14 @@ import {
   Grid,
   Chip,
   IconButton,
+  Avatar,
+  Input,
 } from "@mui/material";
 import {
   Save as SaveIcon,
   ArrowBack as ArrowBackIcon,
   Add as AddIcon,
+  CameraAlt as CameraIcon,
 } from "@mui/icons-material";
 
 export default function EditProfile() {
@@ -40,6 +43,7 @@ export default function EditProfile() {
     }
   );
   const [newSkill, setNewSkill] = useState("");
+  const fileInputRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,11 +100,25 @@ export default function EditProfile() {
     // Here you would typically send the updated data to your backend
     console.log("Updated alumni data:", alumniData);
     // Navigate back to the profile page
-    navigate("/alumni-profile", { state: { alumni: alumniData } });
+    navigate("/dashboard/settings", { state: { alumni: alumniData } });
   };
 
   const handleBack = () => {
     navigate(-1);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAlumniData((prevData) => ({
+          ...prevData,
+          imageUrl: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -115,33 +133,63 @@ export default function EditProfile() {
         padding: 2,
       }}
     >
-      <Card sx={{ maxWidth: 600, width: "100%" }}>
+      <Card sx={{ maxWidth: 800, width: "100%", boxShadow: 3 }}>
         <CardContent>
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mb: 2,
+              mb: 4,
             }}
           >
             <IconButton onClick={handleBack}>
               <ArrowBackIcon />
             </IconButton>
-            <Typography variant="h4" component="h1">
+            <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
               Edit Profile
             </Typography>
             <Box /> {/* Empty box for spacing */}
           </Box>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={12} display="flex" justifyContent="center">
+                <Box position="relative">
+                  <Avatar
+                    src={alumniData.imageUrl}
+                    alt={alumniData.name}
+                    sx={{ width: 150, height: 150, mb: 2 }}
+                  />
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                    sx={{
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      backgroundColor: "background.paper",
+                      "&:hover": { backgroundColor: "background.default" },
+                    }}
+                  >
+                    <Input
+                      ref={fileInputRef}
+                      accept="image/*"
+                      type="file"
+                      onChange={handleImageUpload}
+                    />
+                    <CameraIcon />
+                  </IconButton>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Name"
                   name="name"
                   value={alumniData.name}
                   onChange={handleInputChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -151,15 +199,17 @@ export default function EditProfile() {
                   name="graduationYear"
                   value={alumniData.graduationYear}
                   onChange={handleInputChange}
+                  variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="Role"
                   name="role"
                   value={alumniData.role}
                   onChange={handleInputChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -171,15 +221,17 @@ export default function EditProfile() {
                   name="bio"
                   value={alumniData.bio}
                   onChange={handleInputChange}
+                  variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label="Email"
                   name="email"
                   value={alumniData.details.email}
                   onChange={handleDetailsChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -189,15 +241,17 @@ export default function EditProfile() {
                   name="phone"
                   value={alumniData.details.phone}
                   onChange={handleDetailsChange}
+                  variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="Location"
                   name="location"
                   value={alumniData.details.location}
                   onChange={handleDetailsChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -207,6 +261,7 @@ export default function EditProfile() {
                   name="linkedin"
                   value={alumniData.details.socialMedia.linkedin}
                   onChange={handleSocialMediaChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -216,16 +271,21 @@ export default function EditProfile() {
                   name="twitter"
                   value={alumniData.details.socialMedia.twitter}
                   onChange={handleSocialMediaChange}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="h6">Skills</Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 1 }}>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  Skills
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
                   {alumniData.skills.map((skill, index) => (
                     <Chip
                       key={index}
                       label={skill}
                       onDelete={() => handleRemoveSkill(skill)}
+                      color="primary"
+                      variant="outlined"
                     />
                   ))}
                 </Box>
@@ -234,13 +294,31 @@ export default function EditProfile() {
                     label="New Skill"
                     value={newSkill}
                     onChange={(e) => setNewSkill(e.target.value)}
+                    variant="outlined"
                   />
-                  <IconButton onClick={handleAddSkill}>
+                  <IconButton onClick={handleAddSkill} color="primary">
                     <AddIcon />
                   </IconButton>
                 </Box>
               </Grid>
               <Grid item xs={12}>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  Hobbies
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}
+              >
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleBack}
+                  startIcon={<ArrowBackIcon />}
+                >
+                  Cancel
+                </Button>
                 <Button
                   type="submit"
                   variant="contained"
