@@ -73,7 +73,7 @@ const HomePage = () => {
         sx={{ fontWeight: "bold", mb: 4 }}
         textAlign="center"
       >
-        Welcome back, Here is what happened!
+        Glad to have you back 😁! Here’s the latest update!!!
       </Typography>
 
       <Grid container spacing={4}>

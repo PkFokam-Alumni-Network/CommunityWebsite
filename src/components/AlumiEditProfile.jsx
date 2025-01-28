@@ -195,22 +195,6 @@ export default function EditProfile() {
     >
       <Card sx={{ maxWidth: 800, width: "100%", boxShadow: 3 }}>
         <CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 4,
-            }}
-          >
-            <IconButton onClick={handleCancel}>
-              <ArrowBackIcon />
-            </IconButton>
-            <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
-              Edit Profile
-            </Typography>
-            <Box /> {/* Empty box for spacing */}
-          </Box>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12} display="flex" justifyContent="center">
