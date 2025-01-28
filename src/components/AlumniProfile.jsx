@@ -20,7 +20,6 @@ import {
   LinkedIn as LinkedInIcon,
   Twitter as TwitterIcon,
   LocationOn as LocationIcon,
-  ArrowBack as ArrowBackIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
 import alumniData from "../utils/alumnidata";
@@ -33,9 +32,6 @@ export default function AlumniSettings() {
   const locationData = location.state?.alumni;
   const alumniData = locationData || fallbackData;
 
-  const handleBackClick = () => {
-    navigate(-1); // Go back to the previous page
-  };
   const handleEditClick = () => {
     navigate("/edit-profile", { state: { alumni: alumniData } });
   };
@@ -47,8 +43,6 @@ export default function AlumniSettings() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "radial-gradient(circle farthest-corner at 0.8% 3.1%, rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1) 100.2%)",
         padding: 2,
       }}
     >
@@ -60,25 +54,6 @@ export default function AlumniSettings() {
           padding: { xs: 2, sm: 3 },
         }}
       >
-        {/* Back Button with Arrow */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 1,
-            left: 10,
-            zIndex: 1, // Ensures the button is above the card
-          }}
-        >
-          <IconButton
-            color="primary"
-            onClick={handleBackClick}
-            sx={{
-              display: { xs: "block", sm: "block" }, // Adjust display on small screens
-            }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-        </Box>
         <CardHeader
           avatar={
             <Avatar
