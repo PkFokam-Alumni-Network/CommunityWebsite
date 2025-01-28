@@ -1,10 +1,12 @@
 import React from "react";
 import Banner from "../components/Banner";
-import Events from "../components/Events";
+import HighlightsGrid from "../components/HighlightsGrid";
 import Footer from "../components/Footer";
 import { Typography, Container, Box } from "@mui/material";
 import FAQAccordion from "../components/FAQAccordion";
 import ContactUsPage from "./ContactUsPage";
+
+import { highlightsData } from "../utils/highlightsdata";
 
 export default function Home() {
   return (
@@ -13,8 +15,19 @@ export default function Home() {
       <Banner />
 
       {/* Events Section with subtle spacing */}
-      <Box sx={{ py: 10 }}>
-        <Events />
+      <Box sx={{ py: 10 }} textAlign="center">
+        <Typography
+          variant="h3"
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+            color: "text.primary",
+            mb: 3,
+          }}
+        >
+          Hightlights of the Week
+        </Typography>
+        <HighlightsGrid highlights={highlightsData} />
       </Box>
 
       {/* FAQ Section with proper spacing */}

@@ -50,6 +50,7 @@ export default function Banner() {
               fontWeight: 700,
               maxWidth: "500px",
               width: "100%",
+              zIndex: 100,
               fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             }}
           >
@@ -60,7 +61,12 @@ export default function Banner() {
             mt={2}
             sx={{
               color: "#FFFAFA",
-              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" }, // Responsive font size
+              fontSize: {
+                xs: "1rem",
+                sm: "1.25rem",
+                md: "1.5rem",
+                zIndex: 100,
+              }, // Responsive font size
             }}
           >
             Connecting generations of excellence

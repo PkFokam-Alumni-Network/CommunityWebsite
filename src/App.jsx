@@ -70,7 +70,10 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <SplashScreen onComplete={handleSplashComplete} username={firstName} />
+            <SplashScreen
+              onComplete={handleSplashComplete}
+              username={firstName}
+            />
           }
         />
       ) : (
