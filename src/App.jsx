@@ -19,12 +19,21 @@ import EditProfile from "./components/AlumiEditProfile";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
+  const [firstName, setFirstName] = useState("");
   const handleSplashComplete = () => {
     setShowSplash(false);
   };
 
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isUserDataExists = useSelector((state) => state.auth.isUserDataExists);
+
+  useEffect(() => {
+    if (isUserDataExists) {
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      setFirstName(userData.first_name);
+    }
+  }, [isUserDataExists]);
 
   useEffect(() => {
     dispatch(initializeAuth());
@@ -63,7 +72,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <SplashScreen onComplete={handleSplashComplete} username="Leslie" />
+            <SplashScreen onComplete={handleSplashComplete} username={firstName} />
           }
         />
       ) : (

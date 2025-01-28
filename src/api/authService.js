@@ -29,6 +29,15 @@ const authService = {
       throw handleError(error);
     }
   },
+
+  getUsername: async (user_email) => {
+    try {
+      const response = await axiosInstance.get(`/users/${user_email}`);
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
 };
 
 export default authService;
