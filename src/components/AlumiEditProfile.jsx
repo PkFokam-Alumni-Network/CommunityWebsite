@@ -12,14 +12,20 @@ import {
   Chip,
   IconButton,
   Avatar,
-  Input,
+  styled,
+  Divider,
 } from "@mui/material";
 import {
   Save as SaveIcon,
   ArrowBack as ArrowBackIcon,
   Add as AddIcon,
+  Delete as DeleteIcon,
   CameraAlt as CameraIcon,
 } from "@mui/icons-material";
+
+const Input = styled("input")({
+  display: "none",
+});
 
 export default function EditProfile() {
   const location = useLocation();
@@ -29,7 +35,10 @@ export default function EditProfile() {
       name: "",
       graduationYear: "",
       bio: "",
+      imageUrl: "/placeholder.svg?height=200&width=200",
       role: "",
+      education: [],
+      experience: [],
       skills: [],
       details: {
         email: "",
@@ -95,16 +104,53 @@ export default function EditProfile() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically send the updated data to your backend
-    console.log("Updated alumni data:", alumniData);
-    // Navigate back to the profile page
-    navigate("/dashboard/settings", { state: { alumni: alumniData } });
+  const handleEducationChange = (index, field, value) => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      education: prevData.education.map((edu, i) =>
+        i === index ? { ...edu, [field]: value } : edu
+      ),
+    }));
   };
 
-  const handleBack = () => {
-    navigate(-1);
+  const handleAddEducation = () => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      education: [...prevData.education, { degree: "", field: "", year: "" }],
+    }));
+  };
+
+  const handleRemoveEducation = (index) => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      education: prevData.education.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      experience: prevData.experience.map((exp, i) =>
+        i === index ? { ...exp, [field]: value } : exp
+      ),
+    }));
+  };
+
+  const handleAddExperience = () => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      experience: [
+        ...prevData.experience,
+        { company: "", position: "", duration: "" },
+      ],
+    }));
+  };
+
+  const handleRemoveExperience = (index) => {
+    setAlumniData((prevData) => ({
+      ...prevData,
+      experience: prevData.experience.filter((_, i) => i !== index),
+    }));
   };
 
   const handleImageUpload = (e) => {
@@ -119,6 +165,20 @@ export default function EditProfile() {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send the updated data to your backend
+    console.log("Updated alumni data:", alumniData);
+    // Navigate back to the profile page with updated data
+    navigate("/dashboard/settings", { state: { alumni: alumniData } });
+  };
+
+  const handleCancel = () => {
+    navigate("/dashboard/settings", {
+      state: { alumni: location.state?.alumni },
+    });
   };
 
   return (
@@ -143,7 +203,7 @@ export default function EditProfile() {
               mb: 4,
             }}
           >
-            <IconButton onClick={handleBack}>
+            <IconButton onClick={handleCancel}>
               <ArrowBackIcon />
             </IconButton>
             <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
@@ -224,6 +284,168 @@ export default function EditProfile() {
                   variant="outlined"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 2 }}>
+                  <Typography variant="h6">Education</Typography>
+                </Divider>
+                {alumniData.education.map((edu, index) => (
+                  <Box key={index} sx={{ mb: 2 }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={4}>
+                        <TextField
+                          fullWidth
+                          label="Degree"
+                          value={edu.degree}
+                          onChange={(e) =>
+                            handleEducationChange(
+                              index,
+                              "degree",
+                              e.target.value
+                            )
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={4}>
+                        <TextField
+                          fullWidth
+                          label="Field"
+                          value={edu.field}
+                          onChange={(e) =>
+                            handleEducationChange(
+                              index,
+                              "field",
+                              e.target.value
+                            )
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          fullWidth
+                          label="Year"
+                          value={edu.year}
+                          onChange={(e) =>
+                            handleEducationChange(index, "year", e.target.value)
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        <IconButton
+                          onClick={() => handleRemoveEducation(index)}
+                          color="error"
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                ))}
+                <Button startIcon={<AddIcon />} onClick={handleAddEducation}>
+                  Add Education
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 2 }}>
+                  <Typography variant="h6">Experience</Typography>
+                </Divider>
+                {alumniData.experience.map((exp, index) => (
+                  <Box key={index} sx={{ mb: 2 }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={4}>
+                        <TextField
+                          fullWidth
+                          label="Company"
+                          value={exp.company}
+                          onChange={(e) =>
+                            handleExperienceChange(
+                              index,
+                              "company",
+                              e.target.value
+                            )
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={4}>
+                        <TextField
+                          fullWidth
+                          label="Position"
+                          value={exp.position}
+                          onChange={(e) =>
+                            handleExperienceChange(
+                              index,
+                              "position",
+                              e.target.value
+                            )
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          fullWidth
+                          label="Duration"
+                          value={exp.duration}
+                          onChange={(e) =>
+                            handleExperienceChange(
+                              index,
+                              "duration",
+                              e.target.value
+                            )
+                          }
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        <IconButton
+                          onClick={() => handleRemoveExperience(index)}
+                          color="error"
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                ))}
+                <Button startIcon={<AddIcon />} onClick={handleAddExperience}>
+                  Add Experience
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 2 }}>
+                  <Typography variant="h6">Skills</Typography>
+                </Divider>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
+                  {alumniData.skills.map((skill, index) => (
+                    <Chip
+                      key={index}
+                      label={skill}
+                      onDelete={() => handleRemoveSkill(skill)}
+                      color="primary"
+                      variant="outlined"
+                    />
+                  ))}
+                </Box>
+                <Box sx={{ display: "flex", gap: 1 }}>
+                  <TextField
+                    label="New Skill"
+                    value={newSkill}
+                    onChange={(e) => setNewSkill(e.target.value)}
+                    variant="outlined"
+                  />
+                  <IconButton onClick={handleAddSkill} color="primary">
+                    <AddIcon />
+                  </IconButton>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider sx={{ my: 2 }}>
+                  <Typography variant="h6">Contact Details</Typography>
+                </Divider>
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -274,38 +496,6 @@ export default function EditProfile() {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <Typography variant="h6" sx={{ mb: 2 }}>
-                  Skills
-                </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
-                  {alumniData.skills.map((skill, index) => (
-                    <Chip
-                      key={index}
-                      label={skill}
-                      onDelete={() => handleRemoveSkill(skill)}
-                      color="primary"
-                      variant="outlined"
-                    />
-                  ))}
-                </Box>
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <TextField
-                    label="New Skill"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                    variant="outlined"
-                  />
-                  <IconButton onClick={handleAddSkill} color="primary">
-                    <AddIcon />
-                  </IconButton>
-                </Box>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="h6" sx={{ mb: 2 }}>
-                  Hobbies
-                </Typography>
-              </Grid>
               <Grid
                 item
                 xs={12}
@@ -314,7 +504,7 @@ export default function EditProfile() {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick={handleBack}
+                  onClick={handleCancel}
                   startIcon={<ArrowBackIcon />}
                 >
                   Cancel
