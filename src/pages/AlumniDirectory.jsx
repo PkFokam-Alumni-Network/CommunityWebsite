@@ -5,31 +5,7 @@ import AlumniCard from "../components/AlumniCard";
 
 const alumniData = new Array(10).fill(alumniFakeData);
 
-// const SearchBar = ({ onSearch }) => (
-//   <Box
-//     sx={{
-//       display: "flex",
-//       alignItems: "center",
-//       bgcolor: "grey.100",
-//       borderRadius: 2,
-//       p: 1,
-//       width: 300,
-//     }}
-//   ></Box>
-// );
-
 export default function AlumniDirectory() {
-  //   const handleSearch = (query) => {
-  //     setSearchQuery(query);
-  //     const filtered = alumniData.filter((alumni) => {
-  //       const searchStr = `${alumni.name} ${alumni.role}`.toLowerCase();
-  //       return searchStr.includes(query.toLowerCase());
-  //     });
-  //     setFilteredAlumni(filtered);
-  //   };
-  //   const [searchQuery, setSearchQuery] = useState("");
-  //   const [filteredAlumni, setFilteredAlumni] = useState(alumniData);
-
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Toolbar />

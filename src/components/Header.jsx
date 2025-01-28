@@ -22,7 +22,7 @@ const MotionListItem = motion(ListItem);
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const menu = ["Membership", "Graduation", "Events", "Onboarding"];
+  const menu = ["About Us", "Onboarding"];
 
   // Animation variants
   const containerVariants = {
@@ -91,25 +91,34 @@ const Header = () => {
               cursor: "pointer",
             }}
           >
-            <img
-              src={logo}
-              alt="PKFOKAM ALUMNI"
+            <Link
+              to="/"
               style={{
-                width: "auto",
-                height: "40px",
-                scale: 10,
-                paddingLeft: 21,
-                paddingTop: 2.75,
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
               }}
-              sx={{
-                "@media (max-width: 600px)": {
-                  height: "30px",
-                  scale: 5,
-                  paddingLeft: 10,
-                  paddingTop: 1.75,
-                },
-              }}
-            />
+            >
+              <img
+                src={logo}
+                alt="PKFOKAM ALUMNI"
+                style={{
+                  width: "auto",
+                  height: "40px",
+                  scale: 10,
+                  paddingLeft: 21,
+                  paddingTop: 2.75,
+                }}
+                sx={{
+                  "@media (max-width: 600px)": {
+                    height: "30px",
+                    scale: 5,
+                    paddingLeft: 10,
+                    paddingTop: 1.75,
+                  },
+                }}
+              />
+            </Link>
           </MotionTypography>
 
           <Box

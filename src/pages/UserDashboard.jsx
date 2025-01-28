@@ -15,7 +15,6 @@ import {
   IconButton,
 } from "@mui/material";
 import {
-  Dashboard,
   People,
   Event,
   Message,
@@ -30,7 +29,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 const menuItems = [
-  { text: "Home", icon: <Dashboard />, path: "/dashboard" },
   {
     text: "Alumni Directory",
     icon: <People />,
