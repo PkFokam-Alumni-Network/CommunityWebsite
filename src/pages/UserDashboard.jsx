@@ -21,14 +21,17 @@ import {
   Settings,
   Logout,
   Menu as MenuIcon,
+  Home,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import HomePage from "./HomePage";
 
 const drawerWidth = 240;
 
 const menuItems = [
+  { text: "Home", icon: <Home />, path: "/dashboard" },
   {
     text: "Alumni Directory",
     icon: <People />,
@@ -46,6 +49,7 @@ const menuItems = [
 export default function AlumniDashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -118,6 +122,10 @@ export default function AlumniDashboard() {
                 sx={{
                   py: 1.5,
                   px: 2,
+                  bgcolor:
+                    location.pathname === item.path
+                      ? "primary.light"
+                      : "transparent",
                   "&:hover": {
                     bgcolor: "primary.light",
                     "& .MuiListItemIcon-root": {
@@ -126,12 +134,26 @@ export default function AlumniDashboard() {
                   },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 40, color: "grey.600" }}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 40,
+                    color:
+                      location.pathname === item.path
+                        ? "primary.main"
+                        : "grey.600",
+                  }}
+                >
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText
                   primary={item.text}
-                  primaryTypographyProps={{ variant: "body2" }}
+                  primaryTypographyProps={{
+                    variant: "body2",
+                    color:
+                      location.pathname === item.path
+                        ? "primary.main"
+                        : "inherit",
+                  }}
                 />
               </ListItem>
             ))}
@@ -162,6 +184,7 @@ export default function AlumniDashboard() {
       </Drawer>
 
       <Box
+        component="main"
         sx={{
           flexGrow: 1,
           p: 3,
@@ -169,7 +192,8 @@ export default function AlumniDashboard() {
           overflow: "auto",
         }}
       >
-        <Outlet />
+        <Toolbar /> {/* This is to offset the fixed AppBar */}
+        {location.pathname === "/dashboard" ? <HomePage /> : <Outlet />}
       </Box>
     </Box>
   );
