@@ -64,6 +64,41 @@ const recentAnnouncement = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 };
 
+const recentActivities = [
+  {
+    id: "1",
+    type: "comment",
+    content: "John Doe commented on the upcoming reunion event",
+    timestamp: "2 hours ago",
+    user: "John Doe",
+  },
+  {
+    id: "2",
+    type: "job",
+    content: "New job opportunity posted: Software Engineer at Tech Co",
+    timestamp: "1 day ago",
+  },
+  {
+    id: "3",
+    type: "profile",
+    content: "Sarah Smith updated her profile information",
+    timestamp: "2 days ago",
+    user: "Sarah Smith",
+  },
+  {
+    id: "4",
+    type: "event",
+    content: "Annual alumni dinner next month",
+    timestamp: "1 week ago",
+  },
+  {
+    id: "5",
+    type: "default",
+    content: "New campus expansion project announced",
+    timestamp: "2 weeks ago",
+  },
+];
+
 const HomePage = () => {
   return (
     <Box sx={{ flexGrow: 1, pt: 8 }}>

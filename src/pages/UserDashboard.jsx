@@ -124,7 +124,10 @@ export default function AlumniDashboard() {
               <ListItem
                 button
                 key={item.text}
-                onClick={() => navigate(item.path)}
+                onClick={() => {
+                  navigate(item.path);
+                  setOpenDrawer(false);
+                }}
                 sx={{
                   py: 1.5,
                   px: 2,

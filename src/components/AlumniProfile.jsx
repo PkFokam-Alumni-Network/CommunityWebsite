@@ -10,7 +10,9 @@ import {
   Grid2,
   Typography,
   IconButton,
+  useMediaQuery,
   Link,
+  Divider,
 } from "@mui/material";
 import {
   School as SchoolIcon,
@@ -25,12 +27,20 @@ import {
 import alumniData from "../utils/alumnidata";
 
 const fallbackData = alumniData;
+const mentorData = {
+  name: "Dr. Jane Smith",
+  imageUrl: "https://example.com/jane-smith.jpg", // Replace with an actual image URL
+  graduationYear: 2005,
+  role: "Senior Data Scientist at Tech Corp",
+};
 
 export default function AlumniSettings() {
   const location = useLocation();
   const navigate = useNavigate();
   const locationData = location.state?.alumni;
   const alumniData = locationData || fallbackData;
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const handleEditClick = () => {
     navigate("/edit-profile", { state: { alumni: alumniData } });
@@ -52,31 +62,79 @@ export default function AlumniSettings() {
           width: "100%",
           margin: { xs: 2, sm: 3 },
           padding: { xs: 2, sm: 3 },
+          position: "relative",
         }}
       >
+        <IconButton
+          aria-label="edit profile"
+          onClick={handleEditClick}
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            zIndex: 1,
+          }}
+        >
+          <EditIcon />
+        </IconButton>
         <CardHeader
           avatar={
-            <Avatar
-              src={alumniData.imageUrl}
-              alt={alumniData.name}
-              sx={{ width: 100, height: 100 }}
-            />
-          }
-          action={
-            <IconButton aria-label="edit profile" onClick={handleEditClick}>
-              <EditIcon />
-            </IconButton>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                mb: { xs: 2, sm: 0 },
+              }}
+            >
+              <Avatar
+                src={alumniData.imageUrl}
+                alt={alumniData.name}
+                sx={{
+                  width: { xs: 120, sm: 100 },
+                  height: { xs: 120, sm: 100 },
+                }}
+              />
+            </Box>
           }
           title={
-            <Typography variant="h4" component="h1">
+            <Typography
+              variant={isMobile ? "h5" : "h4"}
+              component="h1"
+              sx={{
+                overflow: "visible",
+                mt: { xs: 2, sm: 0 },
+                ml: { xs: 5 },
+                textAlign: { xs: "center", sm: "left" },
+              }}
+            >
               {alumniData.name}
             </Typography>
           }
           subheader={
-            <Typography variant="subtitle1" color="text.secondary">
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                overflow: "visible",
+                textAlign: { xs: "center", sm: "left" },
+              }}
+            >
               {alumniData.role} • Class of {alumniData.graduationYear}
             </Typography>
           }
+          sx={{
+            flexDirection: isMobile ? "column" : "",
+            alignItems: "center",
+            "& .MuiCardHeader-content": {
+              overflow: "visible",
+              width: "100%",
+            },
+            "& .MuiCardHeader-avatar": {
+              marginRight: 0,
+              marginBottom: { xs: 2, sm: 0 },
+            },
+          }}
         />
         <CardContent>
           <Grid2 container spacing={3}>
@@ -247,6 +305,34 @@ export default function AlumniSettings() {
                   </Typography>
                 </Box>
               ))}
+            </Grid2>
+            <Divider sx={{ my: 3 }} />
+
+            {/* Mentor Section */}
+            <Grid2 item xs={12}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
+              >
+                Alumni Mentor
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Avatar
+                  src={mentorData.imageUrl}
+                  alt={mentorData.name}
+                  sx={{ width: 60, height: 60 }}
+                />
+                <Box>
+                  <Typography variant="subtitle1">{mentorData.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Class of {mentorData.graduationYear}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {mentorData.role}
+                  </Typography>
+                </Box>
+              </Box>
             </Grid2>
           </Grid2>
         </CardContent>
