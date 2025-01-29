@@ -90,6 +90,7 @@ function App() {
           <Route path="events" element={<Events />} />
           <Route path="announcements" element={<Announcements />} />
           <Route path="settings" element={<AlumniSettings />} />
+          <Route path="resources" element={<OnboardingPage />} />
         </Route>
       )}
 
@@ -104,15 +105,6 @@ function App() {
         path="/edit-profile"
         element={
           isAuthenticated ? <EditProfile /> : <Navigate to="/login" replace />
-        }
-      />
-
-      <Route
-        path="/onboarding"
-        element={
-          <MainLayout>
-            <OnboardingPage />
-          </MainLayout>
         }
       />
     </Routes>
