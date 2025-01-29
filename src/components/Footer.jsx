@@ -42,22 +42,12 @@ const Footer = () => {
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link href="#faq-home-main" color="secondary.contrastText" underline="none">
                   FAQ
                 </Link>
               </Grid>
               <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
-                  Membership
-                </Link>
-              </Grid>
-              <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
-                  Events
-                </Link>
-              </Grid>
-              <Grid item xs={6}>
-                <Link href="#" color="secondary.contrastText" underline="none">
+                <Link href="#contact-us-home-main" color="secondary.contrastText" underline="none">
                   Contact Us
                 </Link>
               </Grid>
