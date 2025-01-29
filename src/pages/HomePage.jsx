@@ -3,6 +3,7 @@ import { Box, Typography, Grid, Paper } from "@mui/material";
 import Highlight from "../components/Highlights";
 import { EventCard } from "../components/EventCard";
 import AnnouncementCard from "../components/AnnouncementCard";
+import RecentActivity from "../components/RecentActivity";
 
 // Sample data
 const highlights = [
@@ -148,31 +149,10 @@ const HomePage = () => {
         </Grid>
 
         {/* Recent Activity */}
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={6}>
           <Paper elevation={3} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
-            <Typography variant="h6" gutterBottom>
-              Recent Activity
-            </Typography>
-            <Box sx={{ mt: 2 }}>
-              {[
-                "Ryan Mustapha registered for the upcoming reunion event",
-                "Adrian Soh registered for the upcoming reunion event",
-                "Adele joined the Alumni community",
-                "Announcement: Annual alumni dinner next month",
-              ].map((activity, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    mb: 2,
-                    pb: 1,
-                    borderBottom: index !== 3 ? 1 : 0,
-                    borderColor: "divider",
-                  }}
-                >
-                  <Typography variant="body2">{activity}</Typography>
-                </Box>
-              ))}
-            </Box>
+            <Typography variant="h6" gutterBottom></Typography>
+            <RecentActivity activities={recentActivities} />
           </Paper>
         </Grid>
       </Grid>
