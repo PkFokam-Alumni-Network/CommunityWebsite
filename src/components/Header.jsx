@@ -22,7 +22,7 @@ const MotionListItem = motion(ListItem);
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const menu = ["Onboarding"];
+  const menu = [];
 
   // Animation variants
   const containerVariants = {
