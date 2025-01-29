@@ -22,6 +22,7 @@ import {
   Logout,
   Menu as MenuIcon,
   Home,
+  Source,
 } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
@@ -42,6 +43,11 @@ const menuItems = [
     text: "Announcements",
     icon: <Message />,
     path: "/dashboard/announcements",
+  },
+  {
+    text: "Resources",
+    icon: <Source />,
+    path: "/dashboard/resources",
   },
   { text: "Settings", icon: <Settings />, path: "/dashboard/settings" },
 ];
