@@ -20,7 +20,7 @@ The FrontendApp that will host the Community Website
 - [WEBCRUMBS](https://tools.webcrumbs.org/frontend-ai) - Rapid prototyping
 - [V0](https://v0.dev/chat/) - Prototyping
 - [Material UI](https://mui.com/material-ui/getting-started/) - Reusable UI components
-- [Styling](https://v3.tailwindcss.com/docs/guides/create-react-app) - Library used for styling
+- [Tailwind](https://v3.tailwindcss.com/docs/guides/create-react-app) - Library used for styling
 
 # INSPIRATION
 - https://alumni.princeton.edu/our-community/alumni-association/alumni-council
