@@ -31,7 +31,7 @@ export default function Home() {
       </Box>
 
       {/* FAQ Section with proper spacing */}
-      <Box sx={{ py: 10 }}>
+      <Box id={"faq-home-main"} sx={{ py: 10 }}>
         <Container maxWidth="md">
           <FAQAccordion />
         </Container>
@@ -76,7 +76,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      <Box sx={{ py: 10 }}>
+      <Box id={"contact-us-home-main"} sx={{ py: 10 }}>
         <ContactUsPage />
       </Box>
 

@@ -57,3 +57,8 @@
   width: 80%;
   top: 240px;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+

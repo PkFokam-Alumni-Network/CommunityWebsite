@@ -13,9 +13,9 @@ import Announcements from "./pages/Announcements";
 import OnboardingPage from "./pages/Onboarding";
 import Events from "./pages/Events";
 import { initializeAuth } from "./features/authSlice";
-import "./App.css";
 import AlumniSettings from "./components/AlumniProfile";
 import EditProfile from "./components/AlumiEditProfile";
+import "./App.css";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
