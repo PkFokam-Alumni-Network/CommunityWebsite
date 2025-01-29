@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 import { onboardingData } from "./../constants/OnboardingData";
+import { motion } from "framer-motion";
 
 const CustomCard = ({ title, icon: Icon, children }) => {
   const theme = useTheme();
@@ -100,42 +101,54 @@ export default function OnboardingPage() {
         <CssBaseline />
         <Container maxWidth="lg">
           <Box textAlign="center" mb={6}>
-            <Typography
-              variant="h3"
-              component="h1"
-              gutterBottom
-              fontWeight="bold"
-              color="text.primary"
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              Student Onboarding Guide
-            </Typography>
-            <Typography variant="h6" color="text.primary" mb={4}>
-              Everything you need to know to get started on campus
-            </Typography>
+              <Typography
+                variant="h3"
+                component="h1"
+                gutterBottom
+                fontWeight="bold"
+                color="text.primary"
+              >
+                Student Onboarding Guide
+              </Typography>
+              <Typography variant="h6" color="text.primary" mb={4}>
+                Everything you need to know to get started on campus
+              </Typography>
+            </motion.div>
           </Box>
 
           <Grid container spacing={4}>
             {onboardingData.map((item) => (
               <Grid key={item.key} item xs={12} sm={6} md={4}>
-                <CustomCard title={item.title} icon={item.icon}>
-                  <List>
-                    {item.cardcontent.map((content) => (
-                      <CustomListItem key={content.id}>
-                        <Link
-                          component="button"
-                          variant="body2"
-                          onClick={() => handleLinkOnClick(content)}
-                          sx={{
-                            cursor: "pointer",
-                            textDecoration: "underline",
-                          }}
-                        >
-                          {content.onboardingTitle}
-                        </Link>
-                      </CustomListItem>
-                    ))}
-                  </List>
-                </CustomCard>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <CustomCard title={item.title} icon={item.icon}>
+                    <List>
+                      {item.cardcontent.map((content) => (
+                        <CustomListItem key={content.id}>
+                          <Link
+                            component="button"
+                            variant="body2"
+                            onClick={() => handleLinkOnClick(content)}
+                            sx={{
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          >
+                            {content.onboardingTitle}
+                          </Link>
+                        </CustomListItem>
+                      ))}
+                    </List>
+                  </CustomCard>
+                </motion.div>
               </Grid>
             ))}
           </Grid>

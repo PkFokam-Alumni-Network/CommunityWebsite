@@ -22,7 +22,7 @@ const MotionListItem = motion(ListItem);
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const menu = ["About Us", "Onboarding"];
+  const menu = ["About Us"];
 
   // Animation variants
   const containerVariants = {
