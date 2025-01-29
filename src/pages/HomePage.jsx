@@ -69,22 +69,23 @@ const recentActivities = [
   {
     id: "1",
     type: "comment",
-    content: "John Doe commented on the upcoming reunion event",
+    content: "Adrian Soh registered for the upcoming reunion event",
     timestamp: "2 hours ago",
     user: "John Doe",
   },
   {
     id: "2",
     type: "job",
-    content: "New job opportunity posted: Software Engineer at Tech Co",
+    content:
+      "New job opportunity posted: Software Engineer at HubSpot on Feb 3",
     timestamp: "1 day ago",
   },
   {
     id: "3",
     type: "profile",
-    content: "Sarah Smith updated her profile information",
+    content: "Leslie Alexanne joined the community",
     timestamp: "2 days ago",
-    user: "Sarah Smith",
+    user: "Leslie Alexanne",
   },
   {
     id: "4",
@@ -95,7 +96,7 @@ const recentActivities = [
   {
     id: "5",
     type: "default",
-    content: "New campus expansion project announced",
+    content: "Tax Season is around the corner. Check the resources",
     timestamp: "2 weeks ago",
   },
 ];

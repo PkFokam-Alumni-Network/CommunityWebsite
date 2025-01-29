@@ -24,14 +24,14 @@ import {
   LocationOn as LocationIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
-import alumniData from "../utils/alumnidata";
+import { alumniData } from "../utils/alumnidata";
 
 const fallbackData = alumniData;
 const mentorData = {
-  name: "Dr. Jane Smith",
-  imageUrl: "https://example.com/jane-smith.jpg", // Replace with an actual image URL
-  graduationYear: 2005,
-  role: "Senior Data Scientist at Tech Corp",
+  name: "Warren Mitchell",
+  imageUrl: "https://i.ibb.co/X98kHr0/ayato-modified.png",
+  graduationYear: 2018,
+  role: "Software Engineer",
 };
 
 export default function AlumniSettings() {

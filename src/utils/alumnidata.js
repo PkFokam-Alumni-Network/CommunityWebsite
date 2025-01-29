@@ -47,4 +47,50 @@ const alumniData = {
     },
   },
 };
-export default alumniData;
+
+const another = {
+  name: "Warren Mitchell",
+  graduationYear: "2018",
+  role: "Staff Software Engineer",
+  bio: "Hi there! I'm Warren, a software engineer with a passion for building innovative solutions. I specialize in backend development and love solving complex problems. Let's connect if you're into tech or enjoy discussing the latest in AI and machine learning!",
+  imageUrl: "https://i.ibb.co/X98kHr0/ayato-modified.png",
+  education: [
+    {
+      degree: "Bachelor of Science",
+      field: "Computer Science",
+      year: "2018",
+    },
+  ],
+  experience: [
+    {
+      company: "Tech Fusion Corp.",
+      position: "Senior Software Engineer",
+      duration: "2022 - Present",
+    },
+    {
+      company: "CodeWave Solutions",
+      position: "Software Engineer",
+      duration: "2018 - 2022",
+    },
+  ],
+  skills: [
+    "Java",
+    "C++",
+    "Python",
+    "AWS",
+    "Microservices Architecture",
+    "Docker",
+    "Kubernetes",
+    "Agile Development",
+  ],
+  details: {
+    email: "warren.mitchell@email.com",
+    phone: "+1 234 567 8902",
+    location: "San Francisco, USA",
+    socialMedia: {
+      linkedin: "https://www.linkedin.com/in/warren-mitchell",
+      twitter: "https://twitter.com/warrenmitchell",
+    },
+  },
+};
+export { another, alumniData };
