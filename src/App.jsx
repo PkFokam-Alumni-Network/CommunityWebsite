@@ -17,9 +17,13 @@ import AlumniSettings from "./components/AlumniProfile";
 import EditProfile from "./components/AlumiEditProfile";
 import "./App.css";
 
+const userInfo = localStorage.getItem("userData");
+
 function App() {
   const [showSplash, setShowSplash] = useState(true);
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState(
+    userInfo ? JSON.parse(userInfo).first_name : ""
+  );
   const handleSplashComplete = () => {
     setShowSplash(false);
   };
