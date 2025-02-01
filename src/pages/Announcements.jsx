@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Typography, Box, Divider, Grid2 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import AnnouncementCard from "../components/AnnouncementCard";
+import { getAnnouncements } from "../features/announcementsSlice";
 
 const theme = createTheme({
   palette: {
@@ -113,7 +115,13 @@ const groupAnnouncementsByMonth = (announcements) => {
 };
 
 const Announcements = () => {
+  const { announcementList } = useSelector((state) => state.announcements);
   const groupedAnnouncements = groupAnnouncementsByMonth(announcements);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAnnouncements());
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
