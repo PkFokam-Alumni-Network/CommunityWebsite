@@ -63,6 +63,23 @@ const userService = {
       throw error;
     }
   },
+
+  /**
+   * Retrieves a user's mentees using the user's email.
+   * @param {string} user_email - The user's email for which mentees are to be retrieved.
+   * @returns {Promise<Object>} The retrieved user data.
+   * @throws Will throw an error if the request fails.
+   */
+  getUserMentees: async (user_email) => {
+    try {
+      const response = await axiosInstance.get(
+        `/users/${user_email}/mentees?mentor_email=${user_email}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default userService;
