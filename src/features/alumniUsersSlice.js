@@ -13,7 +13,7 @@ export const getUsers = createAsyncThunk(
 
       return response;
     } catch (error) {
-      return rejectWithValue(error.message || "Login failed");
+      return rejectWithValue(error.message || "Unable to get users!");
     }
   }
 );
