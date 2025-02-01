@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -25,6 +25,9 @@ import {
   Edit as EditIcon,
 } from "@mui/icons-material";
 import { alumniData } from "../utils/alumnidata";
+import coreHelper from "../helpers/coreHelper";
+import { getUserMentees } from "../features/alumniUsersSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const fallbackData = alumniData;
 const mentorData = {
@@ -34,13 +37,23 @@ const mentorData = {
   role: "Software Engineer",
 };
 
+const userInfo = coreHelper.getLoggedInUserData();
+
 export default function AlumniSettings() {
+  const { usersMentees } = useSelector((state) => state.alumniUsers);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const locationData = location.state?.alumni;
   const alumniData = locationData || fallbackData;
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(getUserMentees(userInfo.email));
+    }
+  }, []);
 
   const handleEditClick = () => {
     navigate("/edit-profile", { state: { alumni: alumniData } });

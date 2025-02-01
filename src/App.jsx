@@ -15,15 +15,14 @@ import Events from "./pages/Events";
 import { initializeAuth } from "./features/authSlice";
 import AlumniSettings from "./components/AlumniProfile";
 import EditProfile from "./components/AlumiEditProfile";
+import coreHelper from "./helpers/coreHelper";
 import "./App.css";
 
-const userInfo = localStorage.getItem("userData");
+const userInfo = coreHelper.getLoggedInUserData();
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
-  const [firstName, setFirstName] = useState(
-    userInfo ? JSON.parse(userInfo).first_name : ""
-  );
+  const [firstName, setFirstName] = useState(userInfo?.first_name ?? "");
   const handleSplashComplete = () => {
     setShowSplash(false);
   };
@@ -34,7 +33,7 @@ function App() {
 
   useEffect(() => {
     if (isUserDataExists) {
-      const userData = JSON.parse(localStorage.getItem("userData"));
+      const userData = coreHelper.getLoggedInUserData();
       setFirstName(userData.first_name);
     }
   }, [isUserDataExists]);
