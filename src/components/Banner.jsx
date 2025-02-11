@@ -1,5 +1,5 @@
 import React from "react";
-import colors from "../utils/colors";
+import colors from "../constants/colors";
 import { Container, Typography, Box } from "@mui/material";
 import backgroundImage2 from "../assets/bg.jpg";
 

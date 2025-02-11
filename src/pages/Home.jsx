@@ -6,7 +6,7 @@ import { Typography, Container, Box } from "@mui/material";
 import FAQAccordion from "../components/FAQAccordion";
 import ContactUsPage from "./ContactUsPage";
 
-import { highlightsData } from "../utils/highlightsdata";
+import { highlightsData } from "../constants/highlightsdata";
 
 export default function Home() {
   return (
