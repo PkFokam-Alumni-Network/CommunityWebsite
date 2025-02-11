@@ -24,9 +24,9 @@ import {
   LocationOn as LocationIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
-import { alumniData } from "../utils/alumnidata";
+import { alumniData } from "../constants/alumnidata";
 import coreHelper from "../helpers/coreHelper";
-import { getUserMentees } from "../features/alumniUsersSlice";
+import { getUserMentees } from "../features/alumniSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const fallbackData = alumniData;

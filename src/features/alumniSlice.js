@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import alumniUsersService from "../api/alumniUsersService";
+import alumniUsersService from "../api/alumniService";
 import userService from "../api/userService";
 
 export const USERS_ACTION_TYPES = {
