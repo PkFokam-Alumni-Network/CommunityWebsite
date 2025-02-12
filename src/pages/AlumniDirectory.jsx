@@ -10,7 +10,7 @@ const alumniData = alumniData_1.concat(new Array(5).fill(another));
 
 const groupAlumniByYear = (data) => {
   return data.reduce((acc, alumni) => {
-    const year = alumni.graduationYear;
+    const year = alumni.graduation_year;
     if (!acc[year]) {
       acc[year] = [];
     }
