@@ -50,7 +50,6 @@ const LoginForm = () => {
       .unwrap()
       .then(() => {
         showToast("Login successful", "success");
-        dispatch(getUsername(email));
       })
       .catch((error) => {
         showToast(error, "error");
