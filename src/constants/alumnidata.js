@@ -6,7 +6,7 @@ const alumniData = {
   phone: "+1 123 456 7890",
   email: "leslie.j@email.com",
   bio: "Hello, I am Alexanne. A project Manager at Microsoft. I am in charge of making user experience nice for users across the Surface Pro. Connect with me if you are also a foodie 😍❤️",
-  image: "https://i.ibb.co/b73MfH2/leslie-cropped.png",
+  image: "https://i.ibb.co/mrDp8J9p/leslie-cropped.png",
   current_occupation: "Project Manager",
   degree: "Bachelor of Science",
   major: "Computer Science",
