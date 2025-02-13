@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import pkfLogo from "../assets/logo-black.png";
 import { useDispatch } from "react-redux";
 import { useToast } from "../uiContexts/toastContext";
-import { getUsername, loginUser } from "../features/authSlice";
+import { loginUser } from "../features/authSlice";
 import { NavLink } from "react-router";
 
 const LoginForm = () => {
@@ -50,7 +50,6 @@ const LoginForm = () => {
       .unwrap()
       .then(() => {
         showToast("Login successful", "success");
-        dispatch(getUsername(email));
       })
       .catch((error) => {
         showToast(error, "error");

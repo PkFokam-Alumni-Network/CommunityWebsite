@@ -11,11 +11,12 @@ export const loginUser = createAsyncThunk(
   AUTH_ACTION_TYPES.LOGIN,
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await authService.login(formData);
+      const { access_token, token_type, ...userData } = await authService.login(formData);
 
       return {
-        accessToken: response.access_token,
-        tokenType: response.token_type,
+        accessToken: access_token,
+        tokenType: token_type,
+        userData,
       };
     } catch (error) {
       return rejectWithValue(error.message || "Login failed");
@@ -54,6 +55,7 @@ const authSlice = createSlice({
       state.tokenType = null;
       state.error = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("userData");
       sessionStorage.clear();
     },
     clearError: (state) => {
@@ -76,13 +78,15 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        const { accessToken, tokenType } = action.payload;
+        const { accessToken, tokenType, userData } = action.payload;
+        state.isUserDataExists = userData && Object.keys(userData).length > 0;
         state.isAuthenticated = true;
         state.loading = false;
         state.error = null;
         state.accessToken = accessToken;
         state.tokenType = tokenType;
         localStorage.setItem("token", `${tokenType} ${accessToken}`);
+        if (state.isUserDataExists) localStorage.setItem("userData", JSON.stringify(userData));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
