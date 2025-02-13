@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Chip,
   Grid2,
   Typography,
   IconButton,
@@ -14,33 +13,28 @@ import {
 } from "@mui/material";
 import {
   School as SchoolIcon,
-  Work as WorkIcon,
   Email as EmailIcon,
   Phone as PhoneIcon,
   LinkedIn as LinkedInIcon,
-  Twitter as TwitterIcon,
+  Instagram as InstagramIcon,
   LocationOn as LocationIcon,
   ArrowBack as ArrowBackIcon,
 } from "@mui/icons-material";
 
 const fallbackData = {
-  name: "Alumni Name",
-  graduationYear: "N/A",
-  bio: "No bio available",
-  imageUrl: "/placeholder.svg?height=128&width=128",
-  role: "Alumni",
-  education: [],
-  experience: [],
-  skills: [],
-  details: {
-    email: "N/A",
-    phone: "N/A",
-    location: "N/A",
-    socialMedia: {
-      linkedin: "",
-      twitter: "",
-    },
-  },
+  irst_name: "Ayato",
+  last_name: "FallBack",
+  graduation_year: "2018",
+  address: "San Francisco, USA",
+  email: "ayato.mitchell@email.com",
+  bio: "Hi there! I'm Ayato, a software engineer with a passion for building innovative solutions. I specialize in backend development and love solving complex problems. Let's connect if you're into tech or enjoy discussing the latest in AI and machine learning!",
+  image: "https://i.ibb.co/X98kHr0/ayato-modified.png",
+  current_occupation: "Staff Software Engineer",
+  degree: "Bachelor of Science",
+  major: "Computer Science",
+  linkedin_profile: "https://www.linkedin.com/in/warren-mitchell",
+  instagram_profile: "https://twitter.com/warrenmitchell",
+  mentor_email: null,
 };
 
 export default function AlumniProfile() {
@@ -50,7 +44,7 @@ export default function AlumniProfile() {
   const alumniData = locationData || fallbackData;
 
   const handleBackClick = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1);
   };
 
   return (
@@ -95,19 +89,20 @@ export default function AlumniProfile() {
         <CardHeader
           avatar={
             <Avatar
-              src={alumniData.imageUrl}
-              alt={alumniData.name}
+              src={alumniData.image}
+              alt={"https://www.w3schools.com/howto/img_avatar.png"}
               sx={{ width: 100, height: 100 }}
             />
           }
           title={
             <Typography variant="h4" component="h1">
-              {alumniData.name}
+              {alumniData.first_name + " " + alumniData.last_name}
             </Typography>
           }
           subheader={
             <Typography variant="subtitle1" color="text.secondary">
-              {alumniData.role} • Class of {alumniData.graduationYear}
+              {alumniData.current_occupation} • Class of{" "}
+              {alumniData.graduation_year}
             </Typography>
           }
         />
@@ -141,7 +136,7 @@ export default function AlumniProfile() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.email}</Typography>
+                    <Typography>{alumniData.email}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -150,7 +145,7 @@ export default function AlumniProfile() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.phone}</Typography>
+                    <Typography>{alumniData.phone}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -159,7 +154,7 @@ export default function AlumniProfile() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.location}</Typography>
+                    <Typography>{alumniData.address}</Typography>
                   </Box>
                 </Grid2>
               </Grid2>
@@ -182,7 +177,7 @@ export default function AlumniProfile() {
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.details?.socialMedia.linkedin}
+                      href={alumniData.linkedin_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -192,36 +187,20 @@ export default function AlumniProfile() {
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <TwitterIcon
+                    <InstagramIcon
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.details?.socialMedia.twitter}
+                      href={alumniData.instagram_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Twitter Profile
+                      Instagram Profile
                     </Link>
                   </Box>
                 </Grid2>
               </Grid2>
-            </Grid2>
-
-            {/* Skills Section */}
-            <Grid2 item xs={12}>
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
-              >
-                Skills
-              </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                {(alumniData.skills || []).map((skill, index) => (
-                  <Chip key={index} label={skill} />
-                ))}
-              </Box>
             </Grid2>
 
             {/* Education Section */}
@@ -233,53 +212,22 @@ export default function AlumniProfile() {
               >
                 Education
               </Typography>
-              {(alumniData.education || []).map((edu, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="subtitle1">
-                    <SchoolIcon
-                      fontSize="small"
-                      sx={{
-                        mr: 1,
-                        verticalAlign: "middle",
-                        "&:hover": { color: "primary.main" },
-                      }}
-                    />
-                    {edu.degree} in {edu.field}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Graduated: {edu.year}
-                  </Typography>
-                </Box>
-              ))}
-            </Grid2>
-
-            {/* Experience Section */}
-            <Grid2 item xs={12}>
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{ fontWeight: "bold", fontSize: "1.5rem", mr: 100 }}
-              >
-                Experience
-              </Typography>
-              {(alumniData.experience || []).map((exp, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="subtitle1">
-                    <WorkIcon
-                      fontSize="small"
-                      sx={{
-                        mr: 1,
-                        verticalAlign: "middle",
-                        "&:hover": { color: "primary.main" },
-                      }}
-                    />
-                    {exp.position} at {exp.company}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {exp.duration}
-                  </Typography>
-                </Box>
-              ))}
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle1">
+                  <SchoolIcon
+                    fontSize="small"
+                    sx={{
+                      mr: 1,
+                      verticalAlign: "middle",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  />
+                  {alumniData.degree} in {alumniData.major}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Graduated: {alumniData.graduation_year}
+                </Typography>
+              </Box>
             </Grid2>
           </Grid2>
         </CardContent>

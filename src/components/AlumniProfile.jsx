@@ -6,7 +6,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Chip,
   Grid2,
   Typography,
   IconButton,
@@ -16,11 +15,10 @@ import {
 } from "@mui/material";
 import {
   School as SchoolIcon,
-  Work as WorkIcon,
   Email as EmailIcon,
   Phone as PhoneIcon,
   LinkedIn as LinkedInIcon,
-  Twitter as TwitterIcon,
+  Instagram as InstagramIcon,
   LocationOn as LocationIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
@@ -92,62 +90,23 @@ export default function AlumniSettings() {
         </IconButton>
         <CardHeader
           avatar={
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                width: "100%",
-                mb: { xs: 2, sm: 0 },
-              }}
-            >
-              <Avatar
-                src={alumniData.imageUrl}
-                alt={alumniData.name}
-                sx={{
-                  width: { xs: 120, sm: 100 },
-                  height: { xs: 120, sm: 100 },
-                }}
-              />
-            </Box>
+            <Avatar
+              src={alumniData.image}
+              alt={"https://www.w3schools.com/howto/img_avatar.png"}
+              sx={{ width: 100, height: 100 }}
+            />
           }
           title={
-            <Typography
-              variant={isMobile ? "h5" : "h4"}
-              component="h1"
-              sx={{
-                overflow: "visible",
-                mt: { xs: 2, sm: 0 },
-                ml: { xs: 5 },
-                textAlign: { xs: "center", sm: "left" },
-              }}
-            >
-              {alumniData.name}
+            <Typography variant="h4" component="h1">
+              {alumniData.first_name + " " + alumniData.last_name}
             </Typography>
           }
           subheader={
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              sx={{
-                overflow: "visible",
-                textAlign: { xs: "center", sm: "left" },
-              }}
-            >
-              {alumniData.role} • Class of {alumniData.graduationYear}
+            <Typography variant="subtitle1" color="text.secondary">
+              {alumniData.current_occupation} • Class of{" "}
+              {alumniData.graduation_year}
             </Typography>
           }
-          sx={{
-            flexDirection: isMobile ? "column" : "",
-            alignItems: "center",
-            "& .MuiCardHeader-content": {
-              overflow: "visible",
-              width: "100%",
-            },
-            "& .MuiCardHeader-avatar": {
-              marginRight: 0,
-              marginBottom: { xs: 2, sm: 0 },
-            },
-          }}
         />
         <CardContent>
           <Grid2 container spacing={3}>
@@ -179,7 +138,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.email}</Typography>
+                    <Typography>{alumniData.email}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -188,7 +147,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.phone}</Typography>
+                    <Typography>{alumniData.phone}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -197,7 +156,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.details?.location}</Typography>
+                    <Typography>{alumniData.address}</Typography>
                   </Box>
                 </Grid2>
               </Grid2>
@@ -220,7 +179,7 @@ export default function AlumniSettings() {
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.details?.socialMedia.linkedin}
+                      href={alumniData.linkedin_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -230,36 +189,20 @@ export default function AlumniSettings() {
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <TwitterIcon
+                    <InstagramIcon
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.details?.socialMedia.twitter}
+                      href={alumniData.instagram_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Twitter Profile
+                      Instagram Profile
                     </Link>
                   </Box>
                 </Grid2>
               </Grid2>
-            </Grid2>
-
-            {/* Skills Section */}
-            <Grid2 item xs={12}>
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{ fontWeight: "bold", fontSize: "1.5rem" }}
-              >
-                Skills
-              </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                {(alumniData.skills || []).map((skill, index) => (
-                  <Chip key={index} label={skill} />
-                ))}
-              </Box>
             </Grid2>
 
             {/* Education Section */}
@@ -271,56 +214,24 @@ export default function AlumniSettings() {
               >
                 Education
               </Typography>
-              {(alumniData.education || []).map((edu, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="subtitle1">
-                    <SchoolIcon
-                      fontSize="small"
-                      sx={{
-                        mr: 1,
-                        verticalAlign: "middle",
-                        "&:hover": { color: "primary.main" },
-                      }}
-                    />
-                    {edu.degree} in {edu.field}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Graduated: {edu.year}
-                  </Typography>
-                </Box>
-              ))}
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle1">
+                  <SchoolIcon
+                    fontSize="small"
+                    sx={{
+                      mr: 1,
+                      verticalAlign: "middle",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  />
+                  {alumniData.degree} in {alumniData.major}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Graduated: {alumniData.graduation_year}
+                </Typography>
+              </Box>
             </Grid2>
-
-            {/* Experience Section */}
-            <Grid2 item xs={12}>
-              <Typography
-                variant="h5"
-                gutterBottom
-                sx={{ fontWeight: "bold", fontSize: "1.5rem", mr: 100 }}
-              >
-                Experience
-              </Typography>
-              {(alumniData.experience || []).map((exp, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="subtitle1">
-                    <WorkIcon
-                      fontSize="small"
-                      sx={{
-                        mr: 1,
-                        verticalAlign: "middle",
-                        "&:hover": { color: "primary.main" },
-                      }}
-                    />
-                    {exp.position} at {exp.company}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {exp.duration}
-                  </Typography>
-                </Box>
-              ))}
-            </Grid2>
-            <Divider sx={{ my: 3 }} />
-
+            <Divider sx={{ mx: 10 }} />
             {/* Mentor Section */}
             <Grid2 item xs={12}>
               <Typography
