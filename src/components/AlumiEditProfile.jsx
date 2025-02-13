@@ -9,7 +9,6 @@ import {
   TextField,
   Typography,
   Grid,
-  Chip,
   IconButton,
   Avatar,
   styled,
@@ -18,8 +17,6 @@ import {
 import {
   Save as SaveIcon,
   ArrowBack as ArrowBackIcon,
-  Add as AddIcon,
-  Delete as DeleteIcon,
   CameraAlt as CameraIcon,
 } from "@mui/icons-material";
 
@@ -32,26 +29,22 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const [alumniData, setAlumniData] = useState(
     location.state?.alumni || {
-      name: "",
-      graduationYear: "",
+      first_name: "",
+      last_name: "",
+      graduation_year: "",
+      address: "",
+      email: "",
+      phone: "",
       bio: "",
-      imageUrl: "/placeholder.svg?height=200&width=200",
-      role: "",
-      education: [],
-      experience: [],
-      skills: [],
-      details: {
-        email: "",
-        phone: "",
-        location: "",
-        socialMedia: {
-          linkedin: "",
-          twitter: "",
-        },
-      },
+      image: "",
+      current_occupation: "",
+      degree: "",
+      major: "",
+      linkedin_profile: "",
+      instagram_profile: "",
+      mentor_email: null,
     }
   );
-  const [newSkill, setNewSkill] = useState("");
   const fileInputRef = useRef(null);
 
   const handleInputChange = (e) => {
@@ -59,97 +52,6 @@ export default function EditProfile() {
     setAlumniData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
-
-  const handleDetailsChange = (e) => {
-    const { name, value } = e.target;
-    setAlumniData((prevData) => ({
-      ...prevData,
-      details: {
-        ...prevData.details,
-        [name]: value,
-      },
-    }));
-  };
-
-  const handleSocialMediaChange = (e) => {
-    const { name, value } = e.target;
-    setAlumniData((prevData) => ({
-      ...prevData,
-      details: {
-        ...prevData.details,
-        socialMedia: {
-          ...prevData.details.socialMedia,
-          [name]: value,
-        },
-      },
-    }));
-  };
-
-  const handleAddSkill = () => {
-    if (newSkill.trim() !== "") {
-      setAlumniData((prevData) => ({
-        ...prevData,
-        skills: [...prevData.skills, newSkill.trim()],
-      }));
-      setNewSkill("");
-    }
-  };
-
-  const handleRemoveSkill = (skillToRemove) => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      skills: prevData.skills.filter((skill) => skill !== skillToRemove),
-    }));
-  };
-
-  const handleEducationChange = (index, field, value) => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      education: prevData.education.map((edu, i) =>
-        i === index ? { ...edu, [field]: value } : edu
-      ),
-    }));
-  };
-
-  const handleAddEducation = () => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      education: [...prevData.education, { degree: "", field: "", year: "" }],
-    }));
-  };
-
-  const handleRemoveEducation = (index) => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      education: prevData.education.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleExperienceChange = (index, field, value) => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      experience: prevData.experience.map((exp, i) =>
-        i === index ? { ...exp, [field]: value } : exp
-      ),
-    }));
-  };
-
-  const handleAddExperience = () => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      experience: [
-        ...prevData.experience,
-        { company: "", position: "", duration: "" },
-      ],
-    }));
-  };
-
-  const handleRemoveExperience = (index) => {
-    setAlumniData((prevData) => ({
-      ...prevData,
-      experience: prevData.experience.filter((_, i) => i !== index),
     }));
   };
 
@@ -167,11 +69,10 @@ export default function EditProfile() {
     }
   };
 
+  // TODO: Implement the put function to update
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the updated data to your backend
     console.log("Updated alumni data:", alumniData);
-    // Navigate back to the profile page with updated data
     navigate("/dashboard/settings", { state: { alumni: alumniData } });
   };
 
@@ -200,7 +101,7 @@ export default function EditProfile() {
               <Grid item xs={12} display="flex" justifyContent="center">
                 <Box position="relative">
                   <Avatar
-                    src={alumniData.imageUrl}
+                    src={alumniData.image}
                     alt={alumniData.name}
                     sx={{ width: 150, height: 150, mb: 2 }}
                   />
@@ -229,9 +130,19 @@ export default function EditProfile() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Name"
+                  label="First Name"
                   name="name"
-                  value={alumniData.name}
+                  value={alumniData.first_name}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="Last Name"
+                  name="name"
+                  value={alumniData.last_name}
                   onChange={handleInputChange}
                   variant="outlined"
                 />
@@ -241,7 +152,7 @@ export default function EditProfile() {
                   fullWidth
                   label="Graduation Year"
                   name="graduationYear"
-                  value={alumniData.graduationYear}
+                  value={alumniData.graduation_year}
                   onChange={handleInputChange}
                   variant="outlined"
                 />
@@ -272,157 +183,65 @@ export default function EditProfile() {
                 <Divider sx={{ my: 2 }}>
                   <Typography variant="h6">Education</Typography>
                 </Divider>
-                {alumniData.education.map((edu, index) => (
-                  <Box key={index} sx={{ mb: 2 }}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} sm={4}>
-                        <TextField
-                          fullWidth
-                          label="Degree"
-                          value={edu.degree}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "degree",
-                              e.target.value
-                            )
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <TextField
-                          fullWidth
-                          label="Field"
-                          value={edu.field}
-                          onChange={(e) =>
-                            handleEducationChange(
-                              index,
-                              "field",
-                              e.target.value
-                            )
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                        <TextField
-                          fullWidth
-                          label="Year"
-                          value={edu.year}
-                          onChange={(e) =>
-                            handleEducationChange(index, "year", e.target.value)
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={1}>
-                        <IconButton
-                          onClick={() => handleRemoveEducation(index)}
-                          color="error"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Grid>
+                <Box sx={{ mb: 2 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        fullWidth
+                        label="Degree"
+                        value={alumniData.degree}
+                        onChange={(e) =>
+                          handleInputChange("degree", e.target.value)
+                        }
+                        variant="outlined"
+                      />
                     </Grid>
-                  </Box>
-                ))}
-                <Button startIcon={<AddIcon />} onClick={handleAddEducation}>
-                  Add Education
-                </Button>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        fullWidth
+                        label="Major"
+                        value={alumniData.major}
+                        onChange={(e) =>
+                          handleInputChange("major", e.target.value)
+                        }
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <TextField
+                        fullWidth
+                        label="Graduation Year"
+                        value={alumniData.graduation_year}
+                        onChange={(e) =>
+                          handleInputChange("graduation_year", e.target.value)
+                        }
+                        variant="outlined"
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <Divider sx={{ my: 2 }}>
                   <Typography variant="h6">Experience</Typography>
                 </Divider>
-                {alumniData.experience.map((exp, index) => (
-                  <Box key={index} sx={{ mb: 2 }}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} sm={4}>
-                        <TextField
-                          fullWidth
-                          label="Company"
-                          value={exp.company}
-                          onChange={(e) =>
-                            handleExperienceChange(
-                              index,
-                              "company",
-                              e.target.value
-                            )
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <TextField
-                          fullWidth
-                          label="Position"
-                          value={exp.position}
-                          onChange={(e) =>
-                            handleExperienceChange(
-                              index,
-                              "position",
-                              e.target.value
-                            )
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                        <TextField
-                          fullWidth
-                          label="Duration"
-                          value={exp.duration}
-                          onChange={(e) =>
-                            handleExperienceChange(
-                              index,
-                              "duration",
-                              e.target.value
-                            )
-                          }
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={1}>
-                        <IconButton
-                          onClick={() => handleRemoveExperience(index)}
-                          color="error"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Grid>
+                <Box sx={{ mb: 2 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        fullWidth
+                        label="Current Occupation"
+                        value={alumniData.current_occupation}
+                        onChange={(e) =>
+                          handleInputChange(
+                            "current_occupation",
+                            e.target.value
+                          )
+                        }
+                        variant="outlined"
+                      />
                     </Grid>
-                  </Box>
-                ))}
-                <Button startIcon={<AddIcon />} onClick={handleAddExperience}>
-                  Add Experience
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <Divider sx={{ my: 2 }}>
-                  <Typography variant="h6">Skills</Typography>
-                </Divider>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
-                  {alumniData.skills.map((skill, index) => (
-                    <Chip
-                      key={index}
-                      label={skill}
-                      onDelete={() => handleRemoveSkill(skill)}
-                      color="primary"
-                      variant="outlined"
-                    />
-                  ))}
-                </Box>
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <TextField
-                    label="New Skill"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                    variant="outlined"
-                  />
-                  <IconButton onClick={handleAddSkill} color="primary">
-                    <AddIcon />
-                  </IconButton>
+                  </Grid>
                 </Box>
               </Grid>
               <Grid item xs={12}>
@@ -435,8 +254,8 @@ export default function EditProfile() {
                   fullWidth
                   label="Email"
                   name="email"
-                  value={alumniData.details.email}
-                  onChange={handleDetailsChange}
+                  value={alumniData.email}
+                  onChange={handleInputChange}
                   variant="outlined"
                 />
               </Grid>
@@ -445,8 +264,8 @@ export default function EditProfile() {
                   fullWidth
                   label="Phone"
                   name="phone"
-                  value={alumniData.details.phone}
-                  onChange={handleDetailsChange}
+                  value={alumniData.phone}
+                  onChange={handleInputChange}
                   variant="outlined"
                 />
               </Grid>
@@ -455,8 +274,8 @@ export default function EditProfile() {
                   fullWidth
                   label="Location"
                   name="location"
-                  value={alumniData.details.location}
-                  onChange={handleDetailsChange}
+                  value={alumniData.address}
+                  onChange={handleInputChange}
                   variant="outlined"
                 />
               </Grid>
@@ -465,8 +284,8 @@ export default function EditProfile() {
                   fullWidth
                   label="LinkedIn"
                   name="linkedin"
-                  value={alumniData.details.socialMedia.linkedin}
-                  onChange={handleSocialMediaChange}
+                  value={alumniData.linkedin_profile}
+                  onChange={handleInputChange}
                   variant="outlined"
                 />
               </Grid>
@@ -475,8 +294,8 @@ export default function EditProfile() {
                   fullWidth
                   label="Twitter"
                   name="twitter"
-                  value={alumniData.details.socialMedia.twitter}
-                  onChange={handleSocialMediaChange}
+                  value={alumniData.instagram_profile}
+                  onChange={handleInputChange}
                   variant="outlined"
                 />
               </Grid>

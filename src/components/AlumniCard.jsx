@@ -22,11 +22,15 @@ const AlumniCard = ({ alumni }) => {
     >
       <div className="text-center glassmorphism-card">
         <div className="glassmorphism-card-img">
-          <img src={alumni.imageUrl} alt="Alumni profile" />
+          <img src={alumni.image} alt="Alumni profile" />
         </div>
         <div className="alumni-card-demographics-container">
-          <h6 className="alumni-name-text">{alumni.name}</h6>
-          <h6 className="alumni-job-position-text">{alumni.role}</h6>
+          <h6 className="alumni-name-text">
+            {alumni.first_name + " " + alumni.last_name}
+          </h6>
+          <h6 className="alumni-job-position-text">
+            {alumni.current_occupation}
+          </h6>
         </div>
         <Button className="primary-text glassmorphism-card-button">
           View Profile
