@@ -22,7 +22,7 @@ const AlumniCard = ({ alumni }) => {
     >
       <div className="text-center glassmorphism-card">
         <div className="glassmorphism-card-img">
-          <img src={alumni.image} alt="Alumni profile" />
+          <img src={alumni.image} alt="A" />
         </div>
         <div className="alumni-card-demographics-container">
           <h6 className="alumni-name-text">

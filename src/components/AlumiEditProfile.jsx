@@ -62,7 +62,7 @@ export default function EditProfile() {
       reader.onloadend = () => {
         setAlumniData((prevData) => ({
           ...prevData,
-          imageUrl: reader.result,
+          image: reader.result,
         }));
       };
       reader.readAsDataURL(file);
@@ -131,7 +131,7 @@ export default function EditProfile() {
                 <TextField
                   fullWidth
                   label="First Name"
-                  name="name"
+                  name="first_name"
                   value={alumniData.first_name}
                   onChange={handleInputChange}
                   variant="outlined"
@@ -141,7 +141,7 @@ export default function EditProfile() {
                 <TextField
                   fullWidth
                   label="Last Name"
-                  name="name"
+                  name="last_name"
                   value={alumniData.last_name}
                   onChange={handleInputChange}
                   variant="outlined"
@@ -151,7 +151,7 @@ export default function EditProfile() {
                 <TextField
                   fullWidth
                   label="Graduation Year"
-                  name="graduationYear"
+                  name="graduation_year"
                   value={alumniData.graduation_year}
                   onChange={handleInputChange}
                   variant="outlined"
@@ -160,9 +160,9 @@ export default function EditProfile() {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  label="Role"
-                  name="role"
-                  value={alumniData.role}
+                  label="Current Occupation"
+                  name="current_occupation"
+                  value={alumniData.current_occupation}
                   onChange={handleInputChange}
                   variant="outlined"
                 />
@@ -172,7 +172,7 @@ export default function EditProfile() {
                   fullWidth
                   multiline
                   rows={4}
-                  label="Bio"
+                  label="Biography"
                   name="bio"
                   value={alumniData.bio}
                   onChange={handleInputChange}
@@ -190,9 +190,7 @@ export default function EditProfile() {
                         fullWidth
                         label="Degree"
                         value={alumniData.degree}
-                        onChange={(e) =>
-                          handleInputChange("degree", e.target.value)
-                        }
+                        onChange={handleInputChange}
                         variant="outlined"
                       />
                     </Grid>
@@ -201,9 +199,7 @@ export default function EditProfile() {
                         fullWidth
                         label="Major"
                         value={alumniData.major}
-                        onChange={(e) =>
-                          handleInputChange("major", e.target.value)
-                        }
+                        onChange={handleInputChange}
                         variant="outlined"
                       />
                     </Grid>
@@ -212,32 +208,7 @@ export default function EditProfile() {
                         fullWidth
                         label="Graduation Year"
                         value={alumniData.graduation_year}
-                        onChange={(e) =>
-                          handleInputChange("graduation_year", e.target.value)
-                        }
-                        variant="outlined"
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Grid>
-              <Grid item xs={12}>
-                <Divider sx={{ my: 2 }}>
-                  <Typography variant="h6">Experience</Typography>
-                </Divider>
-                <Box sx={{ mb: 2 }}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={4}>
-                      <TextField
-                        fullWidth
-                        label="Current Occupation"
-                        value={alumniData.current_occupation}
-                        onChange={(e) =>
-                          handleInputChange(
-                            "current_occupation",
-                            e.target.value
-                          )
-                        }
+                        onChange={handleInputChange}
                         variant="outlined"
                       />
                     </Grid>
@@ -273,7 +244,7 @@ export default function EditProfile() {
                 <TextField
                   fullWidth
                   label="Location"
-                  name="location"
+                  name="address"
                   value={alumniData.address}
                   onChange={handleInputChange}
                   variant="outlined"
@@ -283,7 +254,7 @@ export default function EditProfile() {
                 <TextField
                   fullWidth
                   label="LinkedIn"
-                  name="linkedin"
+                  name="linkedin_profile"
                   value={alumniData.linkedin_profile}
                   onChange={handleInputChange}
                   variant="outlined"
@@ -292,8 +263,8 @@ export default function EditProfile() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Twitter"
-                  name="twitter"
+                  label="Instagram"
+                  name="instagram_profile"
                   value={alumniData.instagram_profile}
                   onChange={handleInputChange}
                   variant="outlined"
