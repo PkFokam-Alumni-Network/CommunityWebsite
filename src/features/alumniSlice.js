@@ -5,6 +5,8 @@ import userService from "../api/userService";
 export const USERS_ACTION_TYPES = {
   getUsers: "users/getUsers",
   getUserMentees: "users/getUserMentees",
+  updateUser: "users/updateUser",
+  getUser: "users/getUser",
 };
 
 export const getUsers = createAsyncThunk(
@@ -29,6 +31,19 @@ export const getUserMentees = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(error.message || "Unable to get user's mentees!");
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  USERS_ACTION_TYPES.updateUser,
+  async ({ userId, userData }, { rejectWithValue }) => {
+    try {
+      const response = await userService.updateUser(userId, userData);
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to update user!");
     }
   }
 );
@@ -67,6 +82,18 @@ const alumniUsers = createSlice({
         state.error = null;
       })
       .addCase(getUserMentees.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

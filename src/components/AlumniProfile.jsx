@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -38,12 +38,11 @@ const mentorData = {
 const userInfo = coreHelper.getLoggedInUserData();
 
 export default function AlumniSettings() {
+  const userData = coreHelper.getLoggedInUserData();
   const { usersMentees } = useSelector((state) => state.alumniUsers);
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const locationData = location.state?.alumni;
-  const alumniData = locationData || fallbackData;
+  const alumniData = userData || fallbackData;
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
