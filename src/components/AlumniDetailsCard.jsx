@@ -21,27 +21,11 @@ import {
   ArrowBack as ArrowBackIcon,
 } from "@mui/icons-material";
 
-const fallbackData = {
-  irst_name: "Ayato",
-  last_name: "FallBack",
-  graduation_year: "2018",
-  address: "San Francisco, USA",
-  email: "ayato.mitchell@email.com",
-  bio: "Hi there! I'm Ayato, a software engineer with a passion for building innovative solutions. I specialize in backend development and love solving complex problems. Let's connect if you're into tech or enjoy discussing the latest in AI and machine learning!",
-  image: "https://i.ibb.co/X98kHr0/ayato-modified.png",
-  current_occupation: "Staff Software Engineer",
-  degree: "Bachelor of Science",
-  major: "Computer Science",
-  linkedin_profile: "https://www.linkedin.com/in/warren-mitchell",
-  instagram_profile: "https://twitter.com/warrenmitchell",
-  mentor_email: null,
-};
-
 export default function AlumniProfile() {
   const location = useLocation();
   const navigate = useNavigate();
   const locationData = location.state?.alumni;
-  const alumniData = locationData || fallbackData;
+  const alumniData = locationData;
 
   const handleBackClick = () => {
     navigate(-1);
