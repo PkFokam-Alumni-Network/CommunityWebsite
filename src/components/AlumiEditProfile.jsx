@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../features/alumniSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -27,6 +29,7 @@ const Input = styled("input")({
 export default function EditProfile() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [alumniData, setAlumniData] = useState(
     location.state?.alumni || {
       first_name: "",
@@ -69,10 +72,13 @@ export default function EditProfile() {
     }
   };
 
-  // TODO: Implement the put function to update
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Updated alumni data:", alumniData);
+
+    // Dispatch the updateUser action with the user data
+    dispatch(updateUser(alumniData.id, alumniData));
+
+    // Optionally, show a success message or navigate after update is successful
     navigate("/dashboard/settings", { state: { alumni: alumniData } });
   };
 
