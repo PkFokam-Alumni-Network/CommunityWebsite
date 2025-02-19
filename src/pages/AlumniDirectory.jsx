@@ -21,9 +21,6 @@ const groupAlumniByYear = (data) => {
 };
 
 export default function AlumniDirectory() {
-  const state = useSelector((state) => state);
-
-  console.log("Entire Redux state:", state);
   const { users } = useSelector((state) => state.alumniUsers);
   const groupedAlumni = groupAlumniByYear(users);
   const dispatch = useDispatch();
