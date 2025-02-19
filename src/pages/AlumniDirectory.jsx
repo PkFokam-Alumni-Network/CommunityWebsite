@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Box, Typography, Toolbar, Grid2 } from "@mui/material";
-import { alumniData as alumniFakeData, another } from "../constants/alumnidata";
 import AlumniCard from "../components/AlumniCard";
 import { getUsers } from "../features/alumniSlice";
 
-const alumniData_1 = new Array(5).fill(alumniFakeData);
-const alumniData = alumniData_1.concat(new Array(5).fill(another));
-
 const groupAlumniByYear = (data) => {
+  if (!Array.isArray(data)) {
+    console.error("Expected an array, but got:", data);
+    return {};
+  }
+
   return data.reduce((acc, alumni) => {
     const year = alumni.graduation_year;
     if (!acc[year]) {
@@ -21,16 +22,12 @@ const groupAlumniByYear = (data) => {
 
 export default function AlumniDirectory() {
   const { users } = useSelector((state) => state.alumniUsers);
-  const groupedAlumni = groupAlumniByYear(alumniData);
+  const groupedAlumni = groupAlumniByYear(users);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
-
-  console.log("====================================");
-  console.log("++++ alumniUsers ++++", users);
-  console.log("====================================");
+  }, [dispatch]);
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
