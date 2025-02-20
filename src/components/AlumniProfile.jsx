@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 import { alumniData } from "../constants/alumnidata";
 import coreHelper from "../helpers/coreHelper";
-import { getUserMentees } from "../features/alumniSlice";
+import { getUser, getUserMentees } from "../features/alumniSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const fallbackData = alumniData;
@@ -38,22 +38,26 @@ const mentorData = {
 const userInfo = coreHelper.getLoggedInUserData();
 
 export default function AlumniSettings() {
-  const userData = coreHelper.getLoggedInUserData();
-  const { usersMentees } = useSelector((state) => state.alumniUsers);
+  const { usersMentees, userProfileData } = useSelector((state) => state.alumniUsers);
+  const [userProfile, setUserProfile] = useState(userProfileData ?? fallbackData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alumniData = userData || fallbackData;
 
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (userInfo) {
       dispatch(getUserMentees(userInfo.email));
+      dispatch(getUser(userInfo.email));
     }
   }, []);
 
+  useEffect(() => {
+    if (userProfileData) setUserProfile(userProfileData);
+  }, [userProfileData]);
+
   const handleEditClick = () => {
-    navigate("/edit-profile", { state: { alumni: alumniData } });
+    navigate("/edit-profile", { state: { alumni: userProfile } });
   };
 
   return (
@@ -90,20 +94,20 @@ export default function AlumniSettings() {
         <CardHeader
           avatar={
             <Avatar
-              src={alumniData.image}
+              src={userProfile.image}
               alt={"https://www.w3schools.com/howto/img_avatar.png"}
               sx={{ width: 100, height: 100 }}
             />
           }
           title={
             <Typography variant="h4" component="h1">
-              {alumniData.first_name + " " + alumniData.last_name}
+              {userProfile.first_name + " " + userProfile.last_name}
             </Typography>
           }
           subheader={
             <Typography variant="subtitle1" color="text.secondary">
-              {alumniData.current_occupation} • Class of{" "}
-              {alumniData.graduation_year}
+              {userProfile.current_occupation} • Class of{" "}
+              {userProfile.graduation_year}
             </Typography>
           }
         />
@@ -118,7 +122,7 @@ export default function AlumniSettings() {
               >
                 About Me
               </Typography>
-              <Typography variant="body1">{alumniData.bio}</Typography>
+              <Typography variant="body1">{userProfile.bio}</Typography>
             </Grid2>
 
             {/* Contact Information Section */}
@@ -137,7 +141,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.email}</Typography>
+                    <Typography>{userProfile.email}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -146,7 +150,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.phone}</Typography>
+                    <Typography>{userProfile.phone}</Typography>
                   </Box>
                 </Grid2>
                 <Grid2 item xs={12} sm={6}>
@@ -155,7 +159,7 @@ export default function AlumniSettings() {
                       color="action"
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
-                    <Typography>{alumniData.address}</Typography>
+                    <Typography>{userProfile.address}</Typography>
                   </Box>
                 </Grid2>
               </Grid2>
@@ -178,7 +182,7 @@ export default function AlumniSettings() {
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.linkedin_profile}
+                      href={userProfile.linkedin_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -193,7 +197,7 @@ export default function AlumniSettings() {
                       sx={{ mr: 1, "&:hover": { color: "primary.main" } }}
                     />
                     <Link
-                      href={alumniData.instagram_profile}
+                      href={userProfile.instagram_profile}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -223,10 +227,10 @@ export default function AlumniSettings() {
                       "&:hover": { color: "primary.main" },
                     }}
                   />
-                  {alumniData.degree} in {alumniData.major}
+                  {userProfile.degree} in {userProfile.major}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Graduated: {alumniData.graduation_year}
+                  Graduated: {userProfile.graduation_year}
                 </Typography>
               </Box>
             </Grid2>
