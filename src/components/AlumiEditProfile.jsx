@@ -21,6 +21,7 @@ import {
   ArrowBack as ArrowBackIcon,
   CameraAlt as CameraIcon,
 } from "@mui/icons-material";
+import { useToast } from "../uiContexts/toastContext";
 
 const Input = styled("input")({
   display: "none",
@@ -30,6 +31,8 @@ export default function EditProfile() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const showToast = useToast();
+  
   const [alumniData, setAlumniData] = useState(
     location.state?.alumni || {
       first_name: "",
@@ -76,7 +79,14 @@ export default function EditProfile() {
     e.preventDefault();
 
     // Dispatch the updateUser action with the user data
-    dispatch(updateUser(alumniData.id, alumniData));
+    dispatch(updateUser(alumniData))
+    .unwrap()
+    .then(() => {
+      showToast("Update successful", "success");
+    })
+    .catch((error) => {
+      showToast(error, "error");
+    });
 
     // Optionally, show a success message or navigate after update is successful
     navigate("/dashboard/settings", { state: { alumni: alumniData } });

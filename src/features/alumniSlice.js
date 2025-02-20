@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import alumniUsersService from "../api/alumniService";
 import userService from "../api/userService";
 
 export const USERS_ACTION_TYPES = {
@@ -13,11 +12,24 @@ export const getUsers = createAsyncThunk(
   USERS_ACTION_TYPES.getUsers,
   async (_, { rejectWithValue }) => {
     try {
-      const response = await alumniUsersService.getUsers();
+      const response = await userService.getUsers();
 
       return response;
     } catch (error) {
       return rejectWithValue(error.message || "Unable to get users!");
+    }
+  }
+);
+
+export const getUser = createAsyncThunk(
+  USERS_ACTION_TYPES.getUser,
+  async (user_email, { rejectWithValue }) => {
+    try {
+      const response = await userService.getUser(user_email);
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to get user!");
     }
   }
 );
@@ -37,9 +49,9 @@ export const getUserMentees = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   USERS_ACTION_TYPES.updateUser,
-  async ({ userId, userData }, { rejectWithValue }) => {
+  async ({ email, ...userData }, { rejectWithValue }) => {
     try {
-      const response = await userService.updateUser(userId, userData);
+      const response = await userService.updateUser(email, userData);
 
       return response;
     } catch (error) {
@@ -52,6 +64,7 @@ const alumniUsers = createSlice({
   name: "users",
   initialState: {
     users: null,
+    userProfileData: null,
     usersMentees: null,
     error: null,
     loading: false,
@@ -94,6 +107,19 @@ const alumniUsers = createSlice({
         state.error = null;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.userProfileData = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
