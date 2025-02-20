@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../features/alumniSlice";
+import { updateUser, updateProfilePicture } from "../features/alumniSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -32,7 +32,7 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const showToast = useToast();
-  
+
   const [alumniData, setAlumniData] = useState(
     location.state?.alumni || {
       first_name: "",
@@ -63,14 +63,25 @@ export default function EditProfile() {
 
   const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
+    console.log("file = ", file);
+
     if (file) {
       const reader = new FileReader();
+
       reader.onloadend = () => {
         setAlumniData((prevData) => ({
           ...prevData,
           image: reader.result,
         }));
+
+        dispatch(
+          updateProfilePicture({
+            email: alumniData.email,
+            image: reader.result,
+          })
+        );
       };
+
       reader.readAsDataURL(file);
     }
   };
@@ -80,13 +91,13 @@ export default function EditProfile() {
 
     // Dispatch the updateUser action with the user data
     dispatch(updateUser(alumniData))
-    .unwrap()
-    .then(() => {
-      showToast("Update successful", "success");
-    })
-    .catch((error) => {
-      showToast(error, "error");
-    });
+      .unwrap()
+      .then(() => {
+        showToast("Update successful", "success");
+      })
+      .catch((error) => {
+        showToast(error, "error");
+      });
 
     // Optionally, show a success message or navigate after update is successful
     navigate("/dashboard/settings", { state: { alumni: alumniData } });
@@ -204,6 +215,7 @@ export default function EditProfile() {
                     <Grid item xs={12} sm={4}>
                       <TextField
                         fullWidth
+                        name="degree"
                         label="Degree"
                         value={alumniData.degree}
                         onChange={handleInputChange}
@@ -213,6 +225,7 @@ export default function EditProfile() {
                     <Grid item xs={12} sm={4}>
                       <TextField
                         fullWidth
+                        name="major"
                         label="Major"
                         value={alumniData.major}
                         onChange={handleInputChange}

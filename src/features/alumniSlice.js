@@ -6,6 +6,7 @@ export const USERS_ACTION_TYPES = {
   getUserMentees: "users/getUserMentees",
   updateUser: "users/updateUser",
   getUser: "users/getUser",
+  updateProfilePicture: "users/updateProfilePicture",
 };
 
 export const getUsers = createAsyncThunk(
@@ -52,6 +53,19 @@ export const updateUser = createAsyncThunk(
   async ({ email, ...userData }, { rejectWithValue }) => {
     try {
       const response = await userService.updateUser(email, userData);
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to update user!");
+    }
+  }
+);
+
+export const updateProfilePicture = createAsyncThunk(
+  USERS_ACTION_TYPES.updateProfilePicture,
+  async ({ email, image }, { rejectWithValue }) => {
+    try {
+      const response = await userService.updateProfilePicture(email, image);
 
       return response;
     } catch (error) {
@@ -120,6 +134,19 @@ const alumniUsers = createSlice({
         state.error = null;
       })
       .addCase(getUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateProfilePicture.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProfilePicture.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.userProfileData = action.payload;
+      })
+      .addCase(updateProfilePicture.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
