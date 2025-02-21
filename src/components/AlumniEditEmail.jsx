@@ -7,7 +7,7 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import coreHelper from "./helpers/coreHelper";
+import coreHelper from "../helpers/coreHelper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateEmail } from "../features/alumniSlice";
@@ -29,7 +29,7 @@ export default function EditEmail() {
     e.preventDefault();
     setLoading(true);
     const oldEmail = coreHelper.getLoggedInUserData().email;
-    dispatch(updateEmail({ oldEmail, newEmail: email }))
+    const response = dispatch(updateEmail({ oldEmail, newEmail: email }))
       .unwrap()
       .then(() => {
         showToast("Email updated successfully", "success");
@@ -41,6 +41,8 @@ export default function EditEmail() {
       .finally(() => {
         setLoading(false);
       });
+    console.log(response);
+    coreHelper.setLoggedInUserData(response.payload);
   };
 
   const handleCancel = () => {

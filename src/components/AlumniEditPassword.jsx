@@ -8,7 +8,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import coreHelper from "./helpers/coreHelper";
+import coreHelper from "../helpers/coreHelper";
 import { useDispatch } from "react-redux";
 import { updatePassword } from "../features/alumniSlice";
 import { useToast } from "../uiContexts/toastContext";
@@ -36,8 +36,8 @@ export default function EditPassword() {
     }
 
     setLoading(true);
-    const user_email = coreHelper.getLoggedInUserData().email;
-    dispatch(updatePassword({ user_email, oldPassword, newPassword }))
+    const userEmail = coreHelper.getLoggedInUserData().email;
+    dispatch(updatePassword({ userEmail, oldPassword, newPassword }))
       .unwrap()
       .then(() => {
         showToast("Password updated successfully", "success");

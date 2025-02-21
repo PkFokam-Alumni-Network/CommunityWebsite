@@ -11,6 +11,7 @@ import {
   IconButton,
   Link,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import {
   School as SchoolIcon,
@@ -21,12 +22,10 @@ import {
   LocationOn as LocationIcon,
   Edit as EditIcon,
 } from "@mui/icons-material";
-import { alumniData } from "../constants/alumnidata";
 import coreHelper from "../helpers/coreHelper";
 import { getUser, getUserMentees } from "../features/alumniSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const fallbackData = alumniData;
 const mentorData = {
   name: "Warren Mitchell",
   imageUrl: "https://i.ibb.co/X98kHr0/ayato-modified.png",
@@ -34,15 +33,12 @@ const mentorData = {
   role: "Software Engineer",
 };
 
-const userInfo = coreHelper.getLoggedInUserData();
-
 export default function AlumniSettings() {
+  const userInfo = coreHelper.getLoggedInUserData();
   const { usersMentees, userProfileData } = useSelector(
     (state) => state.alumniUsers
   );
-  const [userProfile, setUserProfile] = useState(
-    userProfileData ?? fallbackData
-  );
+  const [userProfile, setUserProfile] = useState(userProfileData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -60,6 +56,22 @@ export default function AlumniSettings() {
   const handleEditClick = () => {
     navigate("/edit-info");
   };
+
+  if (!userProfile || !userProfileData) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 2,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box
