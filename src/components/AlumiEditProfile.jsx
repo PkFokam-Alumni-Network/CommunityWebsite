@@ -61,25 +61,32 @@ export default function EditProfile() {
     }));
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
-    console.log("file = ", file);
 
     if (file) {
       const reader = new FileReader();
 
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         setAlumniData((prevData) => ({
           ...prevData,
           image: reader.result,
         }));
 
-        dispatch(
-          updateProfilePicture({
-            email: alumniData.email,
-            image: reader.result,
-          })
-        );
+        try {
+          const result = await dispatch(
+            updateProfilePicture({
+              email: alumniData.email,
+              image: reader.result,
+            })
+          );
+          setAlumniData((prevData) => ({
+            ...prevData,
+            image: result.payload.image_path,
+          }));
+        } catch (error) {
+          console.error("Error updating profile picture:", error);
+        }
       };
 
       reader.readAsDataURL(file);
@@ -89,7 +96,6 @@ export default function EditProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Dispatch the updateUser action with the user data
     dispatch(updateUser(alumniData))
       .unwrap()
       .then(() => {
