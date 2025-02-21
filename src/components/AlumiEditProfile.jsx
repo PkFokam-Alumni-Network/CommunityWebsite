@@ -258,16 +258,6 @@ export default function EditProfile() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Email"
-                  name="email"
-                  value={alumniData.email}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
                   label="Phone"
                   name="phone"
                   value={alumniData.phone}

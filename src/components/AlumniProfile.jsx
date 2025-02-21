@@ -38,12 +38,14 @@ const mentorData = {
 const userInfo = coreHelper.getLoggedInUserData();
 
 export default function AlumniSettings() {
-  const { usersMentees, userProfileData } = useSelector((state) => state.alumniUsers);
-  const [userProfile, setUserProfile] = useState(userProfileData ?? fallbackData);
+  const { usersMentees, userProfileData } = useSelector(
+    (state) => state.alumniUsers
+  );
+  const [userProfile, setUserProfile] = useState(
+    userProfileData ?? fallbackData
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (userInfo) {
