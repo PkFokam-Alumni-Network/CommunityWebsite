@@ -9,7 +9,6 @@ import {
   Grid2,
   Typography,
   IconButton,
-  useMediaQuery,
   Link,
   Divider,
 } from "@mui/material";
@@ -59,7 +58,7 @@ export default function AlumniSettings() {
   }, [userProfileData]);
 
   const handleEditClick = () => {
-    navigate("/edit-profile", { state: { alumni: userProfile } });
+    navigate("/edit-info");
   };
 
   return (

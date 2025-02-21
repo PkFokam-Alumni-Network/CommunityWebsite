@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser, updateProfilePicture } from "../features/alumniSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -22,19 +22,20 @@ import {
   CameraAlt as CameraIcon,
 } from "@mui/icons-material";
 import { useToast } from "../uiContexts/toastContext";
+import coreHelper from "../helpers/coreHelper";
 
 const Input = styled("input")({
   display: "none",
 });
 
 export default function EditProfile() {
-  const location = useLocation();
+  const userInfo = coreHelper.getLoggedInUserData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const showToast = useToast();
 
   const [alumniData, setAlumniData] = useState(
-    location.state?.alumni || {
+    userInfo || {
       first_name: "",
       last_name: "",
       graduation_year: "",
@@ -105,13 +106,13 @@ export default function EditProfile() {
         showToast(error, "error");
       });
 
-    // Optionally, show a success message or navigate after update is successful
+    coreHelper.setLoggedInUserData(alumniData);
     navigate("/dashboard/settings", { state: { alumni: alumniData } });
   };
 
   const handleCancel = () => {
     navigate("/dashboard/settings", {
-      state: { alumni: location.state?.alumni },
+      state: { alumni: userInfo },
     });
   };
 
@@ -176,16 +177,6 @@ export default function EditProfile() {
                   label="Last Name"
                   name="last_name"
                   value={alumniData.last_name}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Graduation Year"
-                  name="graduation_year"
-                  value={alumniData.graduation_year}
                   onChange={handleInputChange}
                   variant="outlined"
                 />

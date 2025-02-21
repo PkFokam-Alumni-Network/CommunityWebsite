@@ -17,6 +17,9 @@ import AlumniSettings from "./components/AlumniProfile";
 import EditProfile from "./components/AlumiEditProfile";
 import coreHelper from "./helpers/coreHelper";
 import "./App.css";
+import AlumniSettingsOptions from "./components/AlumniSettingsOption";
+import EditPassword from "./components/AlumniEditPassword";
+import EditEmail from "./components/AlumniEditEmail";
 
 const userInfo = coreHelper.getLoggedInUserData();
 
@@ -105,9 +108,31 @@ function App() {
       />
 
       <Route
+        path="/edit-info"
+        element={
+          isAuthenticated ? (
+            <AlumniSettingsOptions />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+      <Route
         path="/edit-profile"
         element={
           isAuthenticated ? <EditProfile /> : <Navigate to="/login" replace />
+        }
+      />
+      <Route
+        path="/modify-password"
+        element={
+          isAuthenticated ? <EditPassword /> : <Navigate to="/login" replace />
+        }
+      />
+      <Route
+        path="/modify-email"
+        element={
+          isAuthenticated ? <EditEmail /> : <Navigate to="/login" replace />
         }
       />
     </Routes>
