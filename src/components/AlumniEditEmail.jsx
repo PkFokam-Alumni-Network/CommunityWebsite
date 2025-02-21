@@ -7,9 +7,10 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
+import coreHelper from "./helpers/coreHelper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateUser } from "../features/alumniSlice";
+import { updateEmail } from "../features/alumniSlice";
 import { useToast } from "../uiContexts/toastContext";
 
 export default function EditEmail() {
@@ -27,7 +28,8 @@ export default function EditEmail() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    dispatch(updateUser({ email }))
+    const oldEmail = coreHelper.getLoggedInUserData().email;
+    dispatch(updateEmail({ oldEmail, newEmail: email }))
       .unwrap()
       .then(() => {
         showToast("Email updated successfully", "success");
