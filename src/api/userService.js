@@ -57,6 +57,45 @@ const userService = {
   },
 
   /**
+   * Updates a user's email.
+   * @param {string} oldEmail - The current email of the user.
+   * @param {string} newEmail - The new email for the user.
+   * @returns {Promise<Object>} The updated user data.
+   * @throws Will throw an error if the request fails.
+   */
+  updateEmail: async (oldEmail, newEmail) => {
+    try {
+      const response = await axiosInstance.put(
+        `/users/${oldEmail}/update-email`,
+        { new_email: newEmail }
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
+  /**
+   * Updates a user's password.
+   * @param {string} userEmail - The email of the user.
+   * @param {string} oldPassword - The current password of the user.
+   * @param {string} newPassword - The new password for the user.
+   * @returns {Promise<Object>} The updated user data.
+   * @throws Will throw an error if the request fails.
+   */
+  updatePassword: async (userEmail, oldPassword, newPassword) => {
+    try {
+      const response = await axiosInstance.put(
+        `/users/${userEmail}/update-password`,
+        { old_password: oldPassword, new_password: newPassword }
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
+  /**
    * Retrieves a user by email.
    * @param {string} user_email - The user's email for which mentees are to be retrieved.
    * @returns {Promise<Object>} The retrieved user data.

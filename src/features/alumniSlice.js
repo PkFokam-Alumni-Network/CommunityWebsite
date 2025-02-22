@@ -7,6 +7,8 @@ export const USERS_ACTION_TYPES = {
   updateUser: "users/updateUser",
   getUser: "users/getUser",
   updateProfilePicture: "users/updateProfilePicture",
+  updateEmail: "users/updateEmail",
+  updatePassword: "users/updatePassword",
 };
 
 export const getUsers = createAsyncThunk(
@@ -70,6 +72,34 @@ export const updateProfilePicture = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(error.message || "Unable to update user!");
+    }
+  }
+);
+
+export const updateEmail = createAsyncThunk(
+  USERS_ACTION_TYPES.updateEmail,
+  async ({ oldEmail, newEmail }, { rejectWithValue }) => {
+    try {
+      const response = await userService.updateEmail(oldEmail, newEmail);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to update email!");
+    }
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  USERS_ACTION_TYPES.updatePassword,
+  async ({ userEmail, oldPassword, newPassword }, { rejectWithValue }) => {
+    try {
+      const response = await userService.updatePassword(
+        userEmail,
+        oldPassword,
+        newPassword
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message || "Unable to update password!");
     }
   }
 );
@@ -147,6 +177,32 @@ const alumniUsers = createSlice({
         state.userProfileData = action.payload;
       })
       .addCase(updateProfilePicture.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateEmail.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.userProfileData = action.payload;
+      })
+      .addCase(updateEmail.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.userProfileData = action.payload;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
