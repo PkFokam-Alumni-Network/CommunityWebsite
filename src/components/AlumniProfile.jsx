@@ -5,12 +5,11 @@ import {
   Box,
   Card,
   CardContent,
-  CardHeader,
-  Grid2,
+  Grid,
   Typography,
   IconButton,
-  Link,
   Divider,
+  Link,
   CircularProgress,
 } from "@mui/material";
 import {
@@ -104,30 +103,41 @@ export default function AlumniSettings() {
         >
           <EditIcon />
         </IconButton>
-        <CardHeader
-          avatar={
-            <Avatar
-              src={userProfile.image}
-              alt={"https://www.w3schools.com/howto/img_avatar.png"}
-              sx={{ width: 100, height: 100 }}
-            />
-          }
-          title={
-            <Typography variant="h4" component="h1">
-              {userProfile.first_name + " " + userProfile.last_name}
-            </Typography>
-          }
-          subheader={
-            <Typography variant="subtitle1" color="text.secondary">
-              {userProfile.current_occupation} • Class of{" "}
-              {userProfile.graduation_year}
-            </Typography>
-          }
-        />
+
+        {/* Card Header */}
         <CardContent>
-          <Grid2 container spacing={3}>
+          <Grid container spacing={2} direction="column" alignItems="center">
+            {/* Image */}
+            <Grid item xs={12}>
+              <Avatar
+                src={userProfile.image}
+                alt={"https://www.w3schools.com/howto/img_avatar.png"}
+                sx={{ width: 120, height: 120 }}
+              />
+            </Grid>
+
+            {/* Name */}
+            <Grid item xs={12}>
+              <Typography variant="h4" component="h1">
+                {userProfile.first_name + " " + userProfile.last_name}
+              </Typography>
+            </Grid>
+
+            {/* Occupation and Class */}
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" color="text.secondary">
+                {userProfile.current_occupation} • Class of{" "}
+                {userProfile.graduation_year}
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+
+        {/* Card Body */}
+        <CardContent>
+          <Grid container spacing={3}>
             {/* About Me Section */}
-            <Grid2 item xs={12}>
+            <Grid item xs={12}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -136,10 +146,10 @@ export default function AlumniSettings() {
                 About Me
               </Typography>
               <Typography variant="body1">{userProfile.bio}</Typography>
-            </Grid2>
+            </Grid>
 
             {/* Contact Information Section */}
-            <Grid2 item xs={12}>
+            <Grid item xs={12}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -147,8 +157,8 @@ export default function AlumniSettings() {
               >
                 Contact Information
               </Typography>
-              <Grid2 container spacing={2}>
-                <Grid2 item xs={12} sm={6}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <EmailIcon
                       color="action"
@@ -156,8 +166,8 @@ export default function AlumniSettings() {
                     />
                     <Typography>{userProfile.email}</Typography>
                   </Box>
-                </Grid2>
-                <Grid2 item xs={12} sm={6}>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PhoneIcon
                       color="action"
@@ -165,8 +175,8 @@ export default function AlumniSettings() {
                     />
                     <Typography>{userProfile.phone}</Typography>
                   </Box>
-                </Grid2>
-                <Grid2 item xs={12} sm={6}>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <LocationIcon
                       color="action"
@@ -174,12 +184,12 @@ export default function AlumniSettings() {
                     />
                     <Typography>{userProfile.address}</Typography>
                   </Box>
-                </Grid2>
-              </Grid2>
-            </Grid2>
+                </Grid>
+              </Grid>
+            </Grid>
 
             {/* Social Media Section */}
-            <Grid2 item xs={12}>
+            <Grid item xs={12}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -187,8 +197,8 @@ export default function AlumniSettings() {
               >
                 Social Media
               </Typography>
-              <Grid2 container spacing={2}>
-                <Grid2 item xs={12} sm={6}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <LinkedInIcon
                       color="action"
@@ -202,8 +212,8 @@ export default function AlumniSettings() {
                       LinkedIn Profile
                     </Link>
                   </Box>
-                </Grid2>
-                <Grid2 item xs={12} sm={6}>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <InstagramIcon
                       color="action"
@@ -217,12 +227,12 @@ export default function AlumniSettings() {
                       Instagram Profile
                     </Link>
                   </Box>
-                </Grid2>
-              </Grid2>
-            </Grid2>
+                </Grid>
+              </Grid>
+            </Grid>
 
             {/* Education Section */}
-            <Grid2 item xs={12}>
+            <Grid item xs={12}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -246,10 +256,11 @@ export default function AlumniSettings() {
                   Graduated: {userProfile.graduation_year}
                 </Typography>
               </Box>
-            </Grid2>
+            </Grid>
             <Divider sx={{ mx: 10 }} />
+
             {/* Mentor Section */}
-            <Grid2 item xs={12}>
+            <Grid item xs={12}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -273,8 +284,8 @@ export default function AlumniSettings() {
                   </Typography>
                 </Box>
               </Box>
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </Box>

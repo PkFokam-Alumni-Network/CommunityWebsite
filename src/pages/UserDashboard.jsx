@@ -59,8 +59,6 @@ export default function AlumniDashboard() {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("650"));
-
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -89,16 +87,16 @@ export default function AlumniDashboard() {
         }}
       >
         <Toolbar>
-          {isMobile && (
+          {
             <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
               <MenuIcon />
             </IconButton>
-          )}
+          }
           <Box sx={{ flexGrow: 1 }} />
         </Toolbar>
       </AppBar>
       <Drawer
-        variant={isMobile ? "temporary" : "permanent"}
+        variant={"temporary"}
         open={openDrawer}
         onClose={toggleDrawer}
         sx={{
@@ -126,7 +124,7 @@ export default function AlumniDashboard() {
                 key={item.text}
                 onClick={() => {
                   navigate(item.path);
-                  setOpenDrawer(false);
+                  setOpenDrawer(false); // Close drawer on menu item click
                 }}
                 sx={{
                   py: 1.5,
