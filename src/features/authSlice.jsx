@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "../api/authService";
+import config from "../config";
 
 export const AUTH_ACTION_TYPES = {
   LOGIN: "auth/loginUser",
@@ -11,7 +12,8 @@ export const loginUser = createAsyncThunk(
   AUTH_ACTION_TYPES.LOGIN,
   async (formData, { rejectWithValue }) => {
     try {
-      const { access_token, token_type, ...userData } = await authService.login(formData);
+      const { access_token, token_type, ...userData } =
+        await authService.login(formData);
 
       return {
         accessToken: access_token,
@@ -85,8 +87,11 @@ const authSlice = createSlice({
         state.error = null;
         state.accessToken = accessToken;
         state.tokenType = tokenType;
+        const expiryTime = new Date().getTime() + config.session_expiry;
         localStorage.setItem("token", `${tokenType} ${accessToken}`);
-        if (state.isUserDataExists) localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("session_expiry", expiryTime);
+        if (state.isUserDataExists)
+          localStorage.setItem("userData", JSON.stringify(userData));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

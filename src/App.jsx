@@ -22,6 +22,7 @@ import EditPassword from "./components/AlumniEditPassword";
 import EditEmail from "./components/AlumniEditEmail";
 
 const userInfo = coreHelper.getLoggedInUserData();
+const sessionExpiryNotificationTime = 1000 * 60 * 5; // 5 minutes in milliseconds
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -34,7 +35,33 @@ function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const isUserDataExists = useSelector((state) => state.auth.isUserDataExists);
 
+  console.log(
+    "++ coreHelper.hasUserSessionExpired() ",
+    coreHelper.hasUserSessionExpired()
+  );
   useEffect(() => {
+    console.log(
+      "++ coreHelper.hasUserSessionExpired() ",
+      coreHelper.hasUserSessionExpired()
+    );
+    if (isUserDataExists) {
+      const currentTime = new Date().getTime();
+      console.log("====================================");
+      console.log("====================================");
+      if (coreHelper.hasUserSessionExpired()) {
+      } else {
+      }
+      // const userData = coreHelper.getLoggedInUserData();
+      // setFirstName(userData.first_name);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      "++ coreHelper.hasUserSessionExpired() ",
+      coreHelper.hasUserSessionExpired()
+    );
+
     if (isUserDataExists) {
       const userData = coreHelper.getLoggedInUserData();
       setFirstName(userData.first_name);

@@ -28,6 +28,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../features/authSlice";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import HomePage from "./HomePage";
+import SessionManager from "../components/SessionManagementComponent";
 
 const drawerWidth = 240;
 
@@ -69,139 +70,144 @@ export default function AlumniDashboard() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        minHeight: "100vh",
-        background:
-          "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1)  100.2% );",
-        zIndex: 1000,
-      }}
-    >
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        elevation={0}
+    <>
+      <SessionManager />
+      <Box
         sx={{
-          background: "transparent",
+          display: "flex",
+          minHeight: "100vh",
+          background:
+            "radial-gradient( circle farthest-corner at 0.8% 3.1%,  rgba(255,188,224,1) 0%, rgba(170,165,255,1) 46%, rgba(255,188,224,1)  100.2% );",
+          zIndex: 1000,
         }}
       >
-        <Toolbar>
-          {
-            <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
-              <MenuIcon />
-            </IconButton>
-          }
-          <Box sx={{ flexGrow: 1 }} />
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant={"temporary"}
-        open={openDrawer}
-        onClose={toggleDrawer}
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          elevation={0}
+          sx={{
+            background: "transparent",
+          }}
+        >
+          <Toolbar>
+            {
+              <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
+                <MenuIcon />
+              </IconButton>
+            }
+            <Box sx={{ flexGrow: 1 }} />
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant={"temporary"}
+          open={openDrawer}
+          onClose={toggleDrawer}
+          sx={{
             width: drawerWidth,
-            boxSizing: "border-box",
-            borderRight: "1px solid",
-            borderColor: "grey.200",
-          },
-        }}
-      >
-        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-          <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200" }}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>
-              PKF-Alumni
-            </Typography>
-          </Box>
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              borderRight: "1px solid",
+              borderColor: "grey.200",
+            },
+          }}
+        >
+          <Box
+            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+          >
+            <Box sx={{ p: 2, borderBottom: 1, borderColor: "grey.200" }}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                PKF-Alumni
+              </Typography>
+            </Box>
 
-          <Box sx={{ flex: 1, mt: 2 }}>
-            {menuItems.map((item) => (
-              <ListItem
-                button
-                key={item.text}
-                onClick={() => {
-                  navigate(item.path);
-                  setOpenDrawer(false); // Close drawer on menu item click
-                }}
-                sx={{
-                  py: 1.5,
-                  px: 2,
-                  bgcolor:
-                    location.pathname === item.path
-                      ? "primary.light"
-                      : "transparent",
-                  "&:hover": {
-                    bgcolor: "primary.light",
-                    "& .MuiListItemIcon-root": {
-                      color: "primary.main",
+            <Box sx={{ flex: 1, mt: 2 }}>
+              {menuItems.map((item) => (
+                <ListItem
+                  button
+                  key={item.text}
+                  onClick={() => {
+                    navigate(item.path);
+                    setOpenDrawer(false); // Close drawer on menu item click
+                  }}
+                  sx={{
+                    py: 1.5,
+                    px: 2,
+                    bgcolor:
+                      location.pathname === item.path
+                        ? "primary.light"
+                        : "transparent",
+                    "&:hover": {
+                      bgcolor: "primary.light",
+                      "& .MuiListItemIcon-root": {
+                        color: "primary.main",
+                      },
                     },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 40,
+                      color:
+                        location.pathname === item.path
+                          ? "primary.main"
+                          : "grey.600",
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    primaryTypographyProps={{
+                      variant: "body2",
+                      color:
+                        location.pathname === item.path
+                          ? "primary.main"
+                          : "inherit",
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </Box>
+
+            <Divider />
+            <Box sx={{ p: 2 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                startIcon={<Logout />}
+                onClick={handleLogout}
+                sx={{
+                  justifyContent: "flex-start",
+                  px: 2,
+                  py: 1,
+                  "&:hover": {
+                    backgroundColor: "primary.light",
+                    boxShadow: "none",
                   },
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 40,
-                    color:
-                      location.pathname === item.path
-                        ? "primary.main"
-                        : "grey.600",
-                  }}
-                >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  primaryTypographyProps={{
-                    variant: "body2",
-                    color:
-                      location.pathname === item.path
-                        ? "primary.main"
-                        : "inherit",
-                  }}
-                />
-              </ListItem>
-            ))}
+                Logout
+              </Button>
+            </Box>
           </Box>
+        </Drawer>
 
-          <Divider />
-          <Box sx={{ p: 2 }}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              startIcon={<Logout />}
-              onClick={handleLogout}
-              sx={{
-                justifyContent: "flex-start",
-                px: 2,
-                py: 1,
-                "&:hover": {
-                  backgroundColor: "primary.light",
-                  boxShadow: "none",
-                },
-              }}
-            >
-              Logout
-            </Button>
-          </Box>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            maxWidth: "100%",
+            overflow: "auto",
+          }}
+        >
+          <Toolbar /> {/* This is to offset the fixed AppBar */}
+          {location.pathname === "/dashboard" ? <HomePage /> : <Outlet />}
         </Box>
-      </Drawer>
-
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          maxWidth: "100%",
-          overflow: "auto",
-        }}
-      >
-        <Toolbar /> {/* This is to offset the fixed AppBar */}
-        {location.pathname === "/dashboard" ? <HomePage /> : <Outlet />}
       </Box>
-    </Box>
+    </>
   );
 }
