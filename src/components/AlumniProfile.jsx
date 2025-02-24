@@ -25,13 +25,6 @@ import coreHelper from "../helpers/coreHelper";
 import { getUser, getUserMentees } from "../features/alumniSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const mentorData = {
-  name: "Warren Mitchell",
-  imageUrl: "https://i.ibb.co/X98kHr0/ayato-modified.png",
-  graduationYear: 2018,
-  role: "Software Engineer",
-};
-
 export default function AlumniSettings() {
   const userInfo = coreHelper.getLoggedInUserData();
   const { usersMentees, userProfileData } = useSelector(
@@ -259,7 +252,7 @@ export default function AlumniSettings() {
             </Grid>
             <Divider sx={{ mx: 10 }} />
 
-            {/* Mentor Section */}
+            {/* Mentor Section
             <Grid item xs={12}>
               <Typography
                 variant="h5"
@@ -284,7 +277,7 @@ export default function AlumniSettings() {
                   </Typography>
                 </Box>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </CardContent>
       </Card>

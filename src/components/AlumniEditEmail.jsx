@@ -33,6 +33,7 @@ export default function EditEmail() {
       .unwrap()
       .then(() => {
         showToast("Email updated successfully", "success");
+        coreHelper.setLoggedInUserData(response.payload);
         navigate("/dashboard/settings");
       })
       .catch((error) => {
@@ -41,8 +42,6 @@ export default function EditEmail() {
       .finally(() => {
         setLoading(false);
       });
-    console.log(response);
-    coreHelper.setLoggedInUserData(response.payload);
   };
 
   const handleCancel = () => {
